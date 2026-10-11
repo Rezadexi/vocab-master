@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>VocabMaster V15</title>
+<title>VocabMaster V16</title>
 <style>
 *{box-sizing:border-box;font-family:Tahoma,sans-serif}
 body{margin:0;background:#0f172a;color:#fff;min-height:100vh}
@@ -28,12 +28,13 @@ button{padding:11px 16px;border-radius:10px;border:none;background:#8b5cf6;color
 .opt{display:block;width:100%;margin:6px 0;padding:12px;background:#0f172a;border:1px solid #475569;color:#fff;border-radius:10px;font-size:16px;cursor:pointer}
 .opt.ok{background:#16a34a}.opt.no{background:#dc2626}
 img.q{width:100%;max-height:300px;object-fit:cover;border-radius:12px;background:#0f172a;display:block}
+audio{width:100%;margin-top:10px}
 </style>
 </head>
 <body>
 <header>
 <h1>VocabMaster</h1>
-<p>نسخه 15 - ضد فراموشی + تصویری واقعی ✅</p>
+<p>نسخه 16 - تلفظ فیلترشکنی ✅ با VPN تست کن</p>
 <nav>
 <button id="b-learn" class="active" onclick="tab('learn')">آموزش</button>
 <button id="b-review" onclick="tab('review')">تمرین</button>
@@ -54,67 +55,82 @@ img.q{width:100%;max-height:300px;object-fit:cover;border-radius:12px;background
 <button onclick="start('en-fa')">EN→FA</button>
 <button onclick="start('fa-en')">FA→EN</button>
 <button onclick="start('listening')">👂 شنیداری</button>
-<button onclick="start('image')">🖼️ تصویری بدون راهنمایی</button>
+<button onclick="start('image')">🖼️ تصویری</button>
 </div><div id="qb"></div></div>
 </section>
 <section id="t-list" class="tab">
-<div class="card"><h3>📖 لغات من - با بکاپ</h3>
-<div class="row"><button onclick="exportBK()">⬇️ دانلود بکاپ</button><button onclick="document.getElementById('imp').click()">⬆️ برگردوندن بکاپ</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div>
+<div class="card"><h3>📖 لغات من</h3>
+<div class="row"><button onclick="exportBK()">⬇️ بکاپ</button><button onclick="document.getElementById('imp').click()">⬆️ برگردوندن</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div>
 <div class="row"><input id="s" placeholder="جستجو..." oninput="list(1)"></div>
 <div id="wl"></div><div class="row" id="pg"></div></div>
 </section>
 </main>
+<audio id="player" controls style="display:none"></audio>
 <script>
-function loadAll(){
-var all=[];var seen={};
-var keys=['vm15','vm14','vm13','vm12','vm11','vm10','vm9','vm8','vocabmaster_v1','vm7','vm6'];
-for(var k=0;k<keys.length;k++){
-try{var a=JSON.parse(localStorage.getItem(keys[k])||'[]');for(var i=0;i<a.length;i++){if(a[i]&&a[i].word&&!seen[a[i].word]){seen[a[i].word]=1;all.push(a[i]);}}}catch(e){}
-}
-return all;
-}
+function loadAll(){var all=[],seen={};var keys=['vm16','vm15','vm14','vm13','vm12','vm11','vm10','vm9','vm8','vocabmaster_v1'];for(var k=0;k<keys.length;k++){try{var a=JSON.parse(localStorage.getItem(keys[k])||'[]');for(var i=0;i<a.length;i++){if(a[i]&&a[i].word&&!seen[a[i].word]){seen[a[i].word]=1;all.push(a[i]);}}}catch(e){}}return all;}
 var DB=loadAll();
-function save(){localStorage.setItem('vm15',JSON.stringify(DB))}
-save();
+function save(){localStorage.setItem('vm16',JSON.stringify(DB));}save();
 var DICT_AUDIO={};
-function tab(t){var s=document.querySelectorAll('.tab');for(var i=0;i<s.length;i++)s[i].classList.remove('active');var b=document.querySelectorAll('nav button');for(var j=0;j<b.length;j++)b[j].classList.remove('active');document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='review')stats()}
-function lvl(w){if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1'}
-function makeSentences(word,my){return [{label:'✅ جمله مثبت',en:'I really love the word '+word+' because it is very useful.',fa:'من واقعاً کلمهٔ '+word+' را دوست دارم چون خیلی کاربردی است و معنی‌اش «'+my+'» می‌شود.'},{label:'❌ جمله منفی',en:'I did not understand '+word+' at first, but now I know it.',fa:'اول کلمهٔ '+word+' به معنی «'+my+'» را نفهمیدم، ولی الان بلدم.'},{label:'❓ جمله سوالی',en:'Can you use '+word+' in a sentence for me?',fa:'می‌توانی کلمهٔ '+word+' به معنی «'+my+'» را در یک جمله برایم به کار ببری؟'}];}
-function add(){var w=document.getElementById('w').value.trim().toLowerCase();var m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو را بنویس');return}var f=null;for(var i=0;i<DB.length;i++)if(DB[i].word==w)f=DB[i];if(!f){DB.unshift({word:w,meaning:m,level:0,next:Date.now()});save()}document.getElementById('msg').textContent='✅ ذخیره شد: '+w+' = '+m+' (کل: '+DB.length+')';document.getElementById('w').value='';document.getElementById('m').value='';learnFast(w,m);stats();}
+function tab(t){var s=document.querySelectorAll('.tab');for(var i=0;i<s.length;i++)s[i].classList.remove('active');var b=document.querySelectorAll('nav button');for(var j=0;j<b.length;j++)b[j].classList.remove('active');document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='review')stats();}
+function lvl(w){if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1';}
+function makeSentences(word,my){return [{label:'✅ مثبت',en:'I really love the word '+word+' because it is very useful.',fa:'من کلمهٔ '+word+' به معنی «'+my+'» را خیلی دوست دارم.'},{label:'❌ منفی',en:'I did not understand '+word+' at first, but now I know it.',fa:'اول '+word+' را نفهمیدم ولی الان بلدم.'},{label:'❓ سوالی',en:'Can you use '+word+' in a sentence for me?',fa:'می‌توانی '+word+' را در جمله بکار ببری؟'}];}
+function add(){var w=document.getElementById('w').value.trim().toLowerCase();var m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو را بنویس');return;}var f=null;for(var i=0;i<DB.length;i++)if(DB[i].word==w)f=DB[i];if(!f){DB.unshift({word:w,meaning:m,level:0,next:Date.now()});save();}document.getElementById('msg').textContent='✅ ذخیره شد: '+w;document.getElementById('w').value='';document.getElementById('m').value='';learnFast(w,m);stats();}
 function exportBK(){var b=new Blob([JSON.stringify(DB)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='vocab-backup.json';a.click();}
-function importBK(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var a=JSON.parse(r.result);var seen={};for(var i=0;i<DB.length;i++)seen[DB[i].word]=1;for(var j=0;j<a.length;j++)if(a[j].word&&!seen[a[j].word])DB.push(a[j]);save();list(1);stats();alert('برگردونده شد: '+DB.length+' کلمه');}catch(e){alert('فایل خراب است')}};r.readAsText(f);}
-function sp(t){if(!t)return;if(DICT_AUDIO[t]){try{new Audio(DICT_AUDIO[t]).play();return;}catch(e){}}var url='https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t);try{var a=new Audio(url);var p=a.play();if(p&&p.catch){p.catch(function(){fallbackVoice(t);});}a.onerror=function(){fallbackVoice(t);};}catch(e){fallbackVoice(t);}}
-function fallbackVoice(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u);}catch(e){}}
-function wikiImg(word,cb){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(word)).then(function(r){return r.json()}).then(function(j){if(j&&j.thumbnail&&j.thumbnail.source){cb(j.thumbnail.source)}else{cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350')}}).catch(function(){cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350')});}
+function importBK(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var a=JSON.parse(r.result);var seen={};for(var i=0;i<DB.length;i++)seen[DB[i].word]=1;for(var j=0;j<a.length;j++)if(a[j].word&&!seen[a[j].word])DB.push(a[j]);save();list(1);stats();alert('برگشت: '+DB.length);}catch(e){alert('فایل خراب است');}};r.readAsText(f);}
+function sp(t){
+if(!t){return;}
+var p=document.getElementById('player');
+p.style.display='block';
+if(DICT_AUDIO[t]){
+p.src=DICT_AUDIO[t];p.play();
+return;
+}
+fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(t.split(' ').slice(-3).join(' ')||t)).then(function(r){return r.json()}).then(function(d){
+try{
+var aud='';
+for(var k=0;k<d[0].phonetics.length;k++)if(d[0].phonetics[k].audio){aud=d[0].phonetics[k].audio;break;}
+if(aud){DICT_AUDIO[t]=aud;p.src=aud;p.play();return;}
+throw 0;
+}catch(e){playGoogle(t);}
+}).catch(function(){playGoogle(t);});
+function playGoogle(txt){
+var url='https://translate.google.com/translate_tts?ie=UTF-8&tl=en&q='+encodeURIComponent(txt)+'&client=tw-ob';
+p.src=url;
+var pr=p.play();
+if(pr&&pr.catch){pr.catch(function(){alert('⚠️ صدا پخش نشد. فیلترشکن را روشن کن و دوباره بزن.');});}
+}
+}
+function wikiImg(word,cb){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(word)).then(function(r){return r.json()}).then(function(j){if(j&&j.thumbnail&&j.thumbnail.source){cb(j.thumbnail.source);}else{cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350');}}).catch(function(){cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350');});}
 function sentenceHTML(s){return '<div class="def"><b>'+s.label+'</b><div class="en-line">'+s.en+'</div><div class="fa-line">معنی: '+s.fa+'</div></div>';}
 function learnFast(word,my){
 var box=document.getElementById('out');var L=lvl(word);var sens=makeSentences(word,my);
 box.innerHTML='<div class="card"><h2>'+word+'</h2><p><span class="badge lvl">سطح '+L+'</span> <span class="badge">'+my+'</span></p>'
 +'<img id="learn-img" class="q" src="https://picsum.photos/seed/'+word+'/600/350">'
-+'<div class="row"><button onclick="sp(\''+word+'\')">🔊 تلفظ آنلاین کلمه</button></div>'
++'<div class="row"><button onclick="sp(\''+word+'\')">🔊 تلفظ آنلاین (با فیلترشکن)</button></div>'
++'<audio controls src="https://api.dictionaryapi.dev/favicon.ico" style="display:none"></audio>'
 +'<h4>💡 مثبت / منفی / سوالی</h4>'+sentenceHTML(sens[0])+sentenceHTML(sens[1])+sentenceHTML(sens[2])
-+'<div id="extra-'+word+'"><p class="ex">⏳ در حال گرفتن معنی...</p></div>'
++'<div id="extra-'+word+'"><p class="ex">⏳ در حال گرفتن معنی... (با فیلترشکن سریعتر میاد)</p></div>'
 +'<h4>🎬 فیلم - با فیلترشکن</h4><div class="row"><a href="https://www.youtube.com/results?search_query='+word+'+in+movies" target="_blank"><button>▶️ یوتیوب</button></a><a href="https://youglish.com/pronounce/'+word+'/english" target="_blank"><button>🎞️ YouGlish</button></a></div></div>';
 wikiImg(word,function(src){var im=document.getElementById('learn-img');if(im)im.src=src;});
 fetchFa(word,my);fetchEn(word);
 }
-function fetchFa(word,my){fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=en|fa').then(function(r){return r.json()}).then(function(j){var t='';try{t=j.responseData.translatedText}catch(e){}var el=document.getElementById('extra-'+word);if(el&&t&&t.toLowerCase()!=word.toLowerCase())el.innerHTML='<div class="def">🇮🇷 معنی خودکار: <b>'+t+'</b></div><div id="en-'+word+'"></div>';else if(el)el.innerHTML+='<div id="en-'+word+'"></div>';}).catch(function(){});}
-function fetchEn(word){fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){var html='';if(d&&d[0]){try{var aud='';for(var k=0;k<d[0].phonetics.length;k++)if(d[0].phonetics[k].audio){aud=d[0].phonetics[k].audio;break}if(aud){DICT_AUDIO[word]=aud;html+='<div class="row"><button onclick="sp(\''+word+'\')">🔊 پخش تلفظ اصلی</button></div>';}}catch(e){}try{for(var a=0;a<Math.min(2,d[0].meanings.length);a++){var mn=d[0].meanings[a];html+='<div class="def"><span class="badge">'+mn.partOfSpeech+'</span>';for(var b=0;b<Math.min(2,mn.definitions.length);b++){var x=mn.definitions[b];html+='<p class="en-line">'+(b+1)+'. '+x.definition+'</p>';if(x.example)html+='<p class="ex en-line">Ex: '+x.example+'</p>'}html+='</div>'}}catch(e){}}var el=document.getElementById('en-'+word)||document.getElementById('extra-'+word);if(el&&html)el.innerHTML+='<h4>📖 دایره لغات</h4>'+html;}).catch(function(){});}
-function stats(){var c=0;for(var i=0;i<DB.length;i++)if(DB[i].next<=Date.now())c++;document.getElementById('st').innerHTML='کل: '+DB.length+' | امروز: '+c}
+function fetchFa(word,my){fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=en|fa').then(function(r){return r.json()}).then(function(j){var t='';try{t=j.responseData.translatedText;}catch(e){}var el=document.getElementById('extra-'+word);if(el&&t&&t.toLowerCase()!=word.toLowerCase())el.innerHTML='<div class="def">🇮🇷 معنی خودکار: <b>'+t+'</b></div><div id="en-'+word+'"></div>';else if(el)el.innerHTML+='<div id="en-'+word+'"></div>';}).catch(function(){});}
+function fetchEn(word){fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){var html='';if(d&&d[0]){try{var aud='';for(var k=0;k<d[0].phonetics.length;k++)if(d[0].phonetics[k].audio){aud=d[0].phonetics[k].audio;break;}if(aud){DICT_AUDIO[word]=aud;html+='<div class="row"><button onclick="sp(\''+word+'\')">🔊 پخش تلفظ اصلی دیکشنری</button></div><audio controls src="'+aud+'"></audio>';}}catch(e){}try{for(var a=0;a<Math.min(2,d[0].meanings.length);a++){var mn=d[0].meanings[a];html+='<div class="def"><span class="badge">'+mn.partOfSpeech+'</span>';for(var b=0;b<Math.min(2,mn.definitions.length);b++){var x=mn.definitions[b];html+='<p class="en-line">'+(b+1)+'. '+x.definition+'</p>';if(x.example)html+='<p class="ex en-line">Ex: '+x.example+'</p>';}html+='</div>';}}catch(e){}}var el=document.getElementById('en-'+word)||document.getElementById('extra-'+word);if(el&&html)el.innerHTML+='<h4>📖 دایره لغات</h4>'+html;}).catch(function(){var el=document.getElementById('en-'+word);if(el)el.innerHTML='<p class="ex">⚠️ برای دایره لغات کامل فیلترشکن را روشن کن.</p>';});}
+function stats(){var c=0;for(var i=0;i<DB.length;i++)if(DB[i].next<=Date.now())c++;document.getElementById('st').innerHTML='کل: '+DB.length+' | امروز: '+c;}
 function list(p){p=p||1;var qv=document.getElementById('s').value.trim().toLowerCase();var f=[];for(var i=0;i<DB.length;i++)if(!qv||DB[i].word.indexOf(qv)>-1||DB[i].meaning.indexOf(qv)>-1)f.push(DB[i]);var per=50;var tot=Math.ceil(f.length/per)||1;var sl=f.slice((p-1)*per,p*per);var html='';for(var j=0;j<sl.length;j++)html+='<div class="def"><b>'+sl[j].word+'</b> = '+sl[j].meaning+' <button onclick="learnFast(\''+sl[j].word+'\',\''+sl[j].meaning+'\')">آموزش</button></div>';document.getElementById('wl').innerHTML=html||'خالیه';var h='';for(var k=1;k<=Math.min(tot,15);k++)h+='<button onclick="list('+k+')">'+k+'</button>';document.getElementById('pg').innerHTML=h;}
-function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 var Q=[],QI=0,SC=0,QM='mixed';
-function start(m){if(DB.length<2){alert('حداقل 2 لغت');return}QM=m;Q=sh(DB.slice()).slice(0,10);QI=0;SC=0;nq()}
-function gd(c,f){var o=[];for(var i=0;i<DB.length;i++)if(DB[i].word!=c.word)o.push(DB[i][f]);return sh(o).slice(0,3)}
-function nq(){stats();var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>تمام! '+SC+' از '+Q.length+'</h3>';return}var w=Q[QI];var typs=['en-fa','fa-en','blank','image'];var t=QM=='mixed'?typs[Math.floor(Math.random()*typs.length)]:QM;
-if(t=='listening'){b.innerHTML='<p>گوش بده و تایپ کن</p><div class="row"><button onclick="sp(\''+w.word+'\')">🔊 پخش</button></div><div class="row"><input id="li"><button onclick="cl(\''+w.word+'\')">ثبت</button></div>';sp(w.word);return}
-if(t=='image'){var o=sh([w.word].concat(gd(w,'word')));var hh='<p>🖼️ این عکس چیه؟ به انگلیسی حدس بزن (بدون راهنمایی)</p><img id="quiz-img" class="q" src="https://picsum.photos/seed/'+w.word+'/600/350">';for(var i=0;i<o.length;i++)hh+='<button class="opt" onclick="ans(this,\''+o[i]+'\',\''+w.word+'\',\''+w.word+'\')">'+o[i]+'</button>';b.innerHTML=hh;wikiImg(w.word,function(src){var im=document.getElementById('quiz-img');if(im)im.src=src;});return}
-if(t=='en-fa'){var o2=sh([w.meaning].concat(gd(w,'meaning')));var h2='<h3 style="text-align:center">'+w.word+' یعنی چی؟</h3>';for(var a=0;a<o2.length;a++)h2+='<button class="opt" onclick="ans(this,\''+o2[a]+'\',\''+w.meaning+'\',\''+w.word+'\')">'+o2[a]+'</button>';b.innerHTML=h2;return}
-if(t=='fa-en'){var o3=sh([w.word].concat(gd(w,'word')));var h3='<h3 style="text-align:center">'+w.meaning+' به انگلیسی؟</h3>';for(var c=0;c<o3.length;c++)h3+='<button class="opt" onclick="ans(this,\''+o3[c]+'\',\''+w.word+'\',\''+w.word+'\')">'+o3[c]+'</button>';b.innerHTML=h3;return}
+function start(m){if(DB.length<2){alert('حداقل 2 لغت');return;}QM=m;Q=sh(DB.slice()).slice(0,10);QI=0;SC=0;nq();}
+function gd(c,f){var o=[];for(var i=0;i<DB.length;i++)if(DB[i].word!=c.word)o.push(DB[i][f]);return sh(o).slice(0,3);}
+function nq(){stats();var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>تمام! '+SC+' از '+Q.length+'</h3>';return;}var w=Q[QI];var typs=['en-fa','fa-en','blank','image'];var t=QM=='mixed'?typs[Math.floor(Math.random()*typs.length)]:QM;
+if(t=='listening'){b.innerHTML='<p>گوش بده و تایپ کن</p><div class="row"><button onclick="sp(\''+w.word+'\')">🔊 پخش</button></div><div class="row"><input id="li"><button onclick="cl(\''+w.word+'\')">ثبت</button></div>';sp(w.word);return;}
+if(t=='image'){var o=sh([w.word].concat(gd(w,'word')));var hh='<p>🖼️ این عکس چیه؟</p><img id="quiz-img" class="q" src="https://picsum.photos/seed/'+w.word+'/600/350">';for(var i=0;i<o.length;i++)hh+='<button class="opt" onclick="ans(this,\''+o[i]+'\',\''+w.word+'\',\''+w.word+'\')">'+o[i]+'</button>';b.innerHTML=hh;wikiImg(w.word,function(src){var im=document.getElementById('quiz-img');if(im)im.src=src;});return;}
+if(t=='en-fa'){var o2=sh([w.meaning].concat(gd(w,'meaning')));var h2='<h3 style="text-align:center">'+w.word+' یعنی چی؟</h3>';for(var a=0;a<o2.length;a++)h2+='<button class="opt" onclick="ans(this,\''+o2[a]+'\',\''+w.meaning+'\',\''+w.word+'\')">'+o2[a]+'</button>';b.innerHTML=h2;return;}
+if(t=='fa-en'){var o3=sh([w.word].concat(gd(w,'word')));var h3='<h3 style="text-align:center">'+w.meaning+' به انگلیسی؟</h3>';for(var c=0;c<o3.length;c++)h3+='<button class="opt" onclick="ans(this,\''+o3[c]+'\',\''+w.word+'\',\''+w.word+'\')">'+o3[c]+'</button>';b.innerHTML=h3;return;}
 var ss=makeSentences(w.word,w.meaning);var si=QI%3;var mk=ss[si].en.replace(new RegExp(w.word,'ig'),'_____');var o4=sh([w.word].concat(gd(w,'word')));var h4='<div class="def"><b>'+ss[si].label+'</b><div class="en-line">'+mk+'</div></div>';for(var q=0;q<o4.length;q++)h4+='<button class="opt" onclick="ans(this,\''+o4[q]+'\',\''+w.word+'\',\''+w.word+'\')">'+o4[q]+'</button>';b.innerHTML=h4;}
-function cl(c){var v=document.getElementById('li').value.trim().toLowerCase();upd(c,v==c);if(v!=c)alert('درست: '+c);else SC++;QI++;nq()}
-function ans(b,v,cor,wd){var all=document.querySelectorAll('.opt');for(var i=0;i<all.length;i++)if(all[i].textContent==cor)all[i].classList.add('ok');if(v==cor){SC++;upd(wd,true)}else{b.classList.add('no');upd(wd,false)}setTimeout(function(){QI++;nq()},600)}
-function upd(wd,ok){for(var i=0;i<DB.length;i++)if(DB[i].word==wd){if(ok)DB[i].level++;else DB[i].level=0;DB[i].next=Date.now()+86400000}save()}
+function cl(c){var v=document.getElementById('li').value.trim().toLowerCase();upd(c,v==c);if(v!=c)alert('درست: '+c);else SC++;QI++;nq();}
+function ans(b,v,cor,wd){var all=document.querySelectorAll('.opt');for(var i=0;i<all.length;i++)if(all[i].textContent==cor)all[i].classList.add('ok');if(v==cor){SC++;upd(wd,true);}else{b.classList.add('no');upd(wd,false);}setTimeout(function(){QI++;nq();},600);}
+function upd(wd,ok){for(var i=0;i<DB.length;i++)if(DB[i].word==wd){if(ok)DB[i].level++;else DB[i].level=0;DB[i].next=Date.now()+86400000;}save();}
 list(1);stats();
 </script>
 </body>
