@@ -1,15 +1,9 @@
 {
-  "name": "VocabMaster",
+  "name": "VocabMaster V6",
   "short_name": "VocabMaster",
-  "start_url": ".",
+  "start_url": "./?v=6",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#6d28d9",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/3135/3135768.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/3135/3135768.png", "sizes": "512x512", "type": "image/png" }]
 }

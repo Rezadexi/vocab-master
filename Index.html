@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#6d28d9">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135768.png">
-<title>VocabMaster | یادگیری لغت</title>
-<link rel="stylesheet" href="style.css">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="manifest" href="manifest.json?v=6">
+<title>VocabMaster v6 | سریع و همیشه بروز</title>
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <header>
 <h1>🧠 VocabMaster</h1>
-<p>یاد بگیر، بشنو، ببین، فراموش نکن</p>
+<p>نسخه 6 - سریع، بدون کش، بدون فیلتر</p>
 <nav>
 <button onclick="showTab('learn')" id="btn-learn" class="active">📚 آموزش</button>
 <button onclick="showTab('review')" id="btn-review">🔁 تمرین</button>
@@ -40,16 +41,29 @@
 <button onclick="startQuiz('en-fa')">EN به FA</button>
 <button onclick="startQuiz('fa-en')">FA به EN</button>
 <button onclick="startQuiz('listening')">👂 شنیداری</button>
-<button onclick="startQuiz('image')">🖼️ حدس تصویری</button>
+<button onclick="startQuiz('image')">🖼️ تصویری</button>
 </div>
 <div id="quiz-box"></div>
 </div>
 </section>
 <section id="tab-list" class="tab">
-<div class="card"><h2>📖 لغات من</h2><div id="word-list"></div></div>
+<div class="card">
+<h2>📖 لغات من</h2>
+<div class="row">
+<input id="search-inp" placeholder="جستجو... (مثلا book)" oninput="renderList(1)">
+</div>
+<div id="word-list"></div>
+<div class="row" id="pages"></div>
+</div>
 </section>
 </main>
-<script src="script.js"></script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
+<script src="script.js?v=6"></script>
+<script>
+// پاک کردن سرویس ورکر قدیمی که باعث بروز نشدن میشد
+if('serviceWorker' in navigator){
+navigator.serviceWorker.getRegistrations().then(rs=>{rs.forEach(r=>r.unregister());});
+}
+if('caches' in window){caches.keys().then(ks=>ks.forEach(k=>caches.delete(k)));}
+</script>
 </body>
 </html>
