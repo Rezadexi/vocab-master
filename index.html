@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>VocabMaster V13</title>
+<title>VocabMaster V14</title>
 <style>
 *{box-sizing:border-box;font-family:Tahoma,sans-serif}
 body{margin:0;background:#0f172a;color:#fff;min-height:100vh}
@@ -33,7 +33,7 @@ img.q{width:100%;max-height:300px;object-fit:cover;border-radius:12px;background
 <body>
 <header>
 <h1>VocabMaster</h1>
-<p>نسخه 13 - مثبت / منفی / سوالی ✅</p>
+<p>نسخه 14 - تلفظ آنلاین واقعی ✅</p>
 <nav>
 <button id="b-learn" class="active" onclick="tab('learn')">آموزش</button>
 <button id="b-review" onclick="tab('review')">تمرین</button>
@@ -64,22 +64,27 @@ img.q{width:100%;max-height:300px;object-fit:cover;border-radius:12px;background
 </section>
 </main>
 <script>
-var DB=[];try{DB=JSON.parse(localStorage.getItem('vm13')||localStorage.getItem('vm12')||localStorage.getItem('vm11')||'[]')}catch(e){DB=[]}
-function save(){localStorage.setItem('vm13',JSON.stringify(DB))}
+var DB=[];try{DB=JSON.parse(localStorage.getItem('vm14')||localStorage.getItem('vm13')||localStorage.getItem('vm12')||'[]')}catch(e){DB=[]}
+var DICT_AUDIO={};
+function save(){localStorage.setItem('vm14',JSON.stringify(DB))}
 function tab(t){var s=document.querySelectorAll('.tab');for(var i=0;i<s.length;i++)s[i].classList.remove('active');var b=document.querySelectorAll('nav button');for(var j=0;j<b.length;j++)b[j].classList.remove('active');document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='review')stats()}
 function lvl(w){if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1'}
-function makeSentences(word,my){
-return [
-{label:'✅ جمله مثبت',en:'I really love the word '+word+' because it is very useful.',fa:'من واقعاً کلمهٔ '+word+' را دوست دارم چون خیلی کاربردی است و معنی‌اش «'+my+'» می‌شود.'},
-{label:'❌ جمله منفی',en:'I did not understand '+word+' at first, but now I know it.',fa:'اول کلمهٔ '+word+' به معنی «'+my+'» را نفهمیدم، ولی الان بلدم.'},
-{label:'❓ جمله سوالی',en:'Can you use '+word+' in a sentence for me?',fa:'می‌توانی کلمهٔ '+word+' به معنی «'+my+'» را در یک جمله برایم به کار ببری؟'}
-];}
+function makeSentences(word,my){return [{label:'✅ جمله مثبت',en:'I really love the word '+word+' because it is very useful.',fa:'من واقعاً کلمهٔ '+word+' را دوست دارم چون خیلی کاربردی است و معنی‌اش «'+my+'» می‌شود.'},{label:'❌ جمله منفی',en:'I did not understand '+word+' at first, but now I know it.',fa:'اول کلمهٔ '+word+' به معنی «'+my+'» را نفهمیدم، ولی الان بلدم.'},{label:'❓ جمله سوالی',en:'Can you use '+word+' in a sentence for me?',fa:'می‌توانی کلمهٔ '+word+' به معنی «'+my+'» را در یک جمله برایم به کار ببری؟'}];}
 function add(){var w=document.getElementById('w').value.trim().toLowerCase();var m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو را بنویس');return}var f=null;for(var i=0;i<DB.length;i++)if(DB[i].word==w)f=DB[i];if(!f){DB.unshift({word:w,meaning:m,level:0,next:Date.now()});save()}document.getElementById('msg').textContent='✅ ذخیره شد: '+w+' = '+m;document.getElementById('w').value='';document.getElementById('m').value='';learnFast(w,m);stats();}
-function sp(t){var url='https://translate.google.com/translate_tts?ie=UTF-8&tl=en-US&q='+encodeURIComponent(t)+'&client=tw-ob';try{new Audio(url).play();}catch(e){}}
-function wikiImg(word,cb){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(word)).then(function(r){return r.json()}).then(function(j){if(j&&j.thumbnail&&j.thumbnail.source){cb(j.thumbnail.source)}else{cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350')}}).catch(function(){cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350')});}
-function sentenceHTML(s){
-return '<div class="def"><b>'+s.label+'</b><div class="en-line">'+s.en+'</div><div class="fa-line">معنی: '+s.fa+'</div></div>';
+function sp(t){
+if(!t)return;
+if(DICT_AUDIO[t]){try{new Audio(DICT_AUDIO[t]).play();return;}catch(e){}}
+var url='https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t);
+try{
+var a=new Audio(url);
+var p=a.play();
+if(p&&p.catch){p.catch(function(){fallbackVoice(t);});}
+a.onerror=function(){fallbackVoice(t);};
+}catch(e){fallbackVoice(t);}
 }
+function fallbackVoice(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=0.9;speechSynthesis.speak(u);}catch(e){}}
+function wikiImg(word,cb){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(word)).then(function(r){return r.json()}).then(function(j){if(j&&j.thumbnail&&j.thumbnail.source){cb(j.thumbnail.source)}else{cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350')}}).catch(function(){cb('https://picsum.photos/seed/'+word.replace(/[^a-z0-9]/g,'')+'/600/350')});}
+function sentenceHTML(s){return '<div class="def"><b>'+s.label+'</b><div class="en-line">'+s.en+'</div><div class="fa-line">معنی: '+s.fa+'</div></div>';}
 function learnFast(word,my){
 var box=document.getElementById('out');var L=lvl(word);var sens=makeSentences(word,my);
 box.innerHTML='<div class="card"><h2>'+word+'</h2><p><span class="badge lvl">سطح '+L+'</span> <span class="badge">'+my+'</span></p>'
@@ -92,7 +97,7 @@ wikiImg(word,function(src){var im=document.getElementById('learn-img');if(im)im.
 fetchFa(word,my);fetchEn(word);
 }
 function fetchFa(word,my){fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=en|fa').then(function(r){return r.json()}).then(function(j){var t='';try{t=j.responseData.translatedText}catch(e){}var el=document.getElementById('extra-'+word);if(el&&t&&t.toLowerCase()!=word.toLowerCase())el.innerHTML='<div class="def">🇮🇷 معنی خودکار: <b>'+t+'</b> <span class="ex">(معنی تو: '+my+')</span></div><div id="en-'+word+'"></div>';else if(el)el.innerHTML+='<div id="en-'+word+'"></div>';}).catch(function(){});}
-function fetchEn(word){fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){var html='';if(d&&d[0]){try{for(var a=0;a<Math.min(2,d[0].meanings.length);a++){var mn=d[0].meanings[a];html+='<div class="def"><span class="badge">'+mn.partOfSpeech+'</span>';for(var b=0;b<Math.min(2,mn.definitions.length);b++){var x=mn.definitions[b];html+='<p class="en-line">'+(b+1)+'. '+x.definition+'</p>';if(x.example)html+='<p class="ex en-line">Ex: '+x.example+'</p>'}html+='</div>'}}catch(e){}}var el=document.getElementById('en-'+word)||document.getElementById('extra-'+word);if(el&&html)el.innerHTML+='<h4>📖 دایره لغات</h4>'+html;}).catch(function(){});}
+function fetchEn(word){fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){var html='';if(d&&d[0]){try{var aud='';for(var k=0;k<d[0].phonetics.length;k++)if(d[0].phonetics[k].audio){aud=d[0].phonetics[k].audio;break}if(aud){DICT_AUDIO[word]=aud;html+='<div class="row"><button onclick="sp(\''+word+'\')">🔊 پخش تلفظ اصلی دیکشنری</button></div>';}}catch(e){}try{for(var a=0;a<Math.min(2,d[0].meanings.length);a++){var mn=d[0].meanings[a];html+='<div class="def"><span class="badge">'+mn.partOfSpeech+'</span>';for(var b=0;b<Math.min(2,mn.definitions.length);b++){var x=mn.definitions[b];html+='<p class="en-line">'+(b+1)+'. '+x.definition+'</p>';if(x.example)html+='<p class="ex en-line">Ex: '+x.example+'</p>'}html+='</div>'}}catch(e){}}var el=document.getElementById('en-'+word)||document.getElementById('extra-'+word);if(el&&html)el.innerHTML+='<h4>📖 دایره لغات</h4>'+html;}).catch(function(){});}
 function stats(){var c=0;for(var i=0;i<DB.length;i++)if(DB[i].next<=Date.now())c++;document.getElementById('st').innerHTML='کل: '+DB.length+' | امروز: '+c}
 function list(p){p=p||1;var qv=document.getElementById('s').value.trim().toLowerCase();var f=[];for(var i=0;i<DB.length;i++)if(!qv||DB[i].word.indexOf(qv)>-1||DB[i].meaning.indexOf(qv)>-1)f.push(DB[i]);var per=50;var tot=Math.ceil(f.length/per)||1;var sl=f.slice((p-1)*per,p*per);var html='';for(var j=0;j<sl.length;j++)html+='<div class="def"><b>'+sl[j].word+'</b> = '+sl[j].meaning+' <button onclick="learnFast(\''+sl[j].word+'\',\''+sl[j].meaning+'\')">آموزش</button></div>';document.getElementById('wl').innerHTML=html||'خالیه';var h='';for(var k=1;k<=Math.min(tot,15);k++)h+='<button onclick="list('+k+')">'+k+'</button>';document.getElementById('pg').innerHTML=h;}
 function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
