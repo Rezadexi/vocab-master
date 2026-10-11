@@ -3,167 +3,208 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>VocabMaster Vx FINAL</title>
+<title>VocabMaster Vx FINAL - ووکب خاص</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:Tahoma,sans-serif}
-body{margin:0;min-height:100vh;color:#fff;background:#070b16}
-header{padding:24px 16px;text-align:center;background:linear-gradient(135deg,#b45309,#0d9488);border-radius:0 0 28px 28px}
-header h1{margin:0}header p{font-size:12px;opacity:.95}
-.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:960px;margin:12px auto 0;padding:0 12px}
-.stat{background:#1e293b;border:1px solid #f59e0b55;border-radius:14px;padding:10px;text-align:center}.stat b{display:block;color:#fde68a}.stat span{font-size:11px;color:#cbd5e1}
-nav{max-width:960px;margin:12px auto;padding:0 12px;display:flex;gap:8px;flex-wrap:wrap}
-nav button{flex:1;padding:12px;border:none;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-weight:bold;min-width:80px;cursor:pointer}
-nav button.active{background:linear-gradient(135deg,#f59e0b,#0d9488);color:#000}
-main{max-width:960px;margin:12px auto;padding:0 12px 40px}
-.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:14px;margin-bottom:12px}
-.card.need{border-color:#f59e0b}.card.bad{border-color:#dc2626}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-input,select{flex:1;padding:12px;border-radius:12px;border:1px solid #475569;background:#070b16;color:#fff;min-width:100px}
-button{padding:11px 16px;border-radius:12px;border:none;background:linear-gradient(135deg,#f59e0b,#0d9488);color:#000;font-weight:bold;cursor:pointer}
-button.ghost{background:#070b16;border:1px solid #475569;color:#fff}
-.tab{display:none}.tab.active{display:block}
-.def{background:#070b16;padding:12px;border-radius:12px;margin:8px 0;border-right:4px solid #f59e0b;line-height:2}
-.def.wrongB{border-right-color:#dc2626}
-.en-line{direction:ltr;text-align:left;font-size:16px}.fa-line{color:#94a3b8;border-top:1px dashed #334155;margin-top:8px;padding-top:8px;font-size:13px}
-.opt{display:block;width:100%;margin:7px 0;padding:13px;background:#070b16;border:1px solid #475569;color:#fff;border-radius:12px;cursor:pointer;font-size:16px}
-.opt.ok{background:#16a34a}.opt.no{background:#dc2626}
-.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}
-.lesson{background:#070b16;border:1px solid #475569;border-radius:12px;padding:12px;text-align:center;cursor:pointer}
-.mod{margin-top:12px;padding:10px;background:linear-gradient(90deg,#0f766e,#b45309);border-radius:10px;font-weight:bold}
-.wordpick{display:flex;gap:10px;align-items:center;background:#070b16;border:1px solid #334155;border-radius:12px;padding:10px;margin:8px 0}
-.wordpick img{width:110px;height:85px;object-fit:cover;border-radius:10px;flex-shrink:0;background:#1e293b;cursor:pointer;border:2px solid #334155}
-.checks{display:flex;gap:8px;align-items:center;flex-shrink:0}
-.tick{width:30px;height:30px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;cursor:pointer;border:2px solid #334155;color:#000;user-select:none}
-.tick.on-know{background:#16a34a;border-color:#16a34a;color:#fff}
-.tick.on-need{background:#dc2626;border-color:#dc2626;color:#fff}
-.ex{color:#94a3b8;font-size:12px}
-img.q{width:100%;max-height:280px;object-fit:cover;border-radius:12px;display:block;cursor:pointer;background:#070b16}
-.badge{background:#0ea5e9;padding:3px 12px;border-radius:99px;font-size:12px;display:inline-block;margin:2px;color:#000}
-.badge.lvl{background:#f59e0b}.badge.pos{background:#a78bfa;color:#000}.badge.cat{background:#10b981;color:#000}
-canvas{width:100%;background:#070b16;border-radius:12px}
-h4.catH{background:#0f766e;border-radius:10px;padding:8px;margin:12px 0 6px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Vazirmatn,Poppins,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63 50%,#0f3460 100%);color:#fff;min-height:100vh}
+header{padding:22px;text-align:center;background:rgba(255,255,255,.06);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.12);position:sticky;top:0;z-index:10}
+header h1{margin:0;font-size:28px;font-weight:800;background:linear-gradient(90deg,#ff9a9e,#a18cd1,#5ee7df);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tabs{display:flex;gap:8px;justify-content:center;padding:14px;flex-wrap:wrap}
+.tabs button{border:none;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-family:inherit;font-weight:700;transition:.3s}
+.tabs button.active{background:linear-gradient(90deg,#ff6a00,#ee0979);box-shadow:0 8px 25px rgba(238,9,121,.5)}
+.container{max-width:980px;margin:auto;padding:16px}
+.card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:16px;margin:12px 0;backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.en{font-family:Poppins;direction:ltr;text-align:left;font-weight:800;font-size:20px;color:#5ee7df}
+.fa{color:#ffe29f}
+.btn{border:none;border-radius:12px;padding:9px 14px;cursor:pointer;font-family:inherit;font-weight:700;margin:3px}
+.b-green{background:linear-gradient(90deg,#11998e,#38ef7d);color:#002}
+.b-red{background:linear-gradient(90deg,#cb2d3e,#ef473a);color:#fff}
+.b-blue{background:linear-gradient(90deg,#36d1dc,#5b86e5);color:#002}
+.b-orange{background:linear-gradient(90deg,#ff9966,#ff5e62);color:#fff}
+.b-ghost{background:rgba(255,255,255,.14);color:#fff}
+input,select,textarea{width:100%;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.35);color:#fff;font-family:inherit;margin:5px 0}
+.g-suggest{background:rgba(66,133,244,.15);border:1px dashed #4285F4;border-radius:12px;padding:10px;margin-top:8px;font-size:14px}
+.unit-title{font-weight:800;color:#ffcc70}
+img.wimg{width:100%;max-height:220px;object-fit:cover;border-radius:14px;margin-top:8px}
+.tickrow{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.tick{font-size:22px;padding:6px 14px;border-radius:50px;cursor:pointer;border:2px solid #fff;background:rgba(255,255,255,.1)}
+.tick.ok{border-color:#38ef7d}.tick.no{border-color:#ff5e62}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:99}
+.modal>div{background:#1e1e3a;border-radius:18px;padding:18px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
 </style>
 </head>
 <body>
-<header><h1>💎 VocabMaster Vx FINAL</h1><p>حلقه اشتباه → کارنامه → تمرین مجدد ✅</p></header>
-<div class="dash"><div class="stat"><b id="d-t">0</b><span>بانک</span></div><div class="stat"><b id="d-n">0</b><span>نیاز به آموزش</span></div><div class="stat"><b id="d-xp">0</b><span>XP</span></div><div class="stat"><b id="d-d">0</b><span>سررسید</span></div></div>
-<nav>
-<button id="b-learn" class="active" onclick="tab('learn')">📚 آموزش</button>
-<button id="b-book" onclick="tab('book')">📖 کتابی</button>
-<button id="b-review" onclick="tab('review')">🔁 تمرین</button>
-<button id="b-stats" onclick="tab('stats')">📊 کارنامه</button>
-<button id="b-list" onclick="tab('list')">📂 بانک</button>
-</nav>
-<main>
-<section id="t-learn" class="tab active">
-<div class="card"><h3>➕ لغت آزاد + دسته خودکار</h3><div class="row"><input id="w" placeholder="english"><input id="m" placeholder="معنی"><button onclick="add()">افزودن</button></div><p id="msg" style="color:#4ade80"></p></div>
-<div class="card need"><h3>📕 نیاز به آموزش (<span id="needCount">0</span>)</h3><div id="needList"></div></div>
-<div id="out"></div>
-</section>
-<section id="t-book" class="tab">
-<div class="card"><h3>📖 OPD 12 + WS 12 ویرایش دوم</h3><p class="ex">راست ✅ بلدم | چپ ❌ بلد نیستم</p>
-<div class="row"><select id="bookSel" onchange="renderLessons()"><option value="OPD">OPD - 12</option><option value="WS" selected>Word Skills 2nd - 1-12</option></select></div>
-<div id="lessons"></div><div id="lessonView"></div></div>
-</section>
-<section id="t-review" class="tab">
-<div class="card"><h3>🔁 تمرین هوشمند</h3><p id="st" class="ex"></p>
-<div class="row"><select id="filterCat" onchange="stats()"><option value="">همه دسته‌ها</option></select></div>
-<div class="row"><button onclick="start('mixed')">⭐ هوشمند رندوم</button><button class="ghost" onclick="start('en-fa')">EN→FA</button><button class="ghost" onclick="start('fa-en')">FA→EN</button><button class="ghost" onclick="start('image')">🖼️ تصویری</button><button class="ghost" onclick="start('listening')">👂 شنیداری</button><button class="ghost" onclick="start('blank')">⬜ جای‌خالی</button></div>
-<div class="row"><button class="ghost" onclick="startWeak()">🚨 تمرین فقط ضعیف‌ها</button></div>
-<div id="qb"></div></div>
-</section>
-<section id="t-stats" class="tab">
-<div class="card"><h3>📊 کارنامه ۷ روز</h3><canvas id="ch" height="150"></canvas><p id="sum" class="ex"></p></div>
-<div class="card bad"><h3>❌ اشتباهات امروز — دوباره تمرین کن</h3><p class="ex">هر غلطی که امروز زدی اینجاست. بزن روش یاد بگیر بعد دوباره تست بده.</p><div id="todayMiss"></div><div class="row"><button onclick="startMiss()">🔁 تمرین فقط اشتباهات امروز</button></div></div>
-<div class="card bad"><h3>🚨 کلمات ضعیف (۲+ غلط)</h3><div id="weak"></div><div class="row"><button onclick="startWeak()">🚨 تمرین ضعیف‌ها</button></div></div>
-<div class="card"><h3>📁 تسلط دسته‌ها</h3><div id="cats"></div></div>
-</section>
-<section id="t-list" class="tab"><div class="card"><h3>📂 بانک دسته‌بندی‌شده</h3><div class="row"><button onclick="exportBK()">⬇️ بکاپ</button><button class="ghost" onclick="document.getElementById('imp').click()">⬆️ برگردوندن</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div><div class="row"><input id="s" placeholder="جستجو..." oninput="list(1)"></div><div id="wl"></div></div></section>
-</main>
+<header><h1>✨ ووکب VocabMaster Vx FINAL ✨</h1><div style="font-size:13px;opacity:.8">نسخه خاص | گوگل ترنسلیت + ویرایش بانک + تم نئونی</div></header>
+<div class="tabs">
+<button class="active" onclick="showTab('opd',this)">📖 OPD 12 + WS 12</button>
+<button onclick="showTab('need',this)">📕 نیاز به آموزش (<span id="needCount">0</span>)</button>
+<button onclick="showTab('train',this)">🏋️ تمرین ۵ حالته + SmartMix</button>
+<button onclick="showTab('report',this)">📊 کارنامه</button>
+<button onclick="showTab('add',this)">➕ افزودن کلمه</button>
+</div>
+<div class="container">
+<div id="tab-opd"></div>
+<div id="tab-need" style="display:none"></div>
+<div id="tab-train" style="display:none">
+<div class="card"><h3>تمرین</h3>
+<select id="mode"><option value="enfa">انگلیسی → فارسی</option><option value="faen">فارسی → انگلیسی</option><option value="spell">املا (تایپی)</option><option value="listen">شنیداری 🔊</option><option value="smart">🧠 SmartMix رندوم هوشمند</option></select>
+<button class="btn b-blue" onclick="nextQuiz()">شروع / بعدی</button>
+<div id="quizBox" style="margin-top:12px"></div>
+</div>
+</div>
+<div id="tab-report" style="display:none">
+<div class="card"><h3>❌ اشتباهات امروز — دوباره تمرین کن</h3><div id="todayMist"></div>
+<h3>کلمات ضعیف</h3><div id="weakBox"></div>
+<button class="btn b-green" onclick="downloadBackup()">⬇️ بکاپ JSON</button>
+<input type="file" id="restoreFile" accept=".json" onchange="restoreBackup(event)">
+</div>
+</div>
+<div id="tab-add" style="display:none">
+<div class="card"><h3>افزودن کلمه جدید + چک گوگل ترنسلیت</h3>
+<input id="n_en" placeholder="English word" style="direction:ltr">
+<input id="n_fa" placeholder="معنی فارسی (خودت)">
+<button class="btn b-orange" onclick="checkGoogle()">🔍 بررسی با گوگل ترنسلیت</button>
+<div id="gBox"></div>
+<input id="n_phon" placeholder="فونتیک /fəˈnetɪk/">
+<select id="n_level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select>
+<input id="n_pos" placeholder="نوع کلمه noun/verb/...">
+<button class="btn b-green" onclick="saveNewWord()">💾 ذخیره در بانک</button>
+</div>
+</div>
+</div>
+<div class="modal" id="editModal"><div>
+<h3>✏️ ویرایش کلمه</h3>
+<input id="e_en"><input id="e_fa"><input id="e_phon"><input id="e_pos">
+<select id="e_level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select>
+<textarea id="e_ex" rows="4" placeholder="۳ جمله مثبت/منفی/سوالی هر خط یکی"></textarea>
+<button class="btn b-green" onclick="saveEdit()">ذخیره</button>
+<button class="btn b-ghost" onclick="closeEdit()">بستن</button>
+</div></div>
 <script>
-var CATMAP={fork:'آشپزخانه',spoon:'آشپزخانه',knife:'آشپزخانه',plate:'آشپزخانه',cup:'آشپزخانه',pan:'آشپزخانه',pot:'آشپزخانه',oven:'آشپزخانه',fridge:'آشپزخانه',eye:'بدن',nose:'بدن',mouth:'بدن',hand:'بدن',foot:'بدن',head:'بدن',heart:'بدن',ear:'بدن',dog:'حیوانات',cat:'حیوانات',bird:'حیوانات',fish:'حیوانات',horse:'حیوانات',cow:'حیوانات',apple:'غذا',bread:'غذا',rice:'غذا',meat:'غذا',milk:'غذا',egg:'غذا',cheese:'غذا',chicken:'غذا',shirt:'لباس',pants:'لباس',trousers:'لباس',jeans:'لباس',shoes:'لباس',jacket:'لباس',hat:'لباس',car:'سفر',bus:'سفر',train:'سفر',ticket:'سفر',hotel:'سفر',taxi:'سفر',station:'سفر',airport:'سفر',book:'مدرسه',pen:'مدرسه',pencil:'مدرسه',teacher:'مدرسه',school:'مدرسه',dictionary:'مدرسه',notebook:'مدرسه',computer:'تکنولوژی',phone:'تکنولوژی',internet:'تکنولوژی',mother:'خانواده',father:'خانواده',sister:'خانواده',brother:'خانواده',doctor:'شغل',engineer:'شغل',office:'شغل',job:'شغل',football:'ورزش',tennis:'ورزش',run:'ورزش',swim:'ورزش',bank:'شهر',hospital:'شهر',park:'شهر',shop:'شهر',street:'شهر',coffee:'کافه',tea:'کافه',menu:'کافه'};
-function autoCat(w,m){w=(w||'').toLowerCase().split(' ').pop();m=m||'';if(CATMAP[w])return CATMAP[w];return 'عمومی';}
-function lvl(w){w=w||'';if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1';}
-function loadStable(k,fb){try{var v=JSON.parse(localStorage.getItem(k));if(v!=null)return v;}catch(e){}return fb;}
-var DB=loadStable('vm_db',null);
-if(!DB){var a=[],s={};['vmx','vm26'].forEach(function(k){try{var d=JSON.parse(localStorage.getItem(k)||'[]');if(d&&d.bank)d=d.bank;for(var i=0;i<d.length;i++)if(d[i]&&d[i].word&&!s[d[i].word]){s[d[i].word]=1;if(d[i].wrong==null)d[i].wrong=0;if(d[i].streak==null)d[i].streak=0;if(d[i].next==null)d[i].next=Date.now();if(!d[i].cat)d[i].cat=autoCat(d[i].word,d[i].meaning);a.push(d[i]);}}catch(e){}});DB=a;}
-DB.forEach(function(x){if(!x.cat)x.cat=autoCat(x.word,x.meaning);if(x.wrong==null)x.wrong=0;if(x.streak==null)x.streak=0;});
-var NEED=loadStable('vm_need',[]);if(NEED&&NEED.need)NEED=NEED.need;if(!NEED)NEED=[];
-var META=loadStable('vm_meta',{});if(!META)META={};if(!META.xp)META.xp=0;if(!META.hist)META.hist={};if(!META.miss)META.miss={};
-function todayK(){return new Date().toDateString();}
-function save(){try{localStorage.setItem('vm_db',JSON.stringify(DB));localStorage.setItem('vm_need',JSON.stringify(NEED));localStorage.setItem('vm_meta',JSON.stringify(META));}catch(e){}}save();
-function tab(t){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('active')});document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='book')renderLessons();if(t=='stats')renderStats();if(t=='learn')renderNeed();if(t=='review')stats();}
-function sp(t){if(!t)return;try{var a=new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t));var p=a.play();if(p&&p.catch)p.catch(function(){var u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u);});}catch(e){}}
-function inDB(w){for(var i=0;i<DB.length;i++)if(DB[i].word==w)return true;return false;}
-function inNeed(w){for(var i=0;i<NEED.length;i++)if(NEED[i].word==w)return true;return false;}
-function add(){var w=document.getElementById('w').value.trim().toLowerCase(),m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو');return;}if(!inDB(w)){DB.unshift({word:w,meaning:m,cat:autoCat(w,m),wrong:0,streak:0,next:Date.now()});save();document.getElementById('msg').textContent='✅ رفت تو «'+autoCat(w,m)+'»';}document.getElementById('w').value='';document.getElementById('m').value='';dash();learnFast(w,m);}
-function renderNeed(){document.getElementById('needCount').textContent=NEED.length;var h='';NEED.forEach(function(x){h+='<div class="def"><b>'+x.word+'</b>='+x.meaning+' <button onclick="teachNeed(\''+x.word+'\')">📖 یادم بده</button> <button class="ghost" onclick="doneNeed(\''+x.word+'\')">✅ یاد گرفتم</button></div>'});document.getElementById('needList').innerHTML=h||'خالیه';}
-function teachNeed(w){var m='';NEED.forEach(function(x){if(x.word==w)m=x.meaning});learnFast(w,m);}
-function doneNeed(w){var m='';NEED=NEED.filter(function(x){if(x.word==w)m=x.meaning;return x.word!=w});if(!inDB(w))DB.unshift({word:w,meaning:m,cat:autoCat(w,m),wrong:0,streak:0,next:Date.now()});save();dash();renderNeed();}
-function imgSources(w){w=(w||'book').toLowerCase().trim();var f=w.split(' ').pop().replace(/[^a-z]/g,'')||'book';return ['wiki:'+f,'https://image.pollinations.ai/prompt/'+encodeURIComponent('photo of '+w)+'?width=600&height=350&nologo=true','https://picsum.photos/seed/'+f+'/600/350'];}
-function setImg(im){if(!im)return;try{if(!im.getAttribute('data-srcs')){im.setAttribute('data-srcs',JSON.stringify(imgSources(im.getAttribute('data-w')||'book')));im.setAttribute('data-i','0');}var s=JSON.parse(im.getAttribute('data-srcs'));var i=parseInt(im.getAttribute('data-i')||'0');if(i>=s.length)return;var c=s[i];if(c.indexOf('wiki:')==0){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(c.slice(5))).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&j.thumbnail)im.src=j.thumbnail.source;else throw 0}).catch(function(){im.setAttribute('data-i',i+1);setImg(im)});}else{im.onerror=function(){im.setAttribute('data-i',i+1);im.onerror=null;setImg(im)};im.src=c;}}catch(e){}}
-function nextImg(im){var i=parseInt(im.getAttribute('data-i')||'0')+1;im.setAttribute('data-i',i);im.onerror=null;setImg(im);}
-function learnFast(word,my){my=my||'';var cat='عمومی';DB.forEach(function(x){if(x.word==word){if(x.meaning)my=x.meaning;if(x.cat)cat=x.cat;}});cat=autoCat(word,my);var L=lvl(word);var sr=JSON.stringify(imgSources(word)).replace(/"/g,'&quot;');var box=document.getElementById('out');box.innerHTML='<div class="card"><h2 style="direction:ltr;text-align:left">'+word+' <span style="font-size:13px;color:#38bdf8" id="phon"></span></h2><p><span class="badge lvl">سطح '+L+'</span> <span class="badge pos" id="pos">...</span> <span class="badge cat">📁 '+cat+'</span> <span class="badge">'+my+'</span></p><img class="q" data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" onerror="nextImg(this)" src="https://picsum.photos/seed/'+word+'/600/350"><div class="row"><button onclick="sp(\''+word+'\')">🔊 تلفظ</button></div><div class="def"><b>✅ مثبت</b><div class="en-line">I really love '+word+'.</div><div class="fa-line">'+my+'</div></div><div class="def"><b>❌ منفی</b><div class="en-line">I did not know '+word+'.</div><div class="fa-line">'+my+'</div></div><div class="def"><b>❓ سوالی</b><div class="en-line">Can you use '+word+'?</div><div class="fa-line">'+my+'</div></div><div id="extra-'+word+'"></div><div class="row"><a href="https://www.youtube.com/results?search_query='+encodeURIComponent(word)+'+in+movies" target="_blank"><button class="ghost">▶️ یوتیوب</button></a><a href="https://youglish.com/pronounce/'+encodeURIComponent(word)+'/english" target="_blank"><button class="ghost">🎞️ YouGlish</button></a></div><div class="row"><button onclick="doneNeed(\''+word+'\')">✅ یاد گرفتم</button></div></div>';tab('learn');setImg(box.querySelector('img'));fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word)).then(function(r){return r.json()}).then(function(d){if(d&&d[0]){document.getElementById('phon').textContent=d[0].phonetic||'';if(d[0].meanings[0])document.getElementById('pos').textContent=d[0].meanings[0].partOfSpeech;}}).catch(function(){});}
-var OPD=[
-{lesson:1,title:'OPD 1 - آشپزخانه',words:[['fork','چنگال'],['spoon','قاشق'],['knife','چاقو'],['plate','بشقاب'],['cup','فنجان'],['pan','ماهیتابه'],['pot','قابلمه'],['oven','فر']]},
-{lesson:2,title:'OPD 2 - بدن',words:[['eye','چشم'],['nose','بینی'],['mouth','دهان'],['hand','دست'],['foot','پا'],['head','سر'],['heart','قلب'],['ear','گوش']]},
-{lesson:3,title:'OPD 3 - خانه',words:[['mother','مادر'],['father','پدر'],['bed','تخت'],['chair','صندلی'],['table','میز'],['door','در'],['window','پنجره'],['lamp','چراغ']]},
-{lesson:4,title:'OPD 4 - مدرسه',words:[['book','کتاب'],['pen','خودکار'],['pencil','مداد'],['school','مدرسه'],['teacher','معلم'],['student','دانش‌آموز'],['bag','کیف'],['classroom','کلاس']]},
-{lesson:5,title:'OPD 5 - شغل',words:[['doctor','پزشک'],['engineer','مهندس'],['driver','راننده'],['cook','آشپز'],['nurse','پرستار'],['farmer','کشاورز']]},
-{lesson:6,title:'OPD 6 - سفر',words:[['car','ماشین'],['bus','اتوبوس'],['train','قطار'],['airplane','هواپیما'],['ticket','بلیط'],['hotel','هتل'],['passport','پاسپورت'],['map','نقشه']]},
-{lesson:7,title:'OPD 7 - غذا',words:[['apple','سیب'],['bread','نان'],['rice','برنج'],['meat','گوشت'],['milk','شیر'],['egg','تخم‌مرغ'],['cheese','پنیر'],['water','آب']]},
-{lesson:8,title:'OPD 8 - لباس',words:[['shirt','پیراهن'],['pants','شلوار'],['shoes','کفش'],['jacket','کاپشن'],['hat','کلاه'],['dress','پیراهن']]},
-{lesson:9,title:'OPD 9 - حیوانات',words:[['dog','سگ'],['cat','گربه'],['bird','پرنده'],['fish','ماهی'],['horse','اسب'],['cow','گاو']]},
-{lesson:10,title:'OPD 10 - شهر',words:[['street','خیابان'],['bank','بانک'],['hospital','بیمارستان'],['shop','مغازه'],['park','پارک'],['bridge','پل']]},
-{lesson:11,title:'OPD 11 - ورزش',words:[['football','فوتبال'],['tennis','تنیس'],['swim','شنا'],['run','دویدن'],['ball','توپ'],['gym','باشگاه']]},
-{lesson:12,title:'OPD 12 - تکنولوژی',words:[['computer','کامپیوتر'],['phone','تلفن'],['internet','اینترنت'],['camera','دوربین'],['screen','صفحه'],['keyboard','کیبورد']]}
+// ---- STORAGE (ثابت) ----
+let vm_db = JSON.parse(localStorage.getItem('vm_db')||'{}');
+let vm_need = JSON.parse(localStorage.getItem('vm_need')||'[]');
+let vm_meta = JSON.parse(localStorage.getItem('vm_meta')||'{"mistakes":{},"weak":{}}');
+function persist(){localStorage.setItem('vm_db',JSON.stringify(vm_db));localStorage.setItem('vm_need',JSON.stringify(vm_need));localStorage.setItem('vm_meta',JSON.stringify(vm_meta));}
+// ---- DATA OPD 12 (خلاصه دقیق + WS) ----
+const OPD=[
+{u:"Unit 1 - Classroom",cat:"Learning",w:[["board","تخته","/bɔːrd/","noun","A1"],["desk","میز تحریر","/desk/","noun","A1"],["chair","صندلی","/tʃer/","noun","A1"],["book","کتاب","/bʊk/","noun","A1"],["pen","خودکار","/pen/","noun","A1"],["pencil","مداد","/ˈpensl/","noun","A1"],["teacher","معلم","/ˈtiːtʃər/","noun","A1"],["student","دانش‌آموز","/ˈstuːdənt/","noun","A1"],["map","نقشه","/mæp/","noun","A1"],["door","در","/dɔːr/","noun","A1"],["window","پنجره","/ˈwɪndoʊ/","noun","A1"],["eraser","پاک‌کن","/ɪˈreɪsər/","noun","A2"]]},
+{u:"Unit 2 - Words",cat:"Learning",w:[["letter","حرف","/ˈletər/","noun","A1"],["word","کلمه","/wɜːrd/","noun","A1"],["sentence","جمله","/ˈsentəns/","noun","A1"],["question","سوال","/ˈkwestʃən/","noun","A1"],["answer","جواب","/ˈænsər/","noun","A1"],["meaning","معنی","/ˈmiːnɪŋ/","noun","A2"],["spelling","املا","/ˈspelɪŋ/","noun","A2"],["test","امتحان","/test/","noun","A1"]]},
+{u:"Unit 3 - Days",cat:"Time",w:[["Monday","دوشنبه","/ˈmʌndeɪ/","noun","A1"],["Tuesday","سه‌شنبه","/ˈtuːzdeɪ/","noun","A1"],["weekend","آخر هفته","/ˌwiːkˈend/","noun","A1"],["today","امروز","/təˈdeɪ/","adv","A1"],["tomorrow","فردا","/təˈmɑːroʊ/","adv","A1"],["yesterday","دیروز","/ˈjestərdeɪ/","adv","A1"]]},
+{u:"Unit 4 - Time",cat:"Time",w:[["morning","صبح","/ˈmɔːrnɪŋ/","noun","A1"],["afternoon","بعدازظهر","/ˌæftərˈnuːn/","noun","A1"],["evening","عصر","/ˈiːvnɪŋ/","noun","A1"],["night","شب","/naɪt/","noun","A1"],["hour","ساعت","/ˈaʊər/","noun","A1"]]},
+{u:"Unit 5 - Family",cat:"People",w:[["mother","مادر","/ˈmʌðər/","noun","A1"],["father","پدر","/ˈfɑːðər/","noun","A1"],["sister","خواهر","/ˈsɪstər/","noun","A1"],["brother","برادر","/ˈbrʌðər/","noun","A1"],["baby","نوزاد","/ˈbeɪbi/","noun","A1"],["family","خانواده","/ˈfæməli/","noun","A1"],["son","پسر","/sʌn/","noun","A1"],["daughter","دختر","/ˈdɔːtər/","noun","A1"],["parents","والدین","/ˈperənts/","noun","A2"]]},
+{u:"Unit 6 - Describing",cat:"People",w:[["tall","بلندقد","/tɔːl/","adj","A1"],["short","کوتاه","/ʃɔːrt/","adj","A1"],["young","جوان","/jʌŋ/","adj","A1"],["old","پیر","/oʊld/","adj","A1"],["happy","خوشحال","/ˈhæpi/","adj","A1"],["sad","ناراحت","/sæd/","adj","A1"]]},
+{u:"Unit 7 - Routines",cat:"Life",w:[["wake up","بیدار شدن","/weɪk ʌp/","verb","A1"],["eat","خوردن","/iːt/","verb","A1"],["work","کار کردن","/wɜːrk/","verb","A1"],["sleep","خوابیدن","/sliːp/","verb","A1"],["go","رفتن","/ɡoʊ/","verb","A1"],["come","آمدن","/kʌm/","verb","A1"]]},
+{u:"Unit 8 - Clothes",cat:"Life",w:[["shirt","پیراهن","/ʃɜːrt/","noun","A1"],["pants","شلوار","/pænts/","noun","A1"],["shoes","کفش","/ʃuːz/","noun","A1"],["hat","کلاه","/hæt/","noun","A1"],["jacket","کاپشن","/ˈdʒækɪt/","noun","A1"],["dress","لباس","/dres/","noun","A1"]]},
+{u:"Unit 9 - Food",cat:"Food",w:[["apple","سیب","/ˈæpl/","noun","A1"],["bread","نان","/bred/","noun","A1"],["cheese","پنیر","/tʃiːz/","noun","A1"],["egg","تخم‌مرغ","/eɡ/","noun","A1"],["milk","شیر","/mɪlk/","noun","A1"],["meat","گوشت","/miːt/","noun","A1"],["rice","برنج","/raɪs/","noun","A1"],["water","آب","/ˈwɔːtər/","noun","A1"]]},
+{u:"Unit 10 - Cafe",cat:"Food",w:[["coffee","قهوه","/ˈkɔːfi/","noun","A1"],["tea","چای","/tiː/","noun","A1"],["menu","منو","/ˈmenjuː/","noun","A2"],["bill","صورت‌حساب","/bɪl/","noun","A2"],["table","میز","/ˈteɪbl/","noun","A1"],["cup","فنجان","/kʌp/","noun","A1"]]},
+{u:"Unit 11 - Transport",cat:"Getting around",w:[["bus","اتوبوس","/bʌs/","noun","A1"],["train","قطار","/treɪn/","noun","A1"],["car","ماشین","/kɑːr/","noun","A1"],["taxi","تاکسی","/ˈtæksi/","noun","A1"],["bike","دوچرخه","/baɪk/","noun","A1"]]},
+{u:"Unit 12 - In town",cat:"Places",w:[["bank","بانک","/bæŋk/","noun","A1"],["park","پارک","/pɑːrk/","noun","A1"],["shop","مغازه","/ʃɑːp/","noun","A1"],["street","خیابان","/striːt/","noun","A1"],["hospital","بیمارستان","/ˈhɑːspɪtl/","noun","A2"]]}
 ];
-var WS=[
-{lesson:1,mod:'Learning',title:'Unit 1 - Classroom',words:[['pencil','مداد'],['pen','خودکار'],['coursebook','کتاب درسی'],['dictionary','دیکشنری'],['notebook','دفتر'],['exercise book','دفتر تمرین'],['bag','کیف'],['desk','میز تحریر'],['board','تخته'],['whiteboard','وایت‌برد'],['chair','صندلی'],['table','میز']]},
-{lesson:2,mod:'Learning',title:'Unit 2 - Words',words:[['noun','اسم'],['verb','فعل'],['adjective','صفت'],['adverb','قید'],['preposition','حرف اضافه'],['pronoun','ضمیر'],['lesson','درس'],['class','کلاس']]},
-{lesson:3,mod:'Time',title:'Unit 3 - Days',words:[['Monday','دوشنبه'],['Tuesday','سه‌شنبه'],['January','ژانویه'],['spring','بهار'],['summer','تابستان'],['winter','زمستان']]},
-{lesson:4,mod:'Time',title:'Unit 4 - Time',words:[['morning','صبح'],['afternoon','بعدازظهر'],['evening','عصر'],['midnight','نیمه‌شب'],['clock','ساعت']]},
-{lesson:5,mod:'People',title:'Unit 5 - Family',words:[['mother','مادر'],['father','پدر'],['sister','خواهر'],['brother','برادر'],['friend','دوست'],['son','پسر'],['daughter','دختر'],['wife','همسر زن'],['husband','همسر مرد']]},
-{lesson:6,mod:'People',title:'Unit 6 - Describing',words:[['tall','بلندقد'],['short','کوتاه'],['young','جوان'],['kind','مهربان'],['happy','خوشحال'],['smart','باهوش']]},
-{lesson:7,mod:'Life',title:'Unit 7 - Routines',words:[['breakfast','صبحانه'],['lunch','ناهار'],['dinner','شام'],['work','کار'],['home','خانه'],['shower','دوش']]},
-{lesson:8,mod:'Life',title:'Unit 8 - Clothes',words:[['shirt','پیراهن'],['shoes','کفش'],['jacket','کاپشن'],['hat','کلاه'],['trousers','شلوار'],['jeans','جین']]},
-{lesson:9,mod:'Food',title:'Unit 9 - Food',words:[['bread','نان'],['rice','برنج'],['meat','گوشت'],['apple','سیب'],['milk','شیر'],['egg','تخم‌مرغ'],['cheese','پنیر'],['chicken','مرغ']]},
-{lesson:10,mod:'Food',title:'Unit 10 - Cafe',words:[['coffee','قهوه'],['tea','چای'],['menu','منو'],['bill','صورتحساب'],['table','میز'],['cake','کیک']]},
-{lesson:11,mod:'Getting around',title:'Unit 11 - Transport',words:[['bus','اتوبوس'],['taxi','تاکسی'],['station','ایستگاه'],['airport','فرودگاه'],['ticket','بلیط']]},
-{lesson:12,mod:'Places',title:'Unit 12 - In town',words:[['bank','بانک'],['hospital','بیمارستان'],['park','پارک'],['shop','مغازه'],['street','خیابان']]}
+const WS=[ // Word Skills Elementary 2nd - Unit 1-12 خلاصه کاربردی
+{u:"WS 1 - Questions",w:[["what","چه","/wʌt/","pron","A1"],["where","کجا","/wer/","adv","A1"],["when","کی","/wen/","adv","A1"],["why","چرا","/waɪ/","adv","A1"],["how","چطور","/haʊ/","adv","A1"]]},
+{u:"WS 2 - Plurals",w:[["children","بچه‌ها","/ˈtʃɪldrən/","noun","A1"],["men","مردها","/men/","noun","A1"],["women","زن‌ها","/ˈwɪmɪn/","noun","A1"],["feet","پاها","/fiːt/","noun","A2"]]},
+{u:"WS 3 - Prepositions",w:[["in","در","/ɪn/","prep","A1"],["on","روی","/ɒn/","prep","A1"],["under","زیر","/ˈʌndər/","prep","A1"],["between","بین","/bɪˈtwiːn/","prep","A2"]]},
+{u:"WS 4 - Adjectives",w:[["big","بزرگ","/bɪɡ/","adj","A1"],["small","کوچک","/smɔːl/","adj","A1"],["fast","سریع","/fæst/","adj","A1"],["slow","کند","/sloʊ/","adj","A1"]]},
+{u:"WS 5 - Verbs",w:[["like","دوست داشتن","/laɪk/","verb","A1"],["love","عاشق بودن","/lʌv/","verb","A1"],["hate","متنفر بودن","/heɪt/","verb","A2"],["need","نیاز داشتن","/niːd/","verb","A1"]]},
+{u:"WS 6 - Family+",w:[["uncle","عمو/دایی","/ˈʌŋkl/","noun","A1"],["aunt","خاله/عمه","/ænt/","noun","A1"],["cousin","دخترخاله/پسرعمو","/ˈkʌzn/","noun","A2"]]},
+{u:"WS 7 - Daily",w:[["always","همیشه","/ˈɔːlweɪz/","adv","A1"],["never","هرگز","/ˈnevər/","adv","A1"],["sometimes","گاهی","/ˈsʌmtaɪmz/","adv","A1"]]},
+{u:"WS 8 - Clothes+",w:[["wear","پوشیدن","/wer/","verb","A1"],["size","سایز","/saɪz/","noun","A2"],["cotton","نخی","/ˈkɑːtn/","adj","B1"]]},
+{u:"WS 9 - Food+",w:[["delicious","خوشمزه","/dɪˈlɪʃəs/","adj","A2"],["hungry","گرسنه","/ˈhʌŋɡri/","adj","A1"],["thirsty","تشنه","/ˈθɜːrsti/","adj","A1"]]},
+{u:"WS 10 - Orders",w:[["please","لطفا","/pliːz/","adv","A1"],["thanks","ممنون","/θæŋks/","noun","A1"],["welcome","خوش آمدید","/ˈwelkəm/","adj","A1"]]},
+{u:"WS 11 - Travel",w:[["ticket","بلیت","/ˈtɪkɪt/","noun","A1"],["journey","سفر","/ˈdʒɜːrni/","noun","A2"],["map","نقشه","/mæp/","noun","A1"]]},
+{u:"WS 12 - Places+",w:[["city","شهر","/ˈsɪti/","noun","A1"],["village","روستا","/ˈvɪlɪdʒ/","noun","A2"],["capital","پایتخت","/ˈkæpɪtl/","noun","A2"]]}
 ];
-var CURBOOK='WS',CUR=null;
-function renderLessons(){CURBOOK=document.getElementById('bookSel').value;var data=CURBOOK=='OPD'?OPD:WS,h='',last='@@';for(var i=0;i<data.length;i++){var L=data[i];if(L.mod&&L.mod!=last){if(last!='@@')h+='</div>';h+='<div class="mod">📁 '+L.mod+'</div><div class="lesson-grid">';last=L.mod;}if(!L.mod&&i==0)h+='<div class="lesson-grid">';h+='<div class="lesson" onclick="openLesson('+i+')"><b>'+L.title+'</b><br><span class="ex">'+L.words.length+' کلمه 👆</span></div>';var nx=data[i+1];if(!nx||(nx.mod&&nx.mod!=L.mod))h+='</div>';}document.getElementById('lessons').innerHTML=h;document.getElementById('lessonView').innerHTML='';}
-function togglePick(el,type){var row=el.parentElement;var k=row.querySelector('.k'),n=row.querySelector('.n');if(type=='know'){var on=k.classList.contains('on-know');k.classList.remove('on-know');n.classList.remove('on-need');if(!on)k.classList.add('on-know');}else{var on2=n.classList.contains('on-need');k.classList.remove('on-know');n.classList.remove('on-need');if(!on2)n.classList.add('on-need');}}
-function openLesson(idx){var data=CURBOOK=='OPD'?OPD:WS;CUR=data[idx];var h='<div class="card"><h3>'+CUR.title+'</h3>';CUR.words.forEach(function(p){var w=p[0],m=p[1];var has=inDB(w);var sr=JSON.stringify(imgSources(w)).replace(/"/g,'&quot;');h+='<div class="wordpick"><div class="checks"><div class="tick k '+(has?'on-know':'')+'" onclick="togglePick(this,\'know\')">✓</div><div class="tick n" onclick="togglePick(this,\'need\')">✕</div></div><img data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+w.replace(/[^a-z]/g,'')+'/240/180" loading="lazy"><div style="flex:1"><b style="direction:ltr;display:block">'+w+'</b><span class="ex">'+m+'</span><br><button class="ghost" onclick="sp(\''+w+'\')">🔊</button></div><span style="display:none" data-w="'+w+'" data-m="'+m+'"></span></div>'});h+='<div class="row"><button onclick="applyPicks()">ثبت</button><button class="ghost" onclick="quizLesson()">تست</button></div></div>';var lv=document.getElementById('lessonView');lv.innerHTML=h;lv.scrollIntoView();lv.querySelectorAll('img').forEach(function(im){im.onerror=function(){nextImg(im)};setImg(im)});}
-function applyPicks(){var rows=document.querySelectorAll('#lessonView .wordpick');var nk=0,nn=0;rows.forEach(function(r){var w=r.querySelector('span[data-w]').getAttribute('data-w');var m=r.querySelector('span[data-w]').getAttribute('data-m');if(r.querySelector('.k').classList.contains('on-know')){if(!inDB(w)){DB.unshift({word:w,meaning:m,cat:autoCat(w,m),wrong:0,streak:0,next:Date.now()});nk++;}NEED=NEED.filter(function(x){return x.word!=w});}else if(r.querySelector('.n').classList.contains('on-need')){if(!inDB(w)&&!inNeed(w)){NEED.unshift({word:w,meaning:m});nn++;}}});save();dash();renderNeed();}
-function quizLesson(){if(!CUR)return;Q=CUR.words.map(function(x){return {word:x[0],meaning:x[1],cat:autoCat(x[0],x[1])}});QI=0;SC=0;QM='mixed';tab('review');nq();}
-function dash(){document.getElementById('d-t').textContent=DB.length;document.getElementById('d-n').textContent=NEED.length;var d=0;DB.forEach(function(x){if(x.next<=Date.now())d++});document.getElementById('d-d').textContent=d;document.getElementById('d-xp').textContent=META.xp;var sel=document.getElementById('filterCat');if(sel){var cur=sel.value;var cats={};DB.forEach(function(x){cats[x.cat||'عمومی']=1});sel.innerHTML='<option value="">همه دسته‌ها</option>';for(var k in cats)sel.innerHTML+='<option '+(k==cur?'selected':'')+' value="'+k+'">📁 '+k+'</option>';}}
-function stats(){dash();}
-function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
-var Q=[],QI=0,SC=0,QM='mixed';
-function pool(){var f=document.getElementById('filterCat').value;return f?DB.filter(function(x){return (x.cat||'عمومی')==f}):DB;}
-function start(m){var p=pool();if(p.length<2){alert('کمه');return;}QM=m;var sc=p.map(function(w){var ov=Math.max(0,(Date.now()-w.next)/86400000);return {w:w,s:ov*10+(w.wrong||0)*20-(w.streak||0)*5+Math.random()*10};});sc.sort(function(a,b){return b.s-a.s;});Q=sh(sc.slice(0,12).map(function(x){return x.w;})).slice(0,10);QI=0;SC=0;nq();}
-function startWeak(){var wk=DB.filter(function(x){return x.wrong>=2;});if(wk.length<1){alert('ضعیفی نداری 👏');return;}Q=sh(wk.slice()).slice(0,10);QI=0;SC=0;QM='mixed';tab('review');nq();}
-function startMiss(){var k=todayK();var m=META.miss[k]||[];if(!m.length){alert('امروز اشتباهی نداری');return;}var arr=[];m.forEach(function(mm){for(var i=0;i<DB.length;i++)if(DB[i].word==mm.w)arr.push(DB[i]);});if(!arr.length){alert('کلمات پاک شده‌اند');return;}Q=sh(arr).slice(0,10);QI=0;SC=0;QM='mixed';tab('review');nq();}
-function gd(f,ex){var o=[];pool().forEach(function(x){if(x.word!=ex)o.push(x[f])});if(o.length<3){DB.forEach(function(x){if(x.word!=ex&&o.indexOf(x[f])<0)o.push(x[f])});}return sh(o).slice(0,3);}
-function pickT(){return ['en-fa','fa-en','image','blank','listening'][Math.floor(Math.random()*5)];}
-function recordMiss(w,ok,your){var k=todayK();if(!META.miss[k])META.miss[k]=[];if(!ok){var ex=false;for(var i=0;i<META.miss[k].length;i++)if(META.miss[k][i].w==w.word)ex=true;if(!ex)META.miss[k].push({w:w.word,m:w.meaning,y:your||''});}else{for(var j=META.miss[k].length-1;j>=0;j--)if(META.miss[k][j].w==w.word){if((w.streak||0)>=1)META.miss[k].splice(j,1);}}}
-function nq(){var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>🎉 تمام '+SC+' از '+Q.length+' | +'+(SC*10)+' XP</h3><p class="ex">غلط‌ها رفتند تو کارنامه → اشتباهات امروز. برو اونجا دوباره تمرین کن.</p><div class="row"><button onclick="tab(\'stats\')">📊 برو کارنامه</button></div>';META.xp+=SC*10;var t=todayK();if(!META.hist[t])META.hist[t]={ok:0,no:0};META.hist[t].ok+=SC;META.hist[t].no+=(Q.length-SC);save();dash();return;}var w=Q[QI];var t=QM=='mixed'?pickT():QM;var num='('+(QI+1)+'/'+Q.length+') ';
-if(t=='image'){var o=sh([w.word].concat(gd('word',w.word)));var sr=JSON.stringify(imgSources(w.word)).replace(/"/g,'&quot;');b.innerHTML='<p>🖼️ '+num+'این عکس چیه؟</p><img class="q" data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+w.word+'/600/350">'+o.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\',\''+w.word+'\')">'+x+'</button>'}).join('');var im=b.querySelector('img');im.onerror=function(){nextImg(im)};setImg(im);return;}
-if(t=='fa-en'){var o3=sh([w.word].concat(gd('word',w.word)));b.innerHTML='<h3>'+num+w.meaning+' به انگلیسی؟</h3>'+o3.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
-if(t=='listening'){b.innerHTML='<p>👂 '+num+'گوش بده و تایپ کن</p><div class="row"><button onclick="sp(\''+w.word+'\')">🔊 پخش</button></div><div class="row"><input id="li"><button onclick="cl(\''+w.word+'\')">ثبت</button></div>';sp(w.word);return;}
-if(t=='blank'){var mk=('I love '+w.word).replace(w.word,'_____');var o4=sh([w.word].concat(gd('word',w.word)));b.innerHTML='<div class="def">⬜ '+num+mk+'</div>'+o4.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
-var o2=sh([w.meaning].concat(gd('meaning',w.word)));b.innerHTML='<h3>'+num+w.word+' یعنی چی؟</h3>'+o2.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.meaning+'\',\''+w.word+'\')">'+x+'</button>'}).join('');}
-function cl(c){var v=document.getElementById('li').value.trim().toLowerCase();var ok=v==c;upd(c,ok,v);recordMiss(Q[QI],ok,v);if(!ok)alert('درست: '+c);else SC++;QI++;nq();}
-function ans(btn,v,cor,word){var ok=v==cor;document.querySelectorAll('#qb .opt').forEach(function(x){if(x.textContent==cor)x.classList.add('ok')});if(ok)SC++;else btn.classList.add('no');upd(word,ok,v);recordMiss(Q[QI],ok,v);setTimeout(function(){QI++;nq()},600);}
-function upd(wd,ok,your){DB.forEach(function(x){if(x.word==wd){if(ok){x.streak=(x.streak||0)+1;if(x.wrong>0)x.wrong--;if(x.streak>=2){var k=todayK();if(META.miss[k])META.miss[k]=META.miss[k].filter(function(m){return m.w!=wd;});}}else{x.streak=0;x.wrong=(x.wrong||0)+1;}x.next=Date.now()+86400000;}});save();}
-function renderStats(){try{var c=document.getElementById('ch'),ctx=c.getContext('2d'),W=c.offsetWidth||300,H=150;c.width=W*2;c.height=300;ctx.scale(2,2);ctx.clearRect(0,0,W,H);var days=[];for(var d=6;d>=0;d--){var dt=new Date();dt.setDate(dt.getDate()-d);days.push(dt.toDateString());}var mx=5;days.forEach(function(k){var hh=META.hist[k];if(hh&&hh.ok+hh.no>mx)mx=hh.ok+hh.no;});var bw=W/7;days.forEach(function(k,j){var h0=META.hist[k]||{ok:0,no:0};var bh=(h0.ok+h0.no)/mx*110||4;ctx.fillStyle='#334155';ctx.fillRect(j*bw+6,H-bh,bw-12,bh);ctx.fillStyle='#22c55e';ctx.fillRect(j*bw+6,H-(h0.ok/mx*110||0),bw-12,h0.ok/mx*110||0);ctx.fillStyle='#94a3b8';ctx.font='10px Tahoma';ctx.fillText(h0.ok+'✓',j*bw+10,H-bh-5);});}catch(e){}var k=todayK();var miss=META.miss[k]||[];var mh='';miss.forEach(function(m){mh+='<div class="def wrongB">❌ <b style="direction:ltr;display:inline-block">'+m.w+'</b> = '+m.m+(m.y?' <span class="ex">(تو زدی: '+m.y+')</span>':'')+' <button class="ghost" onclick="learnFast(\''+m.w+'\',\''+m.m+'\')">📖 یاد بگیر</button></div>'});document.getElementById('todayMiss').innerHTML=mh||'<span class="ex">👏 امروز اشتباهی نداری</span>';var wk=DB.filter(function(x){return x.wrong>=2;}).sort(function(a,b){return b.wrong-a.wrong;}).slice(0,10);document.getElementById('weak').innerHTML=wk.map(function(x){return '<div class="def wrongB">🚨 <b>'+x.word+'</b> = '+x.meaning+' <span class="ex">'+x.wrong+' غلط | '+x.cat+'</span> <button class="ghost" onclick="learnFast(\''+x.word+'\',\''+x.meaning+'\')">📖</button></div>'}).join('')||'نداری 👏';var ct={};DB.forEach(function(x){var kk=x.cat||'عمومی';if(!ct[kk])ct[kk]=[0,0];ct[kk][1]++;if(x.streak>=2)ct[kk][0]++;});var ch='';for(var C in ct){ch+='<p>📁 '+C+' — '+Math.round(ct[C][0]*100/ct[C][1])+'%</p>';}document.getElementById('cats').innerHTML=ch;document.getElementById('sum').textContent='XP:'+META.xp+' | امروز: '+(META.hist[k]?META.hist[k].ok+' درست / '+META.hist[k].no+' غلط':'تستی ندادی');}
-function exportBK(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({bank:DB,need:NEED,meta:META})]));a.download='vocab-vx-backup.json';a.click();}
-function importBK(i){var f=i.files[0],r=new FileReader();r.onload=function(){try{var j=JSON.parse(r.result);var arr=j.bank||j;var s={};DB.forEach(function(x){s[x.word]=1});arr.forEach(function(x){if(x.word&&!s[x.word]){if(!x.cat)x.cat=autoCat(x.word,x.meaning);DB.push(x)}});if(j.meta){for(var kk in j.meta.hist)META.hist[kk]=j.meta.hist[kk];if(j.meta.miss)META.miss=j.meta.miss;META.xp=j.meta.xp||META.xp;}save();dash();list(1);}catch(e){}};r.readAsText(f);}
-function list(p){var q=document.getElementById('s').value.trim().toLowerCase();var f=DB.filter(function(x){return !q||x.word.includes(q)||x.meaning.includes(q)});f.sort(function(a,b){return (a.cat||'').localeCompare(b.cat||'');});var h='',last='@@';f.slice(0,60).forEach(function(x){if(x.cat!=last){h+='<h4 class="catH">📁 '+x.cat+'</h4>';last=x.cat;}h+='<div class="def"><b>'+x.word+'</b> = '+x.meaning+' <span class="ex">غلط:'+x.wrong+'</span><br><button class="ghost" onclick="learnFast(\''+x.word+'\',\''+x.meaning+'\')">📖 بازخوانی</button></div>';});document.getElementById('wl').innerHTML=h||'خالیه';}
-renderLessons();dash();renderNeed();
+function showTab(id,btn){['opd','need','train','report','add'].forEach(t=>document.getElementById('tab-'+t).style.display=t===id?'block':'none');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='need')renderNeed();if(id==='report')renderReport();}
+function autoCat(en){en=en.toLowerCase();if(/apple|bread|cheese|food|rice|eat|coffee|tea|menu/.test(en))return 'آشپزخانه';if(/hand|eye|foot|head|body|hair/.test(en))return 'بدن';return 'عمومی';}
+function renderOPD(){
+let h='';
+OPD.forEach((U,ui)=>{h+=`<div class="card"><div class="unit-title">📁 ${U.cat} | ${U.u} — ${U.w.length} کلمه 👆</div>`;U.w.forEach((w,wi)=>{let key=U.u+w[0];let st=vm_db[key]||'';h+=`<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding:8px 0"><div><div class="en">${w[0]}</div><div class="fa">${w[1]} ${w[2]} • ${w[3]} • ${w[4]} • ${autoCat(w[0])}</div></div><div class="tickrow"><span class="tick ok" onclick="mark('${key}','know')">✅</span><span class="tick no" onclick="mark('${key}','need','${w[0]}','${w[1]}','${w[2]}','${w[3]}','${w[4]}')">❌</span></div></div>`});h+=`</div>`});
+WS.forEach(U=>{h+=`<div class="card"><div class="unit-title">💡 ${U.u}</div>`;U.w.forEach(w=>{let key=U.u+w[0];h+=`<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding:6px 0"><div><div class="en">${w[0]}</div><div class="fa">${w[1]} ${w[2]} • ${w[3]} • ${w[4]}</div></div><div class="tickrow"><span class="tick ok" onclick="mark('${key}','know')">✅</span><span class="tick no" onclick="mark('${key}','need','${w[0]}','${w[1]}','${w[2]}','${w[3]}','${w[4]}')">❌</span></div></div>`});h+=`</div>`});
+document.getElementById('tab-opd').innerHTML=h;
+}
+function mark(key,type,en,fa,phon,pos,level){
+if(type==='know'){vm_db[key]='know';}
+else{vm_db[key]='need';if(!vm_need.find(x=>x.en===en)){vm_need.push({en,fa,phon,pos,level,ex:[`I like ${en}.`,`I don't like ${en}.`,`Do you like ${en}?`],date:Date.now()});}}
+let today=new Date().toISOString().slice(0,10);
+if(type==='need'){vm_meta.mistakes[today]=vm_meta.mistakes[today]||[];vm_meta.mistakes[today].push(en||key);}
+persist();updateCount();renderOPD();
+}
+function updateCount(){document.getElementById('needCount').innerText=vm_need.length;}
+// NEED + آموزش کامل + ویرایش + عکس + تلفظ + یوتیوب
+function renderNeed(){
+let h='';
+if(!vm_need.length)h='<div class="card">خالیه</div>';
+vm_need.forEach((w,i)=>{
+h+=`<div class="card"><div class="en">${w.en}</div><div class="fa">${w.fa} ${w.phon||''} • ${w.pos||''} • ${w.level||''}</div>
+<div style="font-size:13px;margin-top:6px">✅ ${w.ex?.[0]||''}<br>❌ ${w.ex?.[1]||''}<br>❓ ${w.ex?.[2]||''}</div>
+<img class="wimg" loading="lazy" src="https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(w.en)}" onerror="this.onerror=null;this.src='https://picsum.photos/seed/${encodeURIComponent(w.en)}/600/300'" onload="if(this.src.includes('api.rest')){fetch(this.src).then(r=>r.json()).then(j=>{if(j.thumbnail)this.src=j.thumbnail.source}).catch(()=>this.src='https://picsum.photos/seed/${encodeURIComponent(w.en)}/600/300')}">
+<div style="margin-top:8px">
+<button class="btn b-blue" onclick="speak('${w.en}')">🔊 تلفظ (VPN)</button>
+<a class="btn b-ghost" target="_blank" href="https://www.youtube.com/results?search_query=${encodeURIComponent(w.en+' pronunciation')}">▶️ یوتیوب</a>
+<a class="btn b-ghost" target="_blank" href="https://youglish.com/pronounce/${encodeURIComponent(w.en)}/english">🎧 YouGlish</a>
+<button class="btn b-orange" onclick="openEdit(${i})">✏️ ویرایش</button>
+<button class="btn b-red" onclick="delNeed(${i})">حذف</button>
+</div></div>`});
+document.getElementById('tab-need').innerHTML=h;
+}
+function speak(t){let a=new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t));a.play();}
+let editIdx=-1;
+function openEdit(i){editIdx=i;let w=vm_need[i];e_en.value=w.en;e_fa.value=w.fa;e_phon.value=w.phon||'';e_pos.value=w.pos||'';e_level.value=w.level||'A1';e_ex.value=(w.ex||[]).join('\n');document.getElementById('editModal').style.display='flex';}
+function closeEdit(){document.getElementById('editModal').style.display='none';}
+function saveEdit(){let w=vm_need[editIdx];w.en=e_en.value;w.fa=e_fa.value;w.phon=e_phon.value;w.pos=e_pos.value;w.level=e_level.value;w.ex=e_ex.value.split('\n');persist();closeEdit();renderNeed();updateCount();}
+function delNeed(i){vm_need.splice(i,1);persist();renderNeed();updateCount();}
+// GOOGLE TRANSLATE
+let lastGoogle='';
+async function checkGoogle(){
+let en=n_en.value.trim();if(!en)return alert('کلمه انگلیسی بنویس');
+gBox.innerHTML='در حال گرفتن معنی از گوگل...';
+try{
+let r=await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fa&dt=t&q=${encodeURIComponent(en)}`);
+let j=await r.json();lastGoogle=j[0].map(x=>x[0]).join('');
+gBox.innerHTML=`<div class="g-suggest">🤖 پیشنهاد گوگل ترنسلیت: <b>${lastGoogle}</b><br>مال تو: <b>${n_fa.value}</b><br><button class="btn b-green" onclick="applyGoogle()">استفاده از پیشنهاد گوگل</button></div>`;
+}catch(e){gBox.innerHTML='خطا در اتصال به گوگل';}
+}
+function applyGoogle(){n_fa.value=lastGoogle;}
+function saveNewWord(){
+let en=n_en.value.trim(),fa=n_fa.value.trim();if(!en||!fa)return alert('کلمه و معنی لازمه');
+if(lastGoogle&&fa!==lastGoogle&&!confirm(`معنی تو (${fa}) با گوگل (${lastGoogle}) فرق داره، مطمئنی؟`))return;
+vm_need.push({en,fa,phon:n_phon.value,pos:n_pos.value,level:n_level.value,ex:[`I like ${en}.`,`I don't like ${en}.`,`Do you like ${en}?`],date:Date.now()});
+persist();updateCount();alert('ذخیره شد ✅');n_en.value='';n_fa.value='';gBox.innerHTML='';lastGoogle='';
+}
+// QUIZ 5 حالت
+let cur=null;
+function allWords(){let a=[];OPD.forEach(U=>U.w.forEach(w=>a.push({en:w[0],fa:w[1]})));WS.forEach(U=>U.w.forEach(w=>a.push({en:w[0],fa:w[1]})));vm_need.forEach(w=>a.push({en:w.en,fa:w.fa}));return a;}
+function nextQuiz(){
+let pool=allWords();cur=pool[Math.floor(Math.random()*pool.length)];
+let mode=document.getElementById('mode').value;if(mode==='smart'){mode=['enfa','faen','spell','listen'][Math.floor(Math.random()*4)];}
+let box=document.getElementById('quizBox');
+if(mode==='enfa')box.innerHTML=`<div class="en" style="font-size:26px">${cur.en}</div><input id="q_ans" placeholder="معنی فارسی؟"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
+if(mode==='faen')box.innerHTML=`<div style="font-size:22px">${cur.fa}</div><input id="q_ans" placeholder="English?" style="direction:ltr"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
+if(mode==='spell')box.innerHTML=`<div>معنی: ${cur.fa} — املای انگلیسی؟</div><input id="q_ans" style="direction:ltr"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
+if(mode==='listen')box.innerHTML=`<button class="btn b-blue" onclick="speak('${cur.en}')">🔊 پخش</button><input id="q_ans" placeholder="چی شنیدی؟" style="direction:ltr"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
+box.dataset.mode=mode;
+}
+function checkAns(mode){
+let v=document.getElementById('q_ans').value.trim();let ok=false;
+if(mode==='enfa')ok=v===cur.fa||v.includes(cur.fa)||cur.fa.includes(v);
+else ok=v.toLowerCase()===cur.en.toLowerCase();
+let today=new Date().toISOString().slice(0,10);
+if(!ok){vm_meta.mistakes[today]=vm_meta.mistakes[today]||[];vm_meta.mistakes[today].push(cur.en);vm_meta.weak=vm_meta.weak||{};vm_meta.weak[cur.en]=(vm_meta.weak[cur.en]||0)+1;alert('❌ غلط! جواب: '+(mode==='enfa'?cur.fa:cur.en));}
+else alert('✅ آفرین!');
+persist();
+}
+function renderReport(){
+let today=new Date().toISOString().slice(0,10);
+document.getElementById('todayMist').innerHTML=(vm_meta.mistakes[today]||[]).map(w=>`<span class="btn b-ghost">${w}</span>`).join('')||'امروز اشتباهی نداری 🎉';
+let weak=Object.entries(vm_meta.weak||{}).sort((a,b)=>b[1]-a[1]).slice(0,10);
+document.getElementById('weakBox').innerHTML=weak.map(([k,v])=>`<div>• ${k} — ${v} بار <button class="btn b-blue" onclick="speak('${k}')">🔊</button></div>`).join('')||'—';
+}
+function downloadBackup(){let b=new Blob([JSON.stringify({vm_db,vm_need,vm_meta})],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='vocab-backup.json';a.click();}
+function restoreBackup(e){let f=e.target.files[0];let r=new FileReader();r.onload=()=>{let j=JSON.parse(r.result);vm_db=j.vm_db||{};vm_need=j.vm_need||[];vm_meta=j.vm_meta||{};persist();updateCount();renderOPD();alert('برگردونده شد');};r.readAsText(f);}
+renderOPD();updateCount();
 </script>
 </body>
 </html>
