@@ -3,207 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VocabMaster Vx FINAL - ووکب خاص</title>
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<title>VocabMaster Vx FINAL - ووکب</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Vazirmatn,Poppins,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63 50%,#0f3460 100%);color:#fff;min-height:100vh}
-header{padding:22px;text-align:center;background:rgba(255,255,255,.06);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.12);position:sticky;top:0;z-index:10}
-header h1{margin:0;font-size:28px;font-weight:800;background:linear-gradient(90deg,#ff9a9e,#a18cd1,#5ee7df);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.tabs{display:flex;gap:8px;justify-content:center;padding:14px;flex-wrap:wrap}
-.tabs button{border:none;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-family:inherit;font-weight:700;transition:.3s}
-.tabs button.active{background:linear-gradient(90deg,#ff6a00,#ee0979);box-shadow:0 8px 25px rgba(238,9,121,.5)}
-.container{max-width:980px;margin:auto;padding:16px}
-.card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:16px;margin:12px 0;backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.en{font-family:Poppins;direction:ltr;text-align:left;font-weight:800;font-size:20px;color:#5ee7df}
-.fa{color:#ffe29f}
-.btn{border:none;border-radius:12px;padding:9px 14px;cursor:pointer;font-family:inherit;font-weight:700;margin:3px}
-.b-green{background:linear-gradient(90deg,#11998e,#38ef7d);color:#002}
-.b-red{background:linear-gradient(90deg,#cb2d3e,#ef473a);color:#fff}
-.b-blue{background:linear-gradient(90deg,#36d1dc,#5b86e5);color:#002}
-.b-orange{background:linear-gradient(90deg,#ff9966,#ff5e62);color:#fff}
-.b-ghost{background:rgba(255,255,255,.14);color:#fff}
-input,select,textarea{width:100%;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.35);color:#fff;font-family:inherit;margin:5px 0}
-.g-suggest{background:rgba(66,133,244,.15);border:1px dashed #4285F4;border-radius:12px;padding:10px;margin-top:8px;font-size:14px}
-.unit-title{font-weight:800;color:#ffcc70}
-img.wimg{width:100%;max-height:220px;object-fit:cover;border-radius:14px;margin-top:8px}
-.tickrow{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
-.tick{font-size:22px;padding:6px 14px;border-radius:50px;cursor:pointer;border:2px solid #fff;background:rgba(255,255,255,.1)}
-.tick.ok{border-color:#38ef7d}.tick.no{border-color:#ff5e62}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:99}
-.modal>div{background:#1e1e3a;border-radius:18px;padding:18px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
+body{margin:0;font-family:Tahoma,sans-serif;background:#f2f4f8;color:#222}
+header{background:#1a73e8;color:#fff;padding:16px;text-align:center}
+.tabs{display:flex;gap:6px;justify-content:center;padding:10px;background:#fff;flex-wrap:wrap;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:10}
+.tabs button{border:1px solid #ddd;background:#f8f9fa;padding:8px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+.tabs button.active{background:#1a73e8;color:#fff}
+.container{max-width:900px;margin:auto;padding:12px}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:12px;margin:10px 0}
+.en{font-weight:bold;direction:ltr;text-align:left;color:#1a73e8;font-size:18px}
+.fa{color:#333}
+.btn{border:none;border-radius:8px;padding:7px 12px;cursor:pointer;font-family:inherit;margin:2px}
+.b-green{background:#34a853;color:#fff}.b-red{background:#ea4335;color:#fff}.b-blue{background:#1a73e8;color:#fff}.b-ghost{background:#eee}
+input,select,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #ccc;font-family:inherit;margin:4px 0}
+img.wimg{width:100%;max-height:200px;object-fit:cover;border-radius:8px;margin-top:6px}
+.tickrow{display:flex;gap:6px;justify-content:flex-end;margin-top:6px}
+.tick{background:#fff;border:2px solid #ccc;border-radius:8px;padding:4px 12px;cursor:pointer;font-size:18px}
 </style>
 </head>
 <body>
-<header><h1>✨ ووکب VocabMaster Vx FINAL ✨</h1><div style="font-size:13px;opacity:.8">نسخه خاص | گوگل ترنسلیت + ویرایش بانک + تم نئونی</div></header>
+<header><h1 style="margin:0">ووکب VocabMaster Vx FINAL</h1><div style="font-size:12px">نسخه پایدار قبلی - بدون تغییر رنگ و فونت</div></header>
 <div class="tabs">
-<button class="active" onclick="showTab('opd',this)">📖 OPD 12 + WS 12</button>
-<button onclick="showTab('need',this)">📕 نیاز به آموزش (<span id="needCount">0</span>)</button>
-<button onclick="showTab('train',this)">🏋️ تمرین ۵ حالته + SmartMix</button>
-<button onclick="showTab('report',this)">📊 کارنامه</button>
-<button onclick="showTab('add',this)">➕ افزودن کلمه</button>
+<button class="active" onclick="showTab('opd',this)">OPD 12 + WS 12</button>
+<button onclick="showTab('need',this)">نیاز به آموزش (<span id="needCount">0</span>)</button>
+<button onclick="showTab('train',this)">تمرین 5 حالته + SmartMix</button>
+<button onclick="showTab('report',this)">کارنامه</button>
+<button onclick="showTab('add',this)">افزودن کلمه</button>
 </div>
 <div class="container">
 <div id="tab-opd"></div>
 <div id="tab-need" style="display:none"></div>
-<div id="tab-train" style="display:none">
-<div class="card"><h3>تمرین</h3>
-<select id="mode"><option value="enfa">انگلیسی → فارسی</option><option value="faen">فارسی → انگلیسی</option><option value="spell">املا (تایپی)</option><option value="listen">شنیداری 🔊</option><option value="smart">🧠 SmartMix رندوم هوشمند</option></select>
+<div id="tab-train" style="display:none"><div class="card">
+<select id="mode"><option value="enfa">انگلیسی به فارسی</option><option value="faen">فارسی به انگلیسی</option><option value="spell">املا</option><option value="listen">شنیداری</option><option value="smart">SmartMix هوشمند</option></select>
 <button class="btn b-blue" onclick="nextQuiz()">شروع / بعدی</button>
-<div id="quizBox" style="margin-top:12px"></div>
+<div id="quizBox" style="margin-top:10px"></div></div></div>
+<div id="tab-report" style="display:none"><div class="card"><h3>اشتباهات امروز</h3><div id="todayMist"></div><h3>کلمات ضعیف</h3><div id="weakBox"></div><button class="btn b-green" onclick="downloadBackup()">بکاپ JSON</button><input type="file" id="restoreFile" accept=".json" onchange="restoreBackup(event)"></div></div>
+<div id="tab-add" style="display:none"><div class="card"><h3>افزودن کلمه</h3><input id="n_en" placeholder="English" style="direction:ltr"><input id="n_fa" placeholder="معنی فارسی"><input id="n_phon" placeholder="فونتیک"><select id="n_level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select><input id="n_pos" placeholder="نوع کلمه"><button class="btn b-green" onclick="saveNewWord()">ذخیره</button></div></div>
 </div>
-</div>
-<div id="tab-report" style="display:none">
-<div class="card"><h3>❌ اشتباهات امروز — دوباره تمرین کن</h3><div id="todayMist"></div>
-<h3>کلمات ضعیف</h3><div id="weakBox"></div>
-<button class="btn b-green" onclick="downloadBackup()">⬇️ بکاپ JSON</button>
-<input type="file" id="restoreFile" accept=".json" onchange="restoreBackup(event)">
-</div>
-</div>
-<div id="tab-add" style="display:none">
-<div class="card"><h3>افزودن کلمه جدید + چک گوگل ترنسلیت</h3>
-<input id="n_en" placeholder="English word" style="direction:ltr">
-<input id="n_fa" placeholder="معنی فارسی (خودت)">
-<button class="btn b-orange" onclick="checkGoogle()">🔍 بررسی با گوگل ترنسلیت</button>
-<div id="gBox"></div>
-<input id="n_phon" placeholder="فونتیک /fəˈnetɪk/">
-<select id="n_level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select>
-<input id="n_pos" placeholder="نوع کلمه noun/verb/...">
-<button class="btn b-green" onclick="saveNewWord()">💾 ذخیره در بانک</button>
-</div>
-</div>
-</div>
-<div class="modal" id="editModal"><div>
-<h3>✏️ ویرایش کلمه</h3>
-<input id="e_en"><input id="e_fa"><input id="e_phon"><input id="e_pos">
-<select id="e_level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select>
-<textarea id="e_ex" rows="4" placeholder="۳ جمله مثبت/منفی/سوالی هر خط یکی"></textarea>
-<button class="btn b-green" onclick="saveEdit()">ذخیره</button>
-<button class="btn b-ghost" onclick="closeEdit()">بستن</button>
-</div></div>
 <script>
-// ---- STORAGE (ثابت) ----
-let vm_db = JSON.parse(localStorage.getItem('vm_db')||'{}');
-let vm_need = JSON.parse(localStorage.getItem('vm_need')||'[]');
-let vm_meta = JSON.parse(localStorage.getItem('vm_meta')||'{"mistakes":{},"weak":{}}');
+let vm_db=JSON.parse(localStorage.getItem('vm_db')||'{}');
+let vm_need=JSON.parse(localStorage.getItem('vm_need')||'[]');
+let vm_meta=JSON.parse(localStorage.getItem('vm_meta')||'{"mistakes":{},"weak":{}}');
 function persist(){localStorage.setItem('vm_db',JSON.stringify(vm_db));localStorage.setItem('vm_need',JSON.stringify(vm_need));localStorage.setItem('vm_meta',JSON.stringify(vm_meta));}
-// ---- DATA OPD 12 (خلاصه دقیق + WS) ----
 const OPD=[
 {u:"Unit 1 - Classroom",cat:"Learning",w:[["board","تخته","/bɔːrd/","noun","A1"],["desk","میز تحریر","/desk/","noun","A1"],["chair","صندلی","/tʃer/","noun","A1"],["book","کتاب","/bʊk/","noun","A1"],["pen","خودکار","/pen/","noun","A1"],["pencil","مداد","/ˈpensl/","noun","A1"],["teacher","معلم","/ˈtiːtʃər/","noun","A1"],["student","دانش‌آموز","/ˈstuːdənt/","noun","A1"],["map","نقشه","/mæp/","noun","A1"],["door","در","/dɔːr/","noun","A1"],["window","پنجره","/ˈwɪndoʊ/","noun","A1"],["eraser","پاک‌کن","/ɪˈreɪsər/","noun","A2"]]},
-{u:"Unit 2 - Words",cat:"Learning",w:[["letter","حرف","/ˈletər/","noun","A1"],["word","کلمه","/wɜːrd/","noun","A1"],["sentence","جمله","/ˈsentəns/","noun","A1"],["question","سوال","/ˈkwestʃən/","noun","A1"],["answer","جواب","/ˈænsər/","noun","A1"],["meaning","معنی","/ˈmiːnɪŋ/","noun","A2"],["spelling","املا","/ˈspelɪŋ/","noun","A2"],["test","امتحان","/test/","noun","A1"]]},
-{u:"Unit 3 - Days",cat:"Time",w:[["Monday","دوشنبه","/ˈmʌndeɪ/","noun","A1"],["Tuesday","سه‌شنبه","/ˈtuːzdeɪ/","noun","A1"],["weekend","آخر هفته","/ˌwiːkˈend/","noun","A1"],["today","امروز","/təˈdeɪ/","adv","A1"],["tomorrow","فردا","/təˈmɑːroʊ/","adv","A1"],["yesterday","دیروز","/ˈjestərdeɪ/","adv","A1"]]},
-{u:"Unit 4 - Time",cat:"Time",w:[["morning","صبح","/ˈmɔːrnɪŋ/","noun","A1"],["afternoon","بعدازظهر","/ˌæftərˈnuːn/","noun","A1"],["evening","عصر","/ˈiːvnɪŋ/","noun","A1"],["night","شب","/naɪt/","noun","A1"],["hour","ساعت","/ˈaʊər/","noun","A1"]]},
-{u:"Unit 5 - Family",cat:"People",w:[["mother","مادر","/ˈmʌðər/","noun","A1"],["father","پدر","/ˈfɑːðər/","noun","A1"],["sister","خواهر","/ˈsɪstər/","noun","A1"],["brother","برادر","/ˈbrʌðər/","noun","A1"],["baby","نوزاد","/ˈbeɪbi/","noun","A1"],["family","خانواده","/ˈfæməli/","noun","A1"],["son","پسر","/sʌn/","noun","A1"],["daughter","دختر","/ˈdɔːtər/","noun","A1"],["parents","والدین","/ˈperənts/","noun","A2"]]},
-{u:"Unit 6 - Describing",cat:"People",w:[["tall","بلندقد","/tɔːl/","adj","A1"],["short","کوتاه","/ʃɔːrt/","adj","A1"],["young","جوان","/jʌŋ/","adj","A1"],["old","پیر","/oʊld/","adj","A1"],["happy","خوشحال","/ˈhæpi/","adj","A1"],["sad","ناراحت","/sæd/","adj","A1"]]},
-{u:"Unit 7 - Routines",cat:"Life",w:[["wake up","بیدار شدن","/weɪk ʌp/","verb","A1"],["eat","خوردن","/iːt/","verb","A1"],["work","کار کردن","/wɜːrk/","verb","A1"],["sleep","خوابیدن","/sliːp/","verb","A1"],["go","رفتن","/ɡoʊ/","verb","A1"],["come","آمدن","/kʌm/","verb","A1"]]},
-{u:"Unit 8 - Clothes",cat:"Life",w:[["shirt","پیراهن","/ʃɜːrt/","noun","A1"],["pants","شلوار","/pænts/","noun","A1"],["shoes","کفش","/ʃuːz/","noun","A1"],["hat","کلاه","/hæt/","noun","A1"],["jacket","کاپشن","/ˈdʒækɪt/","noun","A1"],["dress","لباس","/dres/","noun","A1"]]},
-{u:"Unit 9 - Food",cat:"Food",w:[["apple","سیب","/ˈæpl/","noun","A1"],["bread","نان","/bred/","noun","A1"],["cheese","پنیر","/tʃiːz/","noun","A1"],["egg","تخم‌مرغ","/eɡ/","noun","A1"],["milk","شیر","/mɪlk/","noun","A1"],["meat","گوشت","/miːt/","noun","A1"],["rice","برنج","/raɪs/","noun","A1"],["water","آب","/ˈwɔːtər/","noun","A1"]]},
-{u:"Unit 10 - Cafe",cat:"Food",w:[["coffee","قهوه","/ˈkɔːfi/","noun","A1"],["tea","چای","/tiː/","noun","A1"],["menu","منو","/ˈmenjuː/","noun","A2"],["bill","صورت‌حساب","/bɪl/","noun","A2"],["table","میز","/ˈteɪbl/","noun","A1"],["cup","فنجان","/kʌp/","noun","A1"]]},
-{u:"Unit 11 - Transport",cat:"Getting around",w:[["bus","اتوبوس","/bʌs/","noun","A1"],["train","قطار","/treɪn/","noun","A1"],["car","ماشین","/kɑːr/","noun","A1"],["taxi","تاکسی","/ˈtæksi/","noun","A1"],["bike","دوچرخه","/baɪk/","noun","A1"]]},
-{u:"Unit 12 - In town",cat:"Places",w:[["bank","بانک","/bæŋk/","noun","A1"],["park","پارک","/pɑːrk/","noun","A1"],["shop","مغازه","/ʃɑːp/","noun","A1"],["street","خیابان","/striːt/","noun","A1"],["hospital","بیمارستان","/ˈhɑːspɪtl/","noun","A2"]]}
+{u:"Unit 2 - Words",cat:"Learning",w:[["letter","حرف","/ˈletər/","noun","A1"],["word","کلمه","/wɜːrd/","noun","A1"],["sentence","جمله","/ˈsentəns/","noun","A1"],["question","سوال","/ˈkwestʃən/","noun","A1"],["answer","جواب","/ˈænsər/","noun","A1"],["meaning","معنی","/ˈmiːnɪŋ/","noun","A2"]]},
+{u:"Unit 3 - Days",cat:"Time",w:[["Monday","دوشنبه","/ˈmʌndeɪ/","noun","A1"],["weekend","آخر هفته","/ˌwiːkˈend/","noun","A1"],["today","امروز","/təˈdeɪ/","adv","A1"],["tomorrow","فردا","/təˈmɑːroʊ/","adv","A1"]]},
+{u:"Unit 4 - Time",cat:"Time",w:[["morning","صبح","/ˈmɔːrnɪŋ/","noun","A1"],["evening","عصر","/ˈiːvnɪŋ/","noun","A1"],["night","شب","/naɪt/","noun","A1"],["hour","ساعت","/ˈaʊər/","noun","A1"]]},
+{u:"Unit 5 - Family",cat:"People",w:[["mother","مادر","/ˈmʌðər/","noun","A1"],["father","پدر","/ˈfɑːðər/","noun","A1"],["sister","خواهر","/ˈsɪstər/","noun","A1"],["brother","برادر","/ˈbrʌðər/","noun","A1"],["family","خانواده","/ˈfæməli/","noun","A1"]]},
+{u:"Unit 6 - Describing",cat:"People",w:[["tall","بلندقد","/tɔːl/","adj","A1"],["short","کوتاه","/ʃɔːrt/","adj","A1"],["happy","خوشحال","/ˈhæpi/","adj","A1"],["sad","ناراحت","/sæd/","adj","A1"]]},
+{u:"Unit 7 - Routines",cat:"Life",w:[["wake up","بیدار شدن","/weɪk ʌp/","verb","A1"],["eat","خوردن","/iːt/","verb","A1"],["work","کار کردن","/wɜːrk/","verb","A1"],["sleep","خوابیدن","/sliːp/","verb","A1"]]},
+{u:"Unit 8 - Clothes",cat:"Life",w:[["shirt","پیراهن","/ʃɜːrt/","noun","A1"],["shoes","کفش","/ʃuːz/","noun","A1"],["hat","کلاه","/hæt/","noun","A1"],["jacket","کاپشن","/ˈdʒækɪt/","noun","A1"]]},
+{u:"Unit 9 - Food",cat:"Food",w:[["apple","سیب","/ˈæpl/","noun","A1"],["bread","نان","/bred/","noun","A1"],["cheese","پنیر","/tʃiːz/","noun","A1"],["milk","شیر","/mɪlk/","noun","A1"],["rice","برنج","/raɪs/","noun","A1"]]},
+{u:"Unit 10 - Cafe",cat:"Food",w:[["coffee","قهوه","/ˈkɔːfi/","noun","A1"],["tea","چای","/tiː/","noun","A1"],["menu","منو","/ˈmenjuː/","noun","A2"],["bill","صورت‌حساب","/bɪl/","noun","A2"]]},
+{u:"Unit 11 - Transport",cat:"Getting around",w:[["bus","اتوبوس","/bʌs/","noun","A1"],["train","قطار","/treɪn/","noun","A1"],["car","ماشین","/kɑːr/","noun","A1"],["taxi","تاکسی","/ˈtæksi/","noun","A1"]]},
+{u:"Unit 12 - In town",cat:"Places",w:[["bank","بانک","/bæŋk/","noun","A1"],["park","پارک","/pɑːrk/","noun","A1"],["hospital","بیمارستان","/ˈhɑːspɪtl/","noun","A2"]]}
 ];
-const WS=[ // Word Skills Elementary 2nd - Unit 1-12 خلاصه کاربردی
-{u:"WS 1 - Questions",w:[["what","چه","/wʌt/","pron","A1"],["where","کجا","/wer/","adv","A1"],["when","کی","/wen/","adv","A1"],["why","چرا","/waɪ/","adv","A1"],["how","چطور","/haʊ/","adv","A1"]]},
-{u:"WS 2 - Plurals",w:[["children","بچه‌ها","/ˈtʃɪldrən/","noun","A1"],["men","مردها","/men/","noun","A1"],["women","زن‌ها","/ˈwɪmɪn/","noun","A1"],["feet","پاها","/fiːt/","noun","A2"]]},
-{u:"WS 3 - Prepositions",w:[["in","در","/ɪn/","prep","A1"],["on","روی","/ɒn/","prep","A1"],["under","زیر","/ˈʌndər/","prep","A1"],["between","بین","/bɪˈtwiːn/","prep","A2"]]},
-{u:"WS 4 - Adjectives",w:[["big","بزرگ","/bɪɡ/","adj","A1"],["small","کوچک","/smɔːl/","adj","A1"],["fast","سریع","/fæst/","adj","A1"],["slow","کند","/sloʊ/","adj","A1"]]},
-{u:"WS 5 - Verbs",w:[["like","دوست داشتن","/laɪk/","verb","A1"],["love","عاشق بودن","/lʌv/","verb","A1"],["hate","متنفر بودن","/heɪt/","verb","A2"],["need","نیاز داشتن","/niːd/","verb","A1"]]},
-{u:"WS 6 - Family+",w:[["uncle","عمو/دایی","/ˈʌŋkl/","noun","A1"],["aunt","خاله/عمه","/ænt/","noun","A1"],["cousin","دخترخاله/پسرعمو","/ˈkʌzn/","noun","A2"]]},
-{u:"WS 7 - Daily",w:[["always","همیشه","/ˈɔːlweɪz/","adv","A1"],["never","هرگز","/ˈnevər/","adv","A1"],["sometimes","گاهی","/ˈsʌmtaɪmz/","adv","A1"]]},
-{u:"WS 8 - Clothes+",w:[["wear","پوشیدن","/wer/","verb","A1"],["size","سایز","/saɪz/","noun","A2"],["cotton","نخی","/ˈkɑːtn/","adj","B1"]]},
-{u:"WS 9 - Food+",w:[["delicious","خوشمزه","/dɪˈlɪʃəs/","adj","A2"],["hungry","گرسنه","/ˈhʌŋɡri/","adj","A1"],["thirsty","تشنه","/ˈθɜːrsti/","adj","A1"]]},
-{u:"WS 10 - Orders",w:[["please","لطفا","/pliːz/","adv","A1"],["thanks","ممنون","/θæŋks/","noun","A1"],["welcome","خوش آمدید","/ˈwelkəm/","adj","A1"]]},
-{u:"WS 11 - Travel",w:[["ticket","بلیت","/ˈtɪkɪt/","noun","A1"],["journey","سفر","/ˈdʒɜːrni/","noun","A2"],["map","نقشه","/mæp/","noun","A1"]]},
-{u:"WS 12 - Places+",w:[["city","شهر","/ˈsɪti/","noun","A1"],["village","روستا","/ˈvɪlɪdʒ/","noun","A2"],["capital","پایتخت","/ˈkæpɪtl/","noun","A2"]]}
+const WS=[
+{u:"WS 1",w:[["what","چه","/wʌt/","pron","A1"],["where","کجا","/wer/","adv","A1"]]},
+{u:"WS 2",w:[["children","بچه‌ها","/ˈtʃɪldrən/","noun","A1"]]},
+{u:"WS 3",w:[["in","در","/ɪn/","prep","A1"],["on","روی","/ɒn/","prep","A1"]]},
+{u:"WS 4",w:[["big","بزرگ","/bɪɡ/","adj","A1"],["small","کوچک","/smɔːl/","adj","A1"]]},
+{u:"WS 5",w:[["like","دوست داشتن","/laɪk/","verb","A1"]]},
+{u:"WS 6",w:[["uncle","عمو","/ˈʌŋkl/","noun","A1"]]},
+{u:"WS 7",w:[["always","همیشه","/ˈɔːlweɪz/","adv","A1"]]},
+{u:"WS 8",w:[["wear","پوشیدن","/wer/","verb","A1"]]},
+{u:"WS 9",w:[["delicious","خوشمزه","/dɪˈlɪʃəs/","adj","A2"]]},
+{u:"WS 10",w:[["please","لطفا","/pliːz/","adv","A1"]]},
+{u:"WS 11",w:[["ticket","بلیت","/ˈtɪkɪt/","noun","A1"]]},
+{u:"WS 12",w:[["city","شهر","/ˈsɪti/","noun","A1"]]}
 ];
 function showTab(id,btn){['opd','need','train','report','add'].forEach(t=>document.getElementById('tab-'+t).style.display=t===id?'block':'none');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='need')renderNeed();if(id==='report')renderReport();}
-function autoCat(en){en=en.toLowerCase();if(/apple|bread|cheese|food|rice|eat|coffee|tea|menu/.test(en))return 'آشپزخانه';if(/hand|eye|foot|head|body|hair/.test(en))return 'بدن';return 'عمومی';}
-function renderOPD(){
-let h='';
-OPD.forEach((U,ui)=>{h+=`<div class="card"><div class="unit-title">📁 ${U.cat} | ${U.u} — ${U.w.length} کلمه 👆</div>`;U.w.forEach((w,wi)=>{let key=U.u+w[0];let st=vm_db[key]||'';h+=`<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding:8px 0"><div><div class="en">${w[0]}</div><div class="fa">${w[1]} ${w[2]} • ${w[3]} • ${w[4]} • ${autoCat(w[0])}</div></div><div class="tickrow"><span class="tick ok" onclick="mark('${key}','know')">✅</span><span class="tick no" onclick="mark('${key}','need','${w[0]}','${w[1]}','${w[2]}','${w[3]}','${w[4]}')">❌</span></div></div>`});h+=`</div>`});
-WS.forEach(U=>{h+=`<div class="card"><div class="unit-title">💡 ${U.u}</div>`;U.w.forEach(w=>{let key=U.u+w[0];h+=`<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.1);padding:6px 0"><div><div class="en">${w[0]}</div><div class="fa">${w[1]} ${w[2]} • ${w[3]} • ${w[4]}</div></div><div class="tickrow"><span class="tick ok" onclick="mark('${key}','know')">✅</span><span class="tick no" onclick="mark('${key}','need','${w[0]}','${w[1]}','${w[2]}','${w[3]}','${w[4]}')">❌</span></div></div>`});h+=`</div>`});
-document.getElementById('tab-opd').innerHTML=h;
-}
-function mark(key,type,en,fa,phon,pos,level){
-if(type==='know'){vm_db[key]='know';}
-else{vm_db[key]='need';if(!vm_need.find(x=>x.en===en)){vm_need.push({en,fa,phon,pos,level,ex:[`I like ${en}.`,`I don't like ${en}.`,`Do you like ${en}?`],date:Date.now()});}}
-let today=new Date().toISOString().slice(0,10);
-if(type==='need'){vm_meta.mistakes[today]=vm_meta.mistakes[today]||[];vm_meta.mistakes[today].push(en||key);}
-persist();updateCount();renderOPD();
-}
+function autoCat(en){en=en.toLowerCase();if(/apple|bread|cheese|rice|coffee|tea|menu|eat/.test(en))return 'آشپزخانه';if(/hand|eye|foot|head/.test(en))return 'بدن';return 'عمومی';}
+function renderOPD(){let h='';OPD.forEach(U=>{h+=`<div class="card"><b>${U.cat} | ${U.u}</b>`;U.w.forEach(w=>{let key=U.u+w[0];h+=`<div style="display:flex;justify-content:space-between;border-top:1px solid #eee;padding:6px 0"><div><div class="en">${w[0]}</div><div>${w[1]} ${w[2]} ${w[3]} ${w[4]} ${autoCat(w[0])}</div></div><div class="tickrow"><span class="tick" onclick="mark('${key}','know')">✅</span><span class="tick" onclick="mark('${key}','need','${w[0]}','${w[1]}','${w[2]}','${w[3]}','${w[4]}')">❌</span></div></div>`});h+=`</div>`});WS.forEach(U=>{h+=`<div class="card"><b>${U.u}</b>`;U.w.forEach(w=>{let key=U.u+w[0];h+=`<div style="display:flex;justify-content:space-between;border-top:1px solid #eee;padding:6px 0"><div><div class="en">${w[0]}</div><div>${w[1]} ${w[2]}</div></div><div class="tickrow"><span class="tick" onclick="mark('${key}','know')">✅</span><span class="tick" onclick="mark('${key}','need','${w[0]}','${w[1]}','${w[2]}','${w[3]}','${w[4]}')">❌</span></div></div>`});h+=`</div>`});document.getElementById('tab-opd').innerHTML=h;}
+function mark(key,type,en,fa,phon,pos,level){if(type==='know'){vm_db[key]='know';}else{vm_db[key]='need';if(en&&!vm_need.find(x=>x.en===en))vm_need.push({en,fa,phon,pos,level,ex:[`I like ${en}.`,`I don't like ${en}.`,`Do you like ${en}?`],date:Date.now()});}persist();updateCount();renderOPD();}
 function updateCount(){document.getElementById('needCount').innerText=vm_need.length;}
-// NEED + آموزش کامل + ویرایش + عکس + تلفظ + یوتیوب
-function renderNeed(){
-let h='';
-if(!vm_need.length)h='<div class="card">خالیه</div>';
-vm_need.forEach((w,i)=>{
-h+=`<div class="card"><div class="en">${w.en}</div><div class="fa">${w.fa} ${w.phon||''} • ${w.pos||''} • ${w.level||''}</div>
-<div style="font-size:13px;margin-top:6px">✅ ${w.ex?.[0]||''}<br>❌ ${w.ex?.[1]||''}<br>❓ ${w.ex?.[2]||''}</div>
-<img class="wimg" loading="lazy" src="https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(w.en)}" onerror="this.onerror=null;this.src='https://picsum.photos/seed/${encodeURIComponent(w.en)}/600/300'" onload="if(this.src.includes('api.rest')){fetch(this.src).then(r=>r.json()).then(j=>{if(j.thumbnail)this.src=j.thumbnail.source}).catch(()=>this.src='https://picsum.photos/seed/${encodeURIComponent(w.en)}/600/300')}">
-<div style="margin-top:8px">
-<button class="btn b-blue" onclick="speak('${w.en}')">🔊 تلفظ (VPN)</button>
-<a class="btn b-ghost" target="_blank" href="https://www.youtube.com/results?search_query=${encodeURIComponent(w.en+' pronunciation')}">▶️ یوتیوب</a>
-<a class="btn b-ghost" target="_blank" href="https://youglish.com/pronounce/${encodeURIComponent(w.en)}/english">🎧 YouGlish</a>
-<button class="btn b-orange" onclick="openEdit(${i})">✏️ ویرایش</button>
-<button class="btn b-red" onclick="delNeed(${i})">حذف</button>
-</div></div>`});
-document.getElementById('tab-need').innerHTML=h;
-}
-function speak(t){let a=new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t));a.play();}
-let editIdx=-1;
-function openEdit(i){editIdx=i;let w=vm_need[i];e_en.value=w.en;e_fa.value=w.fa;e_phon.value=w.phon||'';e_pos.value=w.pos||'';e_level.value=w.level||'A1';e_ex.value=(w.ex||[]).join('\n');document.getElementById('editModal').style.display='flex';}
-function closeEdit(){document.getElementById('editModal').style.display='none';}
-function saveEdit(){let w=vm_need[editIdx];w.en=e_en.value;w.fa=e_fa.value;w.phon=e_phon.value;w.pos=e_pos.value;w.level=e_level.value;w.ex=e_ex.value.split('\n');persist();closeEdit();renderNeed();updateCount();}
-function delNeed(i){vm_need.splice(i,1);persist();renderNeed();updateCount();}
-// GOOGLE TRANSLATE
-let lastGoogle='';
-async function checkGoogle(){
-let en=n_en.value.trim();if(!en)return alert('کلمه انگلیسی بنویس');
-gBox.innerHTML='در حال گرفتن معنی از گوگل...';
-try{
-let r=await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fa&dt=t&q=${encodeURIComponent(en)}`);
-let j=await r.json();lastGoogle=j[0].map(x=>x[0]).join('');
-gBox.innerHTML=`<div class="g-suggest">🤖 پیشنهاد گوگل ترنسلیت: <b>${lastGoogle}</b><br>مال تو: <b>${n_fa.value}</b><br><button class="btn b-green" onclick="applyGoogle()">استفاده از پیشنهاد گوگل</button></div>`;
-}catch(e){gBox.innerHTML='خطا در اتصال به گوگل';}
-}
-function applyGoogle(){n_fa.value=lastGoogle;}
-function saveNewWord(){
-let en=n_en.value.trim(),fa=n_fa.value.trim();if(!en||!fa)return alert('کلمه و معنی لازمه');
-if(lastGoogle&&fa!==lastGoogle&&!confirm(`معنی تو (${fa}) با گوگل (${lastGoogle}) فرق داره، مطمئنی؟`))return;
-vm_need.push({en,fa,phon:n_phon.value,pos:n_pos.value,level:n_level.value,ex:[`I like ${en}.`,`I don't like ${en}.`,`Do you like ${en}?`],date:Date.now()});
-persist();updateCount();alert('ذخیره شد ✅');n_en.value='';n_fa.value='';gBox.innerHTML='';lastGoogle='';
-}
-// QUIZ 5 حالت
+function renderNeed(){let h=vm_need.length?'':'<div class="card">خالیه</div>';vm_need.forEach(w=>{h+=`<div class="card"><div class="en">${w.en}</div><div>${w.fa} ${w.phon||''} ${w.pos||''} ${w.level||''}</div><div style="font-size:13px">✅ ${w.ex?.[0]||''}<br>❌ ${w.ex?.[1]||''}<br>❓ ${w.ex?.[2]||''}</div><img class="wimg" loading="lazy" src="https://picsum.photos/seed/${encodeURIComponent(w.en)}/600/300"><div><button class="btn b-blue" onclick="speak('${w.en}')">تلفظ</button><a class="btn b-ghost" target="_blank" href="https://www.youtube.com/results?search_query=${encodeURIComponent(w.en)}">یوتیوب</a><a class="btn b-ghost" target="_blank" href="https://youglish.com/pronounce/${encodeURIComponent(w.en)}/english">YouGlish</a></div></div>`});document.getElementById('tab-need').innerHTML=h;}
+function speak(t){new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t)).play();}
+function saveNewWord(){let en=n_en.value.trim(),fa=n_fa.value.trim();if(!en||!fa)return alert('کلمه و معنی');vm_need.push({en,fa,phon:n_phon.value,pos:n_pos.value,level:n_level.value,ex:[`I like ${en}.`,`I don't like ${en}.`,`Do you like ${en}?`],date:Date.now()});persist();updateCount();alert('ذخیره شد');}
 let cur=null;
-function allWords(){let a=[];OPD.forEach(U=>U.w.forEach(w=>a.push({en:w[0],fa:w[1]})));WS.forEach(U=>U.w.forEach(w=>a.push({en:w[0],fa:w[1]})));vm_need.forEach(w=>a.push({en:w.en,fa:w.fa}));return a;}
-function nextQuiz(){
-let pool=allWords();cur=pool[Math.floor(Math.random()*pool.length)];
-let mode=document.getElementById('mode').value;if(mode==='smart'){mode=['enfa','faen','spell','listen'][Math.floor(Math.random()*4)];}
-let box=document.getElementById('quizBox');
-if(mode==='enfa')box.innerHTML=`<div class="en" style="font-size:26px">${cur.en}</div><input id="q_ans" placeholder="معنی فارسی؟"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
-if(mode==='faen')box.innerHTML=`<div style="font-size:22px">${cur.fa}</div><input id="q_ans" placeholder="English?" style="direction:ltr"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
-if(mode==='spell')box.innerHTML=`<div>معنی: ${cur.fa} — املای انگلیسی؟</div><input id="q_ans" style="direction:ltr"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
-if(mode==='listen')box.innerHTML=`<button class="btn b-blue" onclick="speak('${cur.en}')">🔊 پخش</button><input id="q_ans" placeholder="چی شنیدی؟" style="direction:ltr"><button class="btn b-green" onclick="checkAns('${mode}')">چک</button>`;
-box.dataset.mode=mode;
-}
-function checkAns(mode){
-let v=document.getElementById('q_ans').value.trim();let ok=false;
-if(mode==='enfa')ok=v===cur.fa||v.includes(cur.fa)||cur.fa.includes(v);
-else ok=v.toLowerCase()===cur.en.toLowerCase();
-let today=new Date().toISOString().slice(0,10);
-if(!ok){vm_meta.mistakes[today]=vm_meta.mistakes[today]||[];vm_meta.mistakes[today].push(cur.en);vm_meta.weak=vm_meta.weak||{};vm_meta.weak[cur.en]=(vm_meta.weak[cur.en]||0)+1;alert('❌ غلط! جواب: '+(mode==='enfa'?cur.fa:cur.en));}
-else alert('✅ آفرین!');
-persist();
-}
-function renderReport(){
-let today=new Date().toISOString().slice(0,10);
-document.getElementById('todayMist').innerHTML=(vm_meta.mistakes[today]||[]).map(w=>`<span class="btn b-ghost">${w}</span>`).join('')||'امروز اشتباهی نداری 🎉';
-let weak=Object.entries(vm_meta.weak||{}).sort((a,b)=>b[1]-a[1]).slice(0,10);
-document.getElementById('weakBox').innerHTML=weak.map(([k,v])=>`<div>• ${k} — ${v} بار <button class="btn b-blue" onclick="speak('${k}')">🔊</button></div>`).join('')||'—';
-}
+function allWords(){let a=[];OPD.forEach(U=>U.w.forEach(w=>a.push({en:w[0],fa:w[1]})));vm_need.forEach(w=>a.push({en:w.en,fa:w.fa}));return a;}
+function nextQuiz(){let pool=allWords();cur=pool[Math.floor(Math.random()*pool.length)];let mode=document.getElementById('mode').value;if(mode==='smart')mode=['enfa','faen','spell','listen'][Math.floor(Math.random()*4)];let box=document.getElementById('quizBox');box.dataset.mode=mode;if(mode==='enfa')box.innerHTML=`<div class="en">${cur.en}</div><input id="q_ans"><button class="btn b-green" onclick="checkAns()">چک</button>`;else if(mode==='faen')box.innerHTML=`<div>${cur.fa}</div><input id="q_ans" style="direction:ltr"><button class="btn b-green" onclick="checkAns()">چک</button>`;else if(mode==='spell')box.innerHTML=`<div>${cur.fa}</div><input id="q_ans" style="direction:ltr"><button class="btn b-green" onclick="checkAns()">چک</button>`;else box.innerHTML=`<button class="btn b-blue" onclick="speak('${cur.en}')">پخش</button><input id="q_ans" style="direction:ltr"><button class="btn b-green" onclick="checkAns()">چک</button>`;}
+function checkAns(){let mode=document.getElementById('quizBox').dataset.mode;let v=document.getElementById('q_ans').value.trim();let ok=mode==='enfa'?(v===cur.fa):(v.toLowerCase()===cur.en.toLowerCase());let today=new Date().toISOString().slice(0,10);if(!ok){vm_meta.mistakes[today]=vm_meta.mistakes[today]||[];vm_meta.mistakes[today].push(cur.en);vm_meta.weak=vm_meta.weak||{};vm_meta.weak[cur.en]=(vm_meta.weak[cur.en]||0)+1;alert('غلط! '+cur.en+' / '+cur.fa);}else alert('آفرین!');persist();}
+function renderReport(){let today=new Date().toISOString().slice(0,10);document.getElementById('todayMist').innerHTML=(vm_meta.mistakes[today]||[]).join(', ')||'بدون اشتباه';let weak=Object.entries(vm_meta.weak||{}).sort((a,b)=>b[1]-a[1]).slice(0,10);document.getElementById('weakBox').innerHTML=weak.map(([k,v])=>k+' - '+v).join('<br>')||'-';}
 function downloadBackup(){let b=new Blob([JSON.stringify({vm_db,vm_need,vm_meta})],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='vocab-backup.json';a.click();}
-function restoreBackup(e){let f=e.target.files[0];let r=new FileReader();r.onload=()=>{let j=JSON.parse(r.result);vm_db=j.vm_db||{};vm_need=j.vm_need||[];vm_meta=j.vm_meta||{};persist();updateCount();renderOPD();alert('برگردونده شد');};r.readAsText(f);}
+function restoreBackup(e){let f=e.target.files[0];let r=new FileReader();r.onload=()=>{let j=JSON.parse(r.result);vm_db=j.vm_db||{};vm_need=j.vm_need||[];vm_meta=j.vm_meta||{};persist();updateCount();renderOPD();};r.readAsText(f);}
 renderOPD();updateCount();
 </script>
 </body>
