@@ -4,86 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>VocabMaster Vx LEGACY</title>
+<title>VocabMaster Vx Dark Luxe</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 <style>
-:root{--a1:#fbbf24;--a2:#14b8a6;--bg:#05070f;--glass:rgba(20,28,48,.78)}
-body.th-galaxy{--a1:#c084fc;--a2:#f472b6}
-body.th-ocean{--a1:#38bdf8;--a2:#34d399}
+:root{--a1:#2dd4bf;--a2:#60a5fa;--bg:#080d1a;--card:#101828;--line:#1f2b44}
 *{box-sizing:border-box;font-family:Vazirmatn,Tahoma,sans-serif}
-body{margin:0;min-height:100vh;color:#f8fafc;font-size:16.5px;background:radial-gradient(1000px 500px at 90% -10%,#fbbf2433,transparent 60%),radial-gradient(900px 500px at 5% 0%,#14b8a633,transparent 60%),var(--bg)}
+body{margin:0;min-height:100vh;color:#e6edf7;font-size:16.5px;background:radial-gradient(1000px 500px at 50% -10%,#0e2a3d 0%,transparent 60%),var(--bg)}
 body.fs-big{font-size:18.5px}
-header{padding:34px 18px 24px;text-align:center;background:linear-gradient(135deg,#78350f,var(--a1) 40%,var(--a2));border-radius:0 0 36px 36px;box-shadow:0 20px 60px #000a;position:relative;overflow:hidden}
-header::after{content:'';position:absolute;inset:0;background:radial-gradient(600px 200px at 50% 0%,#ffffff44,transparent)}
-header h1{margin:0;font-size:38px;font-weight:900;letter-spacing:.5px;text-shadow:0 4px 18px #0009;position:relative;z-index:1}
-header p{position:relative;z-index:1;opacity:.95}
-.themebar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px;position:relative;z-index:1}
+header{padding:32px 18px 22px;text-align:center;background:linear-gradient(180deg,#0b1528,#080d1a);border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:34px;font-weight:900;letter-spacing:.5px}
+header h1 span{color:var(--a1)}
+header p{color:#8ea0b8;font-size:13px}
+.themebar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px}
 .dash{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:960px;margin:14px auto 0;padding:0 12px}
-.stat{background:var(--glass);border:1px solid #ffffff2a;border-radius:20px;padding:12px;text-align:center;backdrop-filter:blur(14px);box-shadow:0 8px 24px #0007}
-.stat b{display:block;color:var(--a1);font-size:22px;font-weight:900}.stat span{font-size:11px;color:#cbd5e1}
+.stat{background:linear-gradient(180deg,#131e33,#0b1322);border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center}
+.stat b{display:block;color:#fff;font-size:21px;font-weight:900}.stat span{font-size:11px;color:#8ea0b8}
 nav{max-width:960px;margin:12px auto;padding:0 12px;display:flex;gap:8px;flex-wrap:wrap}
-nav button{flex:1;padding:13px;border:none;border-radius:999px;background:#ffffff10;color:#fff;font-weight:800;min-width:85px;cursor:pointer;backdrop-filter:blur(10px);border:1px solid #ffffff18}
-nav button.active{background:linear-gradient(135deg,var(--a1),var(--a2));color:#000;box-shadow:0 6px 20px #fbbf2455}
+nav button{flex:1;padding:13px;border:1px solid var(--line);border-radius:999px;background:#101828;color:#cbd5e1;font-weight:700;min-width:85px;cursor:pointer}
+nav button.active{background:linear-gradient(135deg,var(--a1),var(--a2));color:#04121a;border:none}
 main{max-width:960px;margin:12px auto;padding:0 12px 50px}
-.card{background:var(--glass);border:1px solid #ffffff1e;border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:0 14px 40px #0008;backdrop-filter:blur(14px);animation:up .35s}
-@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
-.card.need{border-color:var(--a1)}
+.card{background:linear-gradient(180deg,#121c31,#0d1526);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px;animation:up .3s}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.card.need{border-color:#2dd4bf55}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-input,select{flex:1;padding:13px;border-radius:14px;border:1px solid #ffffff2a;background:#05070f;color:#fff;min-width:110px;font-family:inherit;font-size:15px}
-button{padding:12px 18px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--a1),var(--a2));color:#000;font-weight:900;cursor:pointer;box-shadow:0 6px 18px #0006}
-button.ghost{background:#05070f;border:1px solid #ffffff2a;color:#fff;box-shadow:none}
+input,select{flex:1;padding:13px;border-radius:14px;border:1px solid var(--line);background:#070c17;color:#fff;min-width:110px;font-family:inherit}
+button{padding:12px 18px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--a1),var(--a2));color:#04121a;font-weight:900;cursor:pointer}
+button.ghost{background:#070c17;border:1px solid var(--line);color:#e6edf7}
 .tab{display:none}.tab.active{display:block}
-.def{background:#05070fd9;padding:14px;border-radius:16px;margin:10px 0;border-right:5px solid var(--a1);line-height:2.1}
-.en-line{direction:ltr;text-align:left;font-size:16.5px;font-weight:500}
-.fa-line{color:#cbd5e1;border-top:1px dashed #ffffff2c;margin-top:10px;padding-top:10px;font-size:14.5px}
-.opt{display:block;width:100%;margin:8px 0;padding:14px;background:#05070f;border:1px solid #ffffff25;color:#fff;border-radius:16px;cursor:pointer;font-size:16px}
-.opt.ok{background:#16a34a}.opt.no{background:#dc2626}
-.suggest{background:#fef3c7;color:#92400e;border-radius:14px;padding:12px;margin-top:10px}
-.wordpick{display:flex;gap:10px;align-items:center;background:#05070f;border:1px solid #ffffff1a;border-radius:16px;padding:10px;margin:8px 0}
-.wordpick img{width:110px;height:85px;object-fit:cover;border-radius:12px;flex-shrink:0;background:#1e293b;cursor:pointer}
-.checks{display:flex;gap:8px}.tick{width:32px;height:32px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;color:#000;font-weight:900}
+.def{background:#070c17;padding:14px;border-radius:14px;margin:10px 0;border-right:4px solid var(--a1);line-height:2.1}
+.en-line{direction:ltr;text-align:left}.fa-line{color:#9fb0c7;border-top:1px dashed var(--line);margin-top:10px;padding-top:10px;font-size:14px}
+.opt{display:block;width:100%;margin:8px 0;padding:14px;background:#070c17;border:1px solid var(--line);color:#fff;border-radius:14px;cursor:pointer}
+.opt.ok{background:#15803d;border-color:#15803d}.opt.no{background:#b91c1c;border-color:#b91c1c}
+.suggest{background:#0b1a26;border:1px solid var(--a1);color:#d6f5ef;border-radius:14px;padding:12px;margin-top:10px}
+.wordpick{display:flex;gap:10px;align-items:center;background:#070c17;border:1px solid var(--line);border-radius:14px;padding:10px;margin:8px 0}
+.wordpick img{width:110px;height:85px;object-fit:cover;border-radius:12px;flex-shrink:0;background:#1a2742;cursor:pointer}
+.checks{display:flex;gap:8px}.tick{width:32px;height:32px;background:#e6edf7;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;color:#0b1322;font-weight:900}
 .tick.on-know{background:#16a34a;color:#fff}.tick.on-need{background:#dc2626;color:#fff}
-.ex{color:#94a3b8;font-size:12.5px}img.q{width:100%;max-height:300px;object-fit:cover;border-radius:18px;display:block;cursor:pointer;background:#0b1020}
-.badge{padding:4px 14px;border-radius:999px;font-size:12px;display:inline-block;margin:3px;font-weight:800}
-.badge.lvl{background:var(--a1);color:#000}.badge.pos{background:#c4b5fd;color:#000}.badge.cat{background:#6ee7b7;color:#000}.badge.mean{background:#38bdf8;color:#000}
-.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}.lesson{background:#05070f;border:1px solid #ffffff22;border-radius:14px;padding:12px;text-align:center;cursor:pointer}
-.mod{margin-top:12px;padding:10px;background:linear-gradient(90deg,var(--a2),var(--a1));color:#000;border-radius:12px;font-weight:900}
-h4.catH{background:#ffffff12;border-radius:12px;padding:8px}
-canvas{width:100%;background:#05070f;border-radius:14px}
+.ex{color:#8ea0b8;font-size:12.5px}img.q{width:100%;max-height:300px;object-fit:cover;border-radius:16px;display:block;cursor:pointer;background:#0b1322}
+.badge{padding:4px 12px;border-radius:999px;font-size:12px;display:inline-block;margin:3px;font-weight:700;background:#1a2742;color:#cbd5e1;border:1px solid var(--line)}
+.badge.lvl{background:#0e2f2b;color:#5eead4;border-color:#2dd4bf55}.badge.cat{background:#122a4a;color:#93c5fd}
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}.lesson{background:#070c17;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;cursor:pointer}
+.mod{margin-top:12px;padding:10px;background:#0e2a3d;border:1px solid var(--line);border-radius:12px;font-weight:800;color:#5eead4}
+h4.catH{background:#0e2a3d;border-radius:12px;padding:8px;color:#bae6fd}
+canvas{width:100%;background:#070c17;border-radius:14px;border:1px solid var(--line)}
 </style>
 </head>
 <body>
-<header><h1>💎 VocabMaster Vx</h1><p>LEGACY EDITION — خاص‌ترین نسخه جهان ✨ هیچی حذف نشده</p>
-<div class="themebar"><button class="ghost" onclick="setTh('')">👑 سلطنتی</button><button class="ghost" onclick="setTh('th-galaxy')">🌌 کهکشانی</button><button class="ghost" onclick="setTh('th-ocean')">🌊 اقیانوسی</button><button class="ghost" onclick="document.body.classList.toggle('fs-big')">🔍 فونت درشت</button></div>
+<header><h1>VocabMaster <span>Vx</span></h1><p>DARK LUXE — تیره • شیک • معتبر • بدون زرد</p>
+<div class="themebar"><button class="ghost" onclick="document.body.classList.toggle('fs-big')">🔍 فونت درشت</button></div>
 </header>
 <div class="dash"><div class="stat"><b id="d-t">0</b><span>📦 بانک</span></div><div class="stat"><b id="d-n">0</b><span>📕 نیاز به آموزش</span></div><div class="stat"><b id="d-xp">0</b><span>⭐ XP</span></div><div class="stat"><b id="d-d">0</b><span>⏰ سررسید</span></div></div>
 <nav><button id="b-learn" class="active" onclick="tab('learn')">📚 آموزش</button><button id="b-book" onclick="tab('book')">📖 کتابی</button><button id="b-review" onclick="tab('review')">🔁 تمرین</button><button id="b-stats" onclick="tab('stats')">📊 کارنامه</button><button id="b-list" onclick="tab('list')">📂 بانک</button></nav>
 <main>
 <section id="t-learn" class="tab active">
-<div class="card"><h3>➕ لغت + پیشنهاد گوگل</h3><div class="row"><input id="w" placeholder="english word"><input id="m" placeholder="معنی فارسی"><button onclick="add()">افزودن ⚡</button></div><div id="gt"></div><p id="msg" style="color:#4ade80"></p></div>
+<div class="card"><h3>➕ لغت + پیشنهاد گوگل</h3><div class="row"><input id="w" placeholder="english word"><input id="m" placeholder="معنی فارسی"><button onclick="add()">افزودن</button></div><div id="gt"></div><p id="msg" style="color:#5eead4"></p></div>
 <div class="card need"><h3>📕 نیاز به آموزش (<span id="needCount">0</span>)</h3><div id="needList"></div></div><div id="out"></div>
 </section>
 <section id="t-book" class="tab"><div class="card"><h3>📖 OPD 12 + Word Skills 2nd 1-12</h3><div class="row"><select id="bookSel" onchange="renderLessons()"><option value="OPD">OPD - 12</option><option value="WS" selected>Word Skills 2nd - 1-12</option></select></div><div id="lessons"></div><div id="lessonView"></div></div></section>
-<section id="t-review" class="tab"><div class="card"><h3>🔁 تمرین SmartMix رندوم</h3><div class="row"><select id="filterCat" onchange="stats()"><option value="">همه دسته‌ها</option></select></div><div class="row"><button onclick="start('mixed')">⭐ هوشمند</button><button class="ghost" onclick="start('en-fa')">EN→FA</button><button class="ghost" onclick="start('fa-en')">FA→EN</button><button class="ghost" onclick="start('image')">🖼️ تصویری</button><button class="ghost" onclick="start('listening')">👂 شنیداری</button><button class="ghost" onclick="start('blank')">⬜ جای‌خالی</button></div><div class="row"><button class="ghost" onclick="startWeak()">🚨 ضعیف‌ها</button></div><div id="qb"></div></div></section>
-<section id="t-stats" class="tab"><div class="card"><h3>📊 کارنامه</h3><canvas id="ch" height="150"></canvas><p id="sum" class="ex"></p></div><div class="card"><h3>❌ اشتباه امروز + تمرین مجدد</h3><div id="todayMiss"></div><div class="row"><button onclick="startMiss()">🔁 تمرین اشتباه امروز</button></div></div><div class="card"><h3>🚨 ضعیف‌ها</h3><div id="weak"></div></div></section>
+<section id="t-review" class="tab"><div class="card"><h3>🔁 تمرین SmartMix</h3><div class="row"><select id="filterCat" onchange="stats()"><option value="">همه دسته‌ها</option></select></div><div class="row"><button onclick="start('mixed')">⭐ هوشمند</button><button class="ghost" onclick="start('en-fa')">EN→FA</button><button class="ghost" onclick="start('fa-en')">FA→EN</button><button class="ghost" onclick="start('image')">🖼️ تصویری</button><button class="ghost" onclick="start('listening')">👂 شنیداری</button><button class="ghost" onclick="start('blank')">⬜ جای‌خالی</button></div><div class="row"><button class="ghost" onclick="startWeak()">🚨 ضعیف‌ها</button></div><div id="qb"></div></div></section>
+<section id="t-stats" class="tab"><div class="card"><h3>📊 کارنامه</h3><canvas id="ch" height="150"></canvas><p id="sum" class="ex"></p></div><div class="card"><h3>❌ اشتباه امروز</h3><div id="todayMiss"></div><div class="row"><button onclick="startMiss()">🔁 تمرین اشتباه امروز</button></div></div><div class="card"><h3>🚨 ضعیف‌ها</h3><div id="weak"></div></div></section>
 <section id="t-list" class="tab"><div class="card"><h3>📂 بانک دسته‌بندی + ویرایش</h3><div class="row"><button onclick="exportBK()">⬇️ بکاپ JSON</button><button class="ghost" onclick="document.getElementById('imp').click()">⬆️ برگردوندن</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div><div class="row"><input id="s" placeholder="جستجو..." oninput="list(1)"></div><div id="wl"></div></div></section>
 </main>
 <script>
 var CATMAP={fork:'آشپزخانه',spoon:'آشپزخانه',knife:'آشپزخانه',plate:'آشپزخانه',cup:'آشپزخانه',pan:'آشپزخانه',pot:'آشپزخانه',oven:'آشپزخانه',eye:'بدن',nose:'بدن',mouth:'بدن',hand:'بدن',foot:'بدن',head:'بدن',heart:'بدن',ear:'بدن',dog:'حیوانات',cat:'حیوانات',bird:'حیوانات',fish:'حیوانات',apple:'غذا',bread:'غذا',rice:'غذا',shirt:'لباس',shoes:'لباس',car:'سفر',bus:'سفر',ticket:'سفر',hotel:'سفر',book:'مدرسه',pen:'مدرسه',pencil:'مدرسه',teacher:'مدرسه',school:'مدرسه',dictionary:'مدرسه',computer:'تکنولوژی',phone:'تکنولوژی',internet:'تکنولوژی',mother:'خانواده',father:'خانواده',doctor:'شغل',job:'شغل',football:'ورزش',bank:'شهر',park:'شهر',coffee:'کافه',tea:'کافه'};
 function autoCat(w,m){w=(w||'').toLowerCase().split(' ').pop();if(CATMAP[w])return CATMAP[w];m=m||'';if(/غذا|نان|برنج/.test(m))return 'غذا';if(/بدن|چشم|دست/.test(m))return 'بدن';if(/مدرسه|کتاب/.test(m))return 'مدرسه';return 'عمومی';}
 function lvl(w){w=w||'';if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1';}
-// SMART SENTENCES - natural, varied, always with FA line
-var POS_T=[["The {w} on the table surprised everyone this morning.","اون {w} («{m}») که صبح روی میز بود همه رو غافلگیر کرد."],["She bought a fresh {w} from the local market yesterday.","دیروز یه {w} تازه («{m}») از بازار محلی خرید."],["Learning the word {w} will make your English much stronger.","یاد گرفتن کلمه {w} به معنی «{m}» انگلیسی‌ت رو خیلی قوی‌تر می‌کنه."],["My grandfather always keeps a {w} in his room.","پدربزرگم همیشه یه {w} («{m}») تو اتاقش نگه می‌داره."],["We talked about {w} during the whole meeting.","کل جلسه درباره {w} («{m}») حرف زدیم."]];
-var NEG_T=[["I could not find my {w} anywhere last night.","دیشب هیچ‌جا {w}م («{m}») رو پیدا نکردم."],["He has never liked this kind of {w} before.","اون قبلاً هیچ‌وقت از این مدل {w} («{m}») خوشش نیومده بود."],["They did not bring the {w} we asked for.","اونا {w} («{m}») که خواسته بودیم رو نیاوردن."],["She will not need a new {w} this year.","امسال به {w} («{m}») جدید نیازی نداره."],["I have not seen such a beautiful {w} in years.","سال‌هاست {w} («{m}») به این قشنگی ندیدم."]];
-var Q_T=[["Have you ever used a {w} in real life?","تا حالا تو زندگی واقعی از {w} («{m}») استفاده کردی؟"],["Where did you put your {w} yesterday?","دیروز {w}ت («{m}») رو کجا گذاشتی؟"],["Can you explain what {w} means without a dictionary?","می‌تونی بدون دیکشنری بگی {w} («{m}») یعنی چی؟"],["Why is {w} so important for beginners?","چرا {w} («{m}») برای مبتدی‌ها این‌قدر مهمه؟"],["Would you like to buy a new {w} tomorrow?","دوست داری فردا یه {w} («{m}») جدید بخری؟"]];
+var POS_T=[["The {w} on the table surprised everyone this morning.","اون {w} («{m}») که صبح روی میز بود همه رو غافلگیر کرد."],["She bought a fresh {w} from the local market yesterday.","دیروز یه {w} تازه («{m}») از بازار خرید."],["Learning {w} will make your English much stronger.","یاد گرفتن {w} به معنی «{m}» انگلیسی‌ت رو قوی می‌کنه."]];
+var NEG_T=[["I could not find my {w} anywhere last night.","دیشب هیچ‌جا {w}م («{m}») رو پیدا نکردم."],["He has never liked this kind of {w}.","اون هیچ‌وقت از این مدل {w} («{m}») خوشش نیومده."]];
+var Q_T=[["Have you ever used a {w} in real life?","تا حالا از {w} («{m}») استفاده کردی؟"],["Where did you put your {w} yesterday?","دیروز {w}ت («{m}») رو کجا گذاشتی؟"]];
 function pick(arr,w){var h=0;for(var i=0;i<w.length;i++)h+=w.charCodeAt(i);return arr[h%arr.length];}
-function makeS(w,m){var a=pick(POS_T,w),b=pick(NEG_T,w),c=pick(Q_T,w);function f(t){return t.split('{w}').join(w).split('{m}').join(m);}return [{l:'✅ مثبت',en:f(a[0]),fa:f(a[1])},{l:'❌ منفی',en:f(b[0]),fa:f(b[1])},{l:'❓ سوالی',en:f(c[0]),fa:f(c[1])}];}
+function makeS(w,m){function f(t){return t.split('{w}').join(w).split('{m}').join(m);}var a=pick(POS_T,w),b=pick(NEG_T,w),c=pick(Q_T,w);return [{l:'✅ مثبت',en:f(a[0]),fa:f(a[1])},{l:'❌ منفی',en:f(b[0]),fa:f(b[1])},{l:'❓ سوالی',en:f(c[0]),fa:f(c[1])}];}
 function loadStable(k,fb){try{var v=JSON.parse(localStorage.getItem(k));if(v!=null)return v;}catch(e){}return fb;}
 var DB=loadStable('vm_db',[]);DB.forEach(function(x){if(!x.cat)x.cat=autoCat(x.word,x.meaning);if(x.wrong==null)x.wrong=0;if(x.streak==null)x.streak=0;if(x.next==null)x.next=Date.now();});
 var NEED=loadStable('vm_need',[]);var META=loadStable('vm_meta',{});if(!META.xp)META.xp=0;if(!META.hist)META.hist={};if(!META.miss)META.miss={};
 function save(){localStorage.setItem('vm_db',JSON.stringify(DB));localStorage.setItem('vm_need',JSON.stringify(NEED));localStorage.setItem('vm_meta',JSON.stringify(META));}
-function setTh(c){document.body.classList.remove('th-galaxy','th-ocean');if(c)document.body.classList.add(c);try{localStorage.setItem('vm_th',c)}catch(e){}}
-try{var thc=localStorage.getItem('vm_th');if(thc)document.body.classList.add(thc);}catch(e){}
 function tab(t){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('active')});document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='book')renderLessons();if(t=='stats')renderStats();if(t=='learn')renderNeed();if(t=='review')stats();}
 function sp(t){if(!t)return;try{new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t)).play().catch(function(){var u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u);});}catch(e){}}
 function gTrans(w,cb){fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fa&dt=t&q='+encodeURIComponent(w)).then(function(r){return r.json()}).then(function(j){try{cb(j[0][0][0])}catch(e){cb('')}}).catch(function(){cb('')});}
@@ -99,8 +93,8 @@ function doneNeed(w){var m='';NEED=NEED.filter(function(x){if(x.word==w)m=x.mean
 function imgSources(w){w=(w||'book').toLowerCase();var f=w.split(' ').pop().replace(/[^a-z]/g,'')||'book';return ['wiki:'+f,'https://image.pollinations.ai/prompt/'+encodeURIComponent('photo of '+w)+'?width=600&height=350&nologo=true','https://picsum.photos/seed/'+f+'/600/350'];}
 function setImg(im){if(!im)return;try{if(!im.getAttribute('data-srcs')){im.setAttribute('data-srcs',JSON.stringify(imgSources(im.getAttribute('data-w')||'book')));im.setAttribute('data-i','0');}var s=JSON.parse(im.getAttribute('data-srcs'));var i=parseInt(im.getAttribute('data-i')||'0');if(i>=s.length)return;var c=s[i];if(c.indexOf('wiki:')==0){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(c.slice(5))).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&j.thumbnail)im.src=j.thumbnail.source;else throw 0}).catch(function(){im.setAttribute('data-i',i+1);setImg(im)});}else{im.onerror=function(){im.setAttribute('data-i',i+1);im.onerror=null;setImg(im)};im.src=c;}}catch(e){}}
 function nextImg(im){im.setAttribute('data-i',parseInt(im.getAttribute('data-i')||'0')+1);im.onerror=null;setImg(im);}
-function sHTML(s){return '<div class="def"><b>'+s.l+'</b><div class="en-line">'+s.en+'</div><div class="fa-line">🇮🇷 '+s.fa+'</div><div class="row"><button class="ghost" onclick="sp(\''+s.en.replace(/'/g,'')+'\')">🔊 تلفظ این جمله</button></div></div>';}
-function learnFast(word,my){my=my||'';DB.forEach(function(x){if(x.word==word&&x.meaning)my=x.meaning});var L=lvl(word);var ss=makeS(word,my||word);var sr=JSON.stringify(imgSources(word)).replace(/"/g,'&quot;');document.getElementById('out').innerHTML='<div class="card"><h2 style="direction:ltr;text-align:left">'+word+' <span id="phon" style="font-size:13px;color:var(--a1)"></span></h2><span class="badge lvl">'+L+'</span> <span class="badge pos" id="pos">...</span> <span class="badge cat">📁 '+autoCat(word,my)+'</span> <span class="badge mean">'+my+'</span><img class="q" data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+word+'/600/350"><div class="row"><button onclick="sp(\''+word+'\')">🔊 تلفظ کلمه (VPN)</button></div><h4>💡 مثبت / منفی / سوالی — با معنی جدا</h4>'+sHTML(ss[0])+sHTML(ss[1])+sHTML(ss[2])+'<div id="exw"></div><div class="row"><a href="https://www.youtube.com/results?search_query='+word+'" target="_blank"><button class="ghost">▶️ یوتیوب</button></a><a href="https://youglish.com/pronounce/'+word+'/english" target="_blank"><button class="ghost">🎞️ YouGlish</button></a></div></div>';tab('learn');setImg(document.querySelector('#out img'));fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){return r.json()}).then(function(d){if(d&&d[0]){document.getElementById('phon').textContent=d[0].phonetic||'';document.getElementById('pos').textContent=d[0].meanings[0].partOfSpeech;}}).catch(function(){});}
+function sHTML(s){return '<div class="def"><b>'+s.l+'</b><div class="en-line">'+s.en+'</div><div class="fa-line">'+s.fa+'</div><div class="row"><button class="ghost" onclick="sp(\''+s.en.replace(/'/g,'')+'\')">🔊 تلفظ جمله</button></div></div>';}
+function learnFast(word,my){my=my||'';DB.forEach(function(x){if(x.word==word&&x.meaning)my=x.meaning});var L=lvl(word);var ss=makeS(word,my||word);var sr=JSON.stringify(imgSources(word)).replace(/"/g,'&quot;');document.getElementById('out').innerHTML='<div class="card"><h2 style="direction:ltr;text-align:left">'+word+' <span id="phon" style="font-size:13px;color:var(--a1)"></span></h2><span class="badge lvl">'+L+'</span> <span class="badge pos" id="pos">...</span> <span class="badge cat">📁 '+autoCat(word,my)+'</span> <span class="badge">'+my+'</span><img class="q" data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+word+'/600/350"><div class="row"><button onclick="sp(\''+word+'\')">🔊 تلفظ (VPN)</button></div><h4>💡 مثبت / منفی / سوالی</h4>'+sHTML(ss[0])+sHTML(ss[1])+sHTML(ss[2])+'<div class="row"><a href="https://www.youtube.com/results?search_query='+word+'" target="_blank"><button class="ghost">▶️ یوتیوب</button></a><a href="https://youglish.com/pronounce/'+word+'/english" target="_blank"><button class="ghost">🎞️ YouGlish</button></a></div></div>';tab('learn');setImg(document.querySelector('#out img'));fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){return r.json()}).then(function(d){if(d&&d[0]){document.getElementById('phon').textContent=d[0].phonetic||'';document.getElementById('pos').textContent=d[0].meanings[0].partOfSpeech;}}).catch(function(){});}
 var OPD=[{lesson:1,title:'OPD 1 - آشپزخانه',words:[['fork','چنگال'],['spoon','قاشق'],['knife','چاقو'],['plate','بشقاب'],['cup','فنجان'],['pan','ماهیتابه']]},{lesson:2,title:'OPD 2 - بدن',words:[['eye','چشم'],['nose','بینی'],['hand','دست'],['foot','پا']]},{lesson:3,title:'OPD 3 - خانه',words:[['mother','مادر'],['bed','تخت'],['chair','صندلی']]},{lesson:4,title:'OPD 4 - مدرسه',words:[['book','کتاب'],['teacher','معلم']]},{lesson:5,title:'OPD 5 - شغل',words:[['doctor','پزشک'],['engineer','مهندس']]},{lesson:6,title:'OPD 6 - سفر',words:[['car','ماشین'],['ticket','بلیط']]},{lesson:7,title:'OPD 7 - غذا',words:[['apple','سیب'],['bread','نان']]},{lesson:8,title:'OPD 8 - لباس',words:[['shirt','پیراهن'],['shoes','کفش']]},{lesson:9,title:'OPD 9 - حیوانات',words:[['dog','سگ'],['cat','گربه']]},{lesson:10,title:'OPD 10 - شهر',words:[['street','خیابان'],['bank','بانک']]},{lesson:11,title:'OPD 11 - ورزش',words:[['football','فوتبال'],['run','دویدن']]},{lesson:12,title:'OPD 12 - تکنولوژی',words:[['computer','کامپیوتر'],['phone','تلفن']]}];
 var WS=[{lesson:1,mod:'Learning',title:'Unit 1 - Classroom',words:[['pencil','مداد'],['pen','خودکار'],['dictionary','دیکشنری'],['notebook','دفتر'],['board','تخته']]},{lesson:2,mod:'Learning',title:'Unit 2 - Words',words:[['noun','اسم'],['verb','فعل'],['adjective','صفت']]},{lesson:3,mod:'Time',title:'Unit 3 - Days',words:[['Monday','دوشنبه'],['spring','بهار']]},{lesson:4,mod:'Time',title:'Unit 4 - Time',words:[['morning','صبح'],['midnight','نیمه‌شب']]},{lesson:5,mod:'People',title:'Unit 5 - Family',words:[['mother','مادر'],['friend','دوست']]},{lesson:6,mod:'People',title:'Unit 6 - Describing',words:[['tall','بلندقد'],['kind','مهربان']]},{lesson:7,mod:'Life',title:'Unit 7 - Routines',words:[['breakfast','صبحانه'],['work','کار']]},{lesson:8,mod:'Life',title:'Unit 8 - Clothes',words:[['shirt','پیراهن'],['shoes','کفش']]},{lesson:9,mod:'Food',title:'Unit 9 - Food',words:[['bread','نان'],['apple','سیب']]},{lesson:10,mod:'Food',title:'Unit 10 - Cafe',words:[['coffee','قهوه'],['menu','منو']]},{lesson:11,mod:'Getting',title:'Unit 11 - Transport',words:[['bus','اتوبوس'],['ticket','بلیط']]},{lesson:12,mod:'Places',title:'Unit 12 - Town',words:[['bank','بانک'],['park','پارک']]}];
 var CURBOOK='WS',CUR=null;
@@ -120,7 +114,7 @@ function nq(){var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='
 if(t=='image'){var o=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));var sr=JSON.stringify(imgSources(w.word)).replace(/"/g,'&quot;');b.innerHTML='<p>🖼️ این عکس چیه؟</p><img class="q" data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+w.word+'/600/350">'+o.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');setImg(b.querySelector('img'));return;}
 if(t=='fa-en'){var o3=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));b.innerHTML='<h3>'+w.meaning+' به انگلیسی؟</h3>'+o3.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
 if(t=='listening'){b.innerHTML='<p>👂 گوش بده</p><div class="row"><button onclick="sp(\''+w.word+'\')">پخش</button></div><div class="row"><input id="li"><button onclick="cl(\''+w.word+'\')">ثبت</button></div>';sp(w.word);return;}
-if(t=='blank'){var ss=makeS(w.word,w.meaning);var mk=ss[0].en.replace(new RegExp(w.word,'ig'),'_____');var o4=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));b.innerHTML='<div class="def"><b>⬜ جای خالی</b><div class="en-line">'+mk+'</div><div class="fa-line">🇮🇷 '+ss[0].fa+'</div></div>'+o4.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
+if(t=='blank'){var ss=makeS(w.word,w.meaning);var mk=ss[0].en.replace(new RegExp(w.word,'ig'),'_____');var o4=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));b.innerHTML='<div class="def"><b>⬜ جای خالی</b><div class="en-line">'+mk+'</div><div class="fa-line">'+ss[0].fa+'</div></div>'+o4.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
 var o2=sh([w.meaning].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.meaning})).slice(0,3)));b.innerHTML='<h3>'+w.word+' یعنی چی؟</h3>'+o2.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.meaning+'\')">'+x+'</button>'}).join('');}
 function cl(c){var v=document.getElementById('li').value.trim().toLowerCase();upd(c,v==c);if(v==c)SC++;QI++;nq();}
 function ans(b,v,c){if(v==c)SC++;b.classList.add(v==c?'ok':'no');upd(Q[QI].word,v==c);setTimeout(function(){QI++;nq()},500);}
