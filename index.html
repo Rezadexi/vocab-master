@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VocabMaster | یادگیری لغت</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>VocabMaster</h1>
+<p>یاد بگیر، بشنو، ببین، فراموش نکن</p>
+<nav>
+<button onclick="showTab('learn')" id="btn-learn" class="active">آموزش</button>
+<button onclick="showTab('review')" id="btn-review">تمرین و تکرار</button>
+<button onclick="showTab('list')" id="btn-list">لغات من</button>
+</nav>
+</header>
+<main>
+<section id="tab-learn" class="tab active">
+<div class="card">
+<h2>افزودن لغت جدید</h2>
+<div class="row">
+<input id="inp-word" placeholder="word e.g. ubiquitous">
+<input id="inp-meaning" placeholder="معنی مثلا همه‌جا حاضر">
+<button onclick="addWord()">افزودن و آموزش</button>
+</div>
+</div>
+<div id="learn-result"></div>
+</section>
+<section id="tab-review" class="tab">
+<div class="card">
+<h2>تمرین هوشمند</h2>
+<p id="review-stats"></p>
+<div class="row">
+<button onclick="startQuiz('mixed')">شروع مرور ترکیبی</button>
+<button onclick="startQuiz('en-fa')">انگلیسی به فارسی</button>
+<button onclick="startQuiz('fa-en')">فارسی به انگلیسی</button>
+<button onclick="startQuiz('listening')">دیکته شنیداری</button>
+</div>
+<div id="quiz-box"></div>
+</div>
+</section>
+<section id="tab-list" class="tab">
+<div class="card">
+<h2>جعبه لغات من</h2>
+<div id="word-list"></div>
+</div>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
