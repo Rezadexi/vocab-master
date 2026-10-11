@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>VocabMaster V7</title>
+<style>
+*{box-sizing:border-box;font-family:Tahoma,sans-serif}
+body{margin:0;background:#0f172a;color:#fff;min-height:100vh}
+header{background:linear-gradient(135deg,#7c3aed,#06b6d4);padding:20px;text-align:center;border-radius:0 0 20px 20px}
+header h1{margin:0}header p{margin:5px 0 0;font-size:12px;opacity:.9}
+nav{margin-top:12px;display:flex;gap:8px;justify-content:center}
+nav button{padding:9px 18px;border:none;border-radius:999px;background:rgba(255,255,255,.25);color:#fff;cursor:pointer}
+nav button.active{background:#fff;color:#6d28d9;font-weight:bold}
+main{max-width:900px;margin:14px auto;padding:0 12px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:16px;margin-bottom:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+input{flex:1;padding:12px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:#fff;min-width:120px}
+button{padding:11px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,#8b5cf6,#06b6d4);color:#fff;font-weight:bold;cursor:pointer}
+.tab{display:none}.tab.active{display:block}
+.def{background:#0f172a;padding:10px;border-radius:10px;margin:6px 0;border-right:4px solid #8b5cf6;line-height:1.9}
+.ex{color:#94a3b8;font-style:italic}
+.badge{display:inline-block;background:#0ea5e9;padding:3px 10px;border-radius:999px;font-size:12px;margin:2px}
+.badge.lvl{background:#f59e0b;color:#000}
+.opt{display:block;width:100%;margin:6px 0;padding:12px;background:#0f172a;border:1px solid #475569;color:#fff;border-radius:10px;font-size:16px;cursor:pointer}
+.opt.ok{background:#16a34a}.opt.no{background:#dc2626}
+img.q{width:100%;max-height:240px;object-fit:cover;border-radius:10px}
+</style>
+</head>
+<body>
+<header>
+<h1>VocabMaster</h1>
+<p>نسخه 7 - تک فایل - سریع و همیشه بروز ✅</p>
+<nav>
+<button id="b-learn" class="active" onclick="tab('learn')">آموزش</button>
+<button id="b-review" onclick="tab('review')">تمرین</button>
+<button id="b-list" onclick="tab('list')">لغات من</button>
+</nav>
+</header>
+<main>
+<section id="t-learn" class="tab active">
+<div class="card"><h3>➕ لغت جدید</h3>
+<div class="row"><input id="w" placeholder="english word"><input id="m" placeholder="معنی فارسی"><button onclick="add()">افزودن</button></div>
+</div><div id="out"></div>
+</section>
+<section id="t-review" class="tab">
+<div class="card"><h3>🔁 تمرین</h3><p id="st"></p>
+<div class="row">
+<button onclick="start('mixed')">⭐ ترکیبی</button>
+<button onclick="start('en-fa')">EN→FA</button>
+<button onclick="start('fa-en')">FA→EN</button>
+<button onclick="start('listening')">👂 شنیداری</button>
+<button onclick="start('image')">🖼️ تصویری</button>
+</div><div id="qb"></div></div>
+</section>
+<section id="t-list" class="tab">
+<div class="card"><h3>📖 لغات من</h3>
+<div class="row"><input id="s" placeholder="جستجو..." oninput="list(1)"></div>
+<div id="wl"></div><div class="row" id="pg"></div></div>
+</section>
+</main>
+<script>
+console.log('V7');
+let DB=[];try{DB=JSON.parse(localStorage.getItem('vm7')||'[]')}catch(e){}
+let CH={};try{CH=JSON.parse(localStorage.getItem('vm7c')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('vm7',JSON.stringify(DB))}catch(e){alert('حافظه پر شد')}}
+function saveC(){try{localStorage.setItem('vm7c',JSON.stringify(CH))}catch(e){}}
+function tab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='review')stats();}
+async function add(){let w=document.getElementById('w').value.trim().toLowerCase();let m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو را بنویس');return}if(!DB.find(x=>x.word==w)){DB.unshift({word:w,meaning:m,level:0,next:Date.now()});save()}document.getElementById('w').value='';document.getElementById('m').value='';await learn(w,m);}
+async function dict(w){if(CH[w])return CH[w];try{let c=new AbortController();setTimeout(()=>c.abort(),7000);let r=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+w,{signal:c.signal});if(!r.ok)return null;let j=await r.json();CH[w]=j;saveC();return j}catch(e){return null}}
+function lvl(w){if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1'}
+async function learn(word,my){let box=document.getElementById('out');box.innerHTML='<div class="card">⏳...</div>';let d=await dict(word);let phon='',aud='',defs='',ex='';if(d&&d[0]){phon=d[0].phonetic||'';let a=d[0].phonetics.find(p=>p.audio);aud=a?a.audio:'';d[0].meanings.slice(0,2).forEach(mn=>{defs+='<div class="def"><span class="badge">'+mn.partOfSpeech+'</span>';mn.definitions.slice(0,2).forEach((x,i)=>{defs+='<p>'+(i+1)+'. '+x.definition+'</p>';if(x.example){defs+='<p class="ex">Ex: '+x.example+'</p>';if(!ex)ex=x.example}});defs+='</div>'});}if(!ex)ex='I learned '+word+' today.';let L=lvl(word);
+let warn=(defs?'':'<p style="color:#fbbf24">⚠️ دایره معانی لود نشد. اگه فیلترشکن خاموشه روشن کن و دوباره بزن. معنی خودت ذخیره شد.</p>');
+box.innerHTML='<div class="card"><h2>'+word+' <span style="color:#38bdf8;font-size:15px">'+phon+'</span></h2><p><span class="badge lvl">سطح '+L+'</span> <span class="badge">'+my+'</span></p><div class="row">'+(aud?'<button onclick="new Audio(\''+aud+'\').play()">🔊 تلفظ</button>':'')+'<button onclick="sp(\''+word+'\')">🗣️ آفلاین</button></div>'+warn+'<h4>📖 دایره لغات</h4>'+(defs||'')+'<h4>🎬 فیلم (V7 جدید)</h4><div class="row"><a href="https://www.aparat.com/result/search?q='+word+'" target="_blank"><button>▶️ آپارات بدون فیلتر</button></a><a href="https://playphrase.me/en/search?q='+word+'" target="_blank"><button>🎞️ تیکه سریال</button></a><a href="https://youglish.com/pronounce/'+word+'/english" target="_blank"><button>YouGlish</button></a></div><h4>💡 جمله</h4><p class="def">'+ex+'</p></div>';stats();}
+function sp(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u);}
+function stats(){let d=DB.filter(x=>x.next<=Date.now()).length;document.getElementById('st').innerHTML='کل: '+DB.length+' | امروز: '+d;}
+function list(p){p=p||1;let q=document.getElementById('s').value.trim().toLowerCase();let f=q?DB.filter(x=>x.word.includes(q)||x.meaning.includes(q)):DB;let per=50;let tot=Math.ceil(f.length/per)||1;let sl=f.slice((p-1)*per,p*per);document.getElementById('wl').innerHTML=sl.length?sl.map(x=>'<div class="def"><b>'+x.word+'</b> = '+x.meaning+' <button onclick="learn(\''+x.word+'\',\''+x.meaning+'\')">آموزش</button></div>').join(''):'خالیه';let h='';for(let i=1;i<=Math.min(tot,15);i++)h+='<button onclick="list('+i+')">'+i+'</button>';document.getElementById('pg').innerHTML=h;}
+function sh(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));let t=a[i];a[i]=a[j];a[j]=t}return a}
+let Q=[],QI=0,SC=0,QM='mixed';
+function start(m){if(DB.length<2){alert('حداقل 2 لغت');return}QM=m;Q=sh([...DB]).slice(0,10);QI=0;SC=0;nq();}
+function gd(c,f){return sh(DB.filter(x=>x.word!=c.word)).slice(0,3).map(o=>o[f])}
+function nq(){stats();let b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>🎉 تمام! '+SC+' از '+Q.length+'</h3>';return}let w=Q[QI];let typs=['en-fa','fa-en','blank','image'];let t=QM=='mixed'?typs[Math.floor(Math.random()*typs.length)]:QM;
+if(t=='listening'){b.innerHTML='<p>گوش بده و تایپ کن</p><div class="row"><button onclick="sp(\''+w.word+'\')">پخش</button></div><div class="row"><input id="li"><button onclick="cl(\''+w.word+'\')">ثبت</button></div>';sp(w.word);return}
+if(t=='image'){let im='https://loremflickr.com/600/350/'+encodeURIComponent(w.word);let o=sh([w.word,...gd(w,'word')]);b.innerHTML='<p>این عکس چیه؟ 🖼️</p><img class="q" loading="lazy" src="'+im+'" onerror="this.src=\'https://picsum.photos/seed/'+w.word+'/600/350\'">'+o.map(x=>'<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\',\''+w.word+'\')">'+x+'</button>').join('');return}
+if(t=='en-fa'){let o=sh([w.meaning,...gd(w,'meaning')]);b.innerHTML='<h3 style="text-align:center">'+w.word+' یعنی چی؟</h3>'+o.map(x=>'<button class="opt" onclick="ans(this,\''+x+'\',\''+w.meaning+'\',\''+w.word+'\')">'+x+'</button>').join('');}
+else if(t=='fa-en'){let o=sh([w.word,...gd(w,'word')]);b.innerHTML='<h3 style="text-align:center">'+w.meaning+' به انگلیسی؟</h3>'+o.map(x=>'<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\',\''+w.word+'\')">'+x+'</button>').join('');}
+else{b.innerHTML='...';dict(w.word).then(d=>{let s='I learned '+w.word;try{let f=d[0].meanings[0].definitions.find(x=>x.example);if(f)s=f.example}catch(e){}let mk=s.replace(new RegExp(w.word,'ig'),'_____');let o=sh([w.word,...gd(w,'word')]);document.getElementById('qb').innerHTML='<p class="def">'+mk+'</p>'+o.map(x=>'<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\',\''+w.word+'\')">'+x+'</button>').join('')});}}
+function cl(c){let v=document.getElementById('li').value.trim().toLowerCase();upd(c,v==c);if(v!=c)alert('درست: '+c);else SC++;QI++;nq();}
+function ans(b,v,cor,wd){document.querySelectorAll('.opt').forEach(x=>{if(x.textContent==cor)x.classList.add('ok')});if(v==cor){SC++;upd(wd,true)}else{b.classList.add('no');upd(wd,false)}setTimeout(()=>{QI++;nq()},700);}
+function upd(wd,ok){let w=DB.find(x=>x.word==wd);if(!w)return;if(ok)w.level++;else w.level=0;w.next=Date.now()+86400000;save();}
+list(1);stats();
+</script>
+</body>
+</html>
