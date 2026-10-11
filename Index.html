@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6d28d9">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135768.png">
+<title>VocabMaster | یادگیری لغت</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>🧠 VocabMaster</h1>
+<p>یاد بگیر، بشنو، ببین، فراموش نکن</p>
+<nav>
+<button onclick="showTab('learn')" id="btn-learn" class="active">📚 آموزش</button>
+<button onclick="showTab('review')" id="btn-review">🔁 تمرین</button>
+<button onclick="showTab('list')" id="btn-list">📖 لغات من</button>
+</nav>
+</header>
+<main>
+<section id="tab-learn" class="tab active">
+<div class="card">
+<h2>➕ لغت جدید</h2>
+<div class="row">
+<input id="inp-word" placeholder="word">
+<input id="inp-meaning" placeholder="معنی فارسی">
+<button onclick="addWord()">افزودن</button>
+</div>
+</div>
+<div id="learn-result"></div>
+</section>
+<section id="tab-review" class="tab">
+<div class="card">
+<h2>🔁 تمرین هوشمند</h2>
+<p id="review-stats"></p>
+<div class="row">
+<button onclick="startQuiz('mixed')">⭐ ترکیبی</button>
+<button onclick="startQuiz('en-fa')">EN به FA</button>
+<button onclick="startQuiz('fa-en')">FA به EN</button>
+<button onclick="startQuiz('listening')">👂 شنیداری</button>
+<button onclick="startQuiz('image')">🖼️ حدس تصویری</button>
+</div>
+<div id="quiz-box"></div>
+</div>
+</section>
+<section id="tab-list" class="tab">
+<div class="card"><h2>📖 لغات من</h2><div id="word-list"></div></div>
+</section>
+</main>
+<script src="script.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
+</body>
+</html>
