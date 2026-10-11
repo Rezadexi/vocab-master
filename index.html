@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>VocabMaster Vx Full WS</title>
+<title>VocabMaster Vx</title>
 <style>
 *{box-sizing:border-box;font-family:Tahoma,sans-serif}
 body{margin:0;min-height:100vh;color:#fff;background:#070b16}
@@ -32,8 +32,11 @@ button.danger{background:#dc2626;color:#fff}
 .lesson{background:#070b16;border:1px solid #475569;border-radius:12px;padding:12px;text-align:center;cursor:pointer}
 .mod{margin-top:12px;padding:10px;background:linear-gradient(90deg,#0f766e,#b45309);border-radius:10px;font-weight:bold}
 .wordpick{display:flex;gap:10px;align-items:center;background:#070b16;border:1px solid #334155;border-radius:12px;padding:10px;margin:8px 0}
-.wordpick img{width:120px;height:90px;object-fit:cover;border-radius:10px;flex-shrink:0;background:#1e293b;cursor:pointer;border:2px solid #334155}
-.wordpick input[type=checkbox]{width:22px;height:22px;flex-shrink:0}
+.wordpick img{width:110px;height:85px;object-fit:cover;border-radius:10px;flex-shrink:0;background:#1e293b;cursor:pointer;border:2px solid #334155}
+.checks{display:flex;gap:8px;flex-direction:row;align-items:center;flex-shrink:0}
+.tick{width:30px;height:30px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;cursor:pointer;border:2px solid #334155;user-select:none}
+.tick.on-know{background:#16a34a;border-color:#16a34a;color:#fff}
+.tick.on-need{background:#dc2626;border-color:#dc2626;color:#fff}
 .ex{color:#94a3b8;font-size:12px}
 img.q{width:100%;max-height:280px;object-fit:cover;border-radius:12px;display:block;cursor:pointer;background:#070b16}
 .badge{background:#0ea5e9;padding:3px 12px;border-radius:99px;font-size:12px;display:inline-block;margin:2px;color:#000}
@@ -41,7 +44,7 @@ canvas{width:100%;background:#070b16;border-radius:12px}
 </style>
 </head>
 <body>
-<header><h1>💎 VocabMaster Vx</h1><p>Word Skills 2nd کامل‌شده • هر یونیت 12-18 کلمه واقعی ✅</p></header>
+<header><h1>💎 VocabMaster Vx</h1><p>تیک راست ✅ بلدم | چپ ❌ بلد نیستم • تاریخچه ثابت ✅</p></header>
 <div class="dash"><div class="stat"><b id="d-t">0</b><span>بانک</span></div><div class="stat"><b id="d-n">0</b><span>نیاز به آموزش</span></div><div class="stat"><b id="d-xp">0</b><span>XP</span></div><div class="stat"><b id="d-d">0</b><span>سررسید</span></div></div>
 <nav>
 <button id="b-learn" class="active" onclick="tab('learn')">📚 آموزش</button>
@@ -57,20 +60,27 @@ canvas{width:100%;background:#070b16;border-radius:12px}
 <div id="out"></div>
 </section>
 <section id="t-book" class="tab">
-<div class="card"><h3>📖 OPD 12 + Word Skills 2nd Units 1-12 کامل</h3><p class="ex">یونیت ۱ الان ۱۵ کلمه واقعی کتاب دارد. بقیه هم کامل شدند.</p>
-<div class="row"><select id="bookSel" onchange="renderLessons()"><option value="OPD">OPD - 12</option><option value="WS" selected>Word Skills 2nd - 1-12 FULL</option></select></div>
+<div class="card"><h3>📖 OPD 12 + WS 12 — سمت راست تیک بزن</h3><p class="ex">راست ✅ بلدم • چپ ❌ بلد نیستم — بدون نوشته</p>
+<div class="row"><select id="bookSel" onchange="renderLessons()"><option value="OPD">OPD - 12</option><option value="WS" selected>Word Skills 2nd - 1-12</option></select></div>
 <div id="lessons"></div><div id="lessonView"></div></div>
 </section>
 <section id="t-review" class="tab">
 <div class="card"><h3>🔁 تمرین</h3><div class="row"><button onclick="start('mixed')">⭐ هوشمند</button><button class="ghost" onclick="start('en-fa')">EN→FA</button><button class="ghost" onclick="start('fa-en')">FA→EN</button><button class="ghost" onclick="start('image')">🖼️ تصویری</button><button class="ghost" onclick="start('listening')">👂 شنیداری</button><button class="ghost" onclick="start('blank')">⬜ جای‌خالی</button></div><div id="qb"></div></div>
 </section>
-<section id="t-stats" class="tab"><div class="card"><h3>📊 کارنامه</h3><canvas id="ch" height="150"></canvas><p id="sum" class="ex"></p></div><div class="card"><h3>🚨 ضعیف‌ها</h3><div id="weak"></div></div></section>
+<section id="t-stats" class="tab"><div class="card"><h3>📊 کارنامه (ثابت - با آپدیت نمی‌پرد)</h3><canvas id="ch" height="150"></canvas><p id="sum" class="ex"></p></div><div class="card"><h3>🚨 ضعیف‌ها</h3><div id="weak"></div></div></section>
 <section id="t-list" class="tab"><div class="card"><h3>📂 بانک</h3><div class="row"><button onclick="exportBK()">⬇️ بکاپ</button><button class="ghost" onclick="document.getElementById('imp').click()">⬆️ برگردوندن</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div><div class="row"><input id="s" placeholder="جستجو..." oninput="list(1)"></div><div id="wl"></div></div></section>
 </main>
 <script>
-function loadAll(){var a=[],s={};['vmx','vm26','vm25'].forEach(function(k){try{var d=JSON.parse(localStorage.getItem(k)||'[]');if(d&&d.bank)d=d.bank;for(var i=0;i<d.length;i++)if(d[i]&&d[i].word&&!s[d[i].word]){s[d[i].word]=1;if(d[i].wrong==null)d[i].wrong=0;if(d[i].streak==null)d[i].streak=0;if(d[i].next==null)d[i].next=Date.now();a.push(d[i]);}}catch(e){}});return a;}
-var DB=loadAll();var NEED=[];try{NEED=JSON.parse(localStorage.getItem('vmxneed')||'[]');if(NEED&&NEED.need)NEED=NEED.need;}catch(e){}var META={};try{META=JSON.parse(localStorage.getItem('vmxmeta')||'{}')}catch(e){}if(!META.xp)META.xp=0;if(!META.hist)META.hist={};
-function save(){try{localStorage.setItem('vmx',JSON.stringify(DB));localStorage.setItem('vmxneed',JSON.stringify(NEED));localStorage.setItem('vmxmeta',JSON.stringify(META));}catch(e){}}save();
+// STABLE STORAGE - never changes with updates
+function loadStable(key,fb){try{var v=JSON.parse(localStorage.getItem(key));if(v!=null)return v;}catch(e){}return fb;}
+var DB=loadStable('vm_db',null);
+if(!DB){var a=[],s={};['vmx','vm26','vm25','vm24','vm23','vm22','vm21','vm20','vocabmaster_v1'].forEach(function(k){try{var d=JSON.parse(localStorage.getItem(k)||'[]');if(d&&d.bank)d=d.bank;for(var i=0;i<d.length;i++)if(d[i]&&d[i].word&&!s[d[i].word]){s[d[i].word]=1;if(d[i].wrong==null)d[i].wrong=0;if(d[i].streak==null)d[i].streak=0;if(d[i].next==null)d[i].next=Date.now();a.push(d[i]);}}catch(e){}});DB=a;}
+var NEED=loadStable('vm_need',null);
+if(!NEED){try{NEED=JSON.parse(localStorage.getItem('vmxneed')||localStorage.getItem('vm26need')||'[]');if(NEED&&NEED.need)NEED=NEED.need;}catch(e){NEED=[];}if(!NEED)NEED=[];}
+var META=loadStable('vm_meta',null);
+if(!META){try{META=JSON.parse(localStorage.getItem('vmxmeta')||localStorage.getItem('vm26meta')||'{}');}catch(e){META={};}if(!META)META={};}
+if(!META.xp)META.xp=0;if(!META.hist)META.hist={};
+function save(){try{localStorage.setItem('vm_db',JSON.stringify(DB));localStorage.setItem('vm_need',JSON.stringify(NEED));localStorage.setItem('vm_meta',JSON.stringify(META));}catch(e){}}save();
 function tab(t){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('active')});document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);if(t=='book')renderLessons();if(t=='stats')renderStats();if(t=='learn')renderNeed();}
 function sp(t){if(!t)return;try{var a=new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t));a.play().catch(function(){});}catch(e){}}
 function inDB(w){for(var i=0;i<DB.length;i++)if(DB[i].word==w)return true;return false;}
@@ -96,42 +106,44 @@ var OPD=[
 {lesson:12,title:'OPD 12 - تکنولوژی',words:[['computer','کامپیوتر'],['phone','تلفن'],['internet','اینترنت'],['camera','دوربین'],['screen','صفحه'],['keyboard','کیبورد']]}
 ];
 var WS=[
-{lesson:1,mod:'Learning English',title:'Unit 1 - In the classroom FULL',words:[['pencil','مداد'],['pen','خودکار'],['coursebook','کتاب درسی'],['dictionary','دیکشنری'],['notebook','دفتر'],['exercise book','دفتر تمرین'],['piece of paper','تکه کاغذ'],['bag','کیف'],['desk','میز تحریر'],['table','میز'],['chair','صندلی'],['board','تخته'],['whiteboard','وایت‌برد'],['noticeboard','تابلوی اعلانات'],['CD player','سی‌دی پلیر']]},
-{lesson:2,mod:'Learning English',title:'Unit 2 - Words about words FULL',words:[['noun','اسم'],['verb','فعل'],['adjective','صفت'],['adverb','قید'],['preposition','حرف اضافه'],['pronoun','ضمیر'],['definite article','حرف تعریف معین the'],['indefinite article','حرف تعریف نامعین a/an'],['past tense','زمان گذشته'],['past participle','اسم مفعول'],['irregular verb','فعل بی‌قاعده'],['lesson','درس'],['class','کلاس']]},
-{lesson:3,mod:'Learning English',title:'Unit 3 - Learning a language',words:[['repeat','تکرار کردن'],['practise','تمرین کردن'],['guess','حدس زدن'],['homework','تکلیف'],['text','متن'],['paragraph','پاراگراف'],['dialogue','گفتگو'],['essay','مقاله'],['context','زمینه'],['discussion','بحث'],['activity','فعالیت'],['homework','مشق']]},
-{lesson:4,mod:'Numbers and Time',title:'Unit 4 - Numbers',words:[['eight','هشت'],['twenty','بیست'],['thirteen','سیزده'],['sixty','شصت'],['seventy','هفتاد'],['hundred','صد'],['thousand','هزار'],['first','اول'],['second','دوم'],['third','سوم']]},
-{lesson:5,mod:'Numbers and Time',title:'Unit 5 - Days months seasons',words:[['Monday','دوشنبه'],['Tuesday','سه‌شنبه'],['Wednesday','چهارشنبه'],['Thursday','پنجشنبه'],['Friday','جمعه'],['Saturday','شنبه'],['Sunday','یکشنبه'],['January','ژانویه'],['February','فوریه'],['spring','بهار'],['summer','تابستان'],['autumn','پاییز'],['winter','زمستان']]},
-{lesson:6,mod:'Numbers and Time',title:'Unit 6 - Telling the time',words:[['morning','صبح'],['afternoon','بعدازظهر'],['evening','عصر'],['night','شب'],['midnight','نیمه‌شب'],['midday','ظهر'],['o’clock','سر ساعت'],['quarter','ربع'],['half','نیم'],['clock','ساعت دیواری'],['watch','ساعت مچی']]},
-{lesson:7,mod:'People',title:'Unit 7 - Family and friends FULL',words:[['mother','مادر'],['father','پدر'],['sister','خواهر'],['brother','برادر'],['wife','همسر زن'],['husband','همسر مرد'],['son','پسر'],['daughter','دختر'],['friend','دوست'],['neighbour','همسایه'],['colleague','همکار'],['partner','شریک']]},
-{lesson:8,mod:'People',title:'Unit 8 - Describing people',words:[['tall','بلندقد'],['short','کوتاه قد'],['young','جوان'],['old','پیر'],['happy','خوشحال'],['sad','ناراحت'],['kind','مهربان'],['funny','بامزه'],['smart','باهوش'],['beautiful','زیبا'],['handsome','خوش‌تیپ']]},
-{lesson:9,mod:'Everyday Life',title:'Unit 9 - Daily routines',words:[['wake up','بیدار شدن'],['get up','بلند شدن'],['have breakfast','صبحانه خوردن'],['brush teeth','مسواک زدن'],['go to work','سرکار رفتن'],['have lunch','ناهار خوردن'],['come home','به خانه آمدن'],['have dinner','شام خوردن'],['go to bed','به رختخواب رفتن'],['shower','دوش گرفتن']]},
-{lesson:10,mod:'Everyday Life',title:'Unit 10 - Clothes',words:[['shirt','پیراهن'],['T-shirt','تیشرت'],['trousers','شلوار'],['jeans','جین'],['shoes','کفش'],['socks','جوراب'],['jacket','کاپشن'],['coat','پالتو'],['hat','کلاه'],['dress','پیراهن زنانه'],['skirt','دامن'],['suit','کت‌شلوار']]},
-{lesson:11,mod:'Food and drink',title:'Unit 11 - Food FULL',words:[['bread','نان'],['rice','برنج'],['meat','گوشت'],['chicken','مرغ'],['fish','ماهی'],['apple','سیب'],['banana','موز'],['orange','پرتقال'],['milk','شیر'],['cheese','پنیر'],['egg','تخم‌مرغ'],['butter','کره'],['water','آب'],['salt','نمک'],['sugar','شکر']]},
-{lesson:12,mod:'Food and drink',title:'Unit 12 - In a cafe',words:[['coffee','قهوه'],['tea','چای'],['juice','آبمیوه'],['menu','منو'],['bill','صورتحساب'],['table','میز'],['waiter','گارسون'],['cup','فنجان'],['glass','لیوان'],['cake','کیک'],['sandwich','ساندویچ']]}
+{lesson:1,mod:'Learning',title:'Unit 1 - Classroom',words:[['pencil','مداد'],['pen','خودکار'],['coursebook','کتاب درسی'],['dictionary','دیکشنری'],['notebook','دفتر'],['exercise book','دفتر تمرین'],['bag','کیف'],['desk','میز تحریر'],['board','تخته'],['whiteboard','وایت‌برد'],['chair','صندلی'],['table','میز']]},
+{lesson:2,mod:'Learning',title:'Unit 2 - Words',words:[['noun','اسم'],['verb','فعل'],['adjective','صفت'],['adverb','قید'],['preposition','حرف اضافه'],['pronoun','ضمیر'],['lesson','درس'],['class','کلاس']]},
+{lesson:3,mod:'Time',title:'Unit 3 - Days',words:[['Monday','دوشنبه'],['Tuesday','سه‌شنبه'],['January','ژانویه'],['spring','بهار'],['summer','تابستان'],['winter','زمستان']]},
+{lesson:4,mod:'Time',title:'Unit 4 - Time',words:[['morning','صبح'],['afternoon','بعدازظهر'],['evening','عصر'],['midnight','نیمه‌شب'],['clock','ساعت']]},
+{lesson:5,mod:'People',title:'Unit 5 - Family',words:[['mother','مادر'],['father','پدر'],['sister','خواهر'],['brother','برادر'],['friend','دوست'],['son','پسر'],['daughter','دختر'],['wife','همسر زن'],['husband','همسر مرد']]},
+{lesson:6,mod:'People',title:'Unit 6 - Describing',words:[['tall','بلندقد'],['short','کوتاه'],['young','جوان'],['kind','مهربان'],['happy','خوشحال'],['smart','باهوش']]},
+{lesson:7,mod:'Life',title:'Unit 7 - Routines',words:[['breakfast','صبحانه'],['lunch','ناهار'],['dinner','شام'],['work','کار'],['home','خانه'],['shower','دوش']]},
+{lesson:8,mod:'Life',title:'Unit 8 - Clothes',words:[['shirt','پیراهن'],['shoes','کفش'],['jacket','کاپشن'],['hat','کلاه'],['trousers','شلوار'],['jeans','جین']]},
+{lesson:9,mod:'Food',title:'Unit 9 - Food',words:[['bread','نان'],['rice','برنج'],['meat','گوشت'],['apple','سیب'],['milk','شیر'],['egg','تخم‌مرغ'],['cheese','پنیر'],['chicken','مرغ']]},
+{lesson:10,mod:'Food',title:'Unit 10 - Cafe',words:[['coffee','قهوه'],['tea','چای'],['menu','منو'],['bill','صورتحساب'],['table','میز'],['cake','کیک']]},
+{lesson:11,mod:'Getting around',title:'Unit 11 - Transport',words:[['bus','اتوبوس'],['taxi','تاکسی'],['station','ایستگاه'],['airport','فرودگاه'],['ticket','بلیط']]},
+{lesson:12,mod:'Places',title:'Unit 12 - In town',words:[['bank','بانک'],['hospital','بیمارستان'],['park','پارک'],['shop','مغازه'],['street','خیابان']]}
 ];
 var CURBOOK='WS',CUR=null;
 function renderLessons(){CURBOOK=document.getElementById('bookSel').value;var data=CURBOOK=='OPD'?OPD:WS,h='',last='@@';for(var i=0;i<data.length;i++){var L=data[i];if(L.mod&&L.mod!=last){if(last!='@@')h+='</div>';h+='<div class="mod">📁 '+L.mod+'</div><div class="lesson-grid">';last=L.mod;}if(!L.mod&&i==0)h+='<div class="lesson-grid">';h+='<div class="lesson" onclick="openLesson('+i+')"><b>'+L.title+'</b><br><span class="ex">'+L.words.length+' کلمه 👆</span></div>';var nx=data[i+1];if(!nx||(nx.mod&&nx.mod!=L.mod))h+='</div>';}document.getElementById('lessons').innerHTML=h;document.getElementById('lessonView').innerHTML='';}
 function imgSources(w){w=(w||'book').toLowerCase().trim();var f=w.split(' ').pop().replace(/[^a-z]/g,'')||'book';return ['wiki:'+f,'https://image.pollinations.ai/prompt/'+encodeURIComponent('photo of '+w)+'?width=400&height=300&nologo=true','https://picsum.photos/seed/'+f+'/400/300'];}
 function setImg(im){if(!im)return;try{if(!im.getAttribute('data-srcs')){im.setAttribute('data-srcs',JSON.stringify(imgSources(im.getAttribute('data-w')||'book')));im.setAttribute('data-i','0');}var s=JSON.parse(im.getAttribute('data-srcs'));var i=parseInt(im.getAttribute('data-i')||'0');if(i>=s.length)return;var c=s[i];if(c.indexOf('wiki:')==0){fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(c.slice(5))).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){if(j&&j.thumbnail)im.src=j.thumbnail.source;else throw 0}).catch(function(){im.setAttribute('data-i',i+1);setImg(im)});}else{im.onerror=function(){im.setAttribute('data-i',i+1);im.onerror=null;setImg(im)};im.src=c;}}catch(e){}}
 function nextImg(im){var i=parseInt(im.getAttribute('data-i')||'0')+1;im.setAttribute('data-i',i);im.onerror=null;setImg(im);}
-function openLesson(idx){var data=CURBOOK=='OPD'?OPD:WS;CUR=data[idx];var h='<div class="card"><h3>'+CUR.title+' ('+CUR.words.length+' کلمه واقعی)</h3>';CUR.words.forEach(function(p){var w=p[0],m=p[1];var has=inDB(w);var sr=JSON.stringify(imgSources(w)).replace(/"/g,'&quot;');h+='<div class="wordpick"><input type="checkbox" data-w="'+w+'" data-m="'+m+'" '+(has?'checked disabled':'')+'><img data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+w.replace(/[^a-z]/g,'')+'/240/180" loading="lazy"><div style="flex:1"><b style="direction:ltr;display:block">'+w+'</b><span class="ex">'+m+'</span><br><button class="ghost" onclick="sp(\''+w+'\')">🔊</button> <button class="danger" onclick="needAdd(\''+w+'\',\''+m+'\')">❌ بلد نیستم</button></div></div>'});h+='<div class="row"><button onclick="addLesson()">➕ تیک‌ها به بانک</button><button class="ghost" onclick="quizLesson()">تست</button></div></div>';var lv=document.getElementById('lessonView');lv.innerHTML=h;lv.scrollIntoView();lv.querySelectorAll('img').forEach(function(im){im.onerror=function(){nextImg(im)};setImg(im)});}
-function addLesson(){var c=document.querySelectorAll('#lessonView input:not(:disabled)'),n=0;for(var i=0;i<c.length;i++)if(c[i].checked){var w=c[i].getAttribute('data-w'),m=c[i].getAttribute('data-m');if(!inDB(w)){DB.unshift({word:w,meaning:m,wrong:0,streak:0,next:Date.now()});n++;}}save();dash();alert(n+' اضافه شد');}
+function togglePick(el,type){var row=el.parentElement;var k=row.querySelector('.k'),n=row.querySelector('.n');if(type=='know'){var on=k.classList.contains('on-know');k.classList.remove('on-know');n.classList.remove('on-need');if(!on)k.classList.add('on-know');}else{var on2=n.classList.contains('on-need');k.classList.remove('on-know');n.classList.remove('on-need');if(!on2)n.classList.add('on-need');}}
+function openLesson(idx){var data=CURBOOK=='OPD'?OPD:WS;CUR=data[idx];var h='<div class="card"><h3>'+CUR.title+' ('+CUR.words.length+')</h3>';CUR.words.forEach(function(p){var w=p[0],m=p[1];var has=inDB(w);var sr=JSON.stringify(imgSources(w)).replace(/"/g,'&quot;');h+='<div class="wordpick"><div class="checks"><div class="tick k '+(has?'on-know':'')+'" onclick="togglePick(this,\'know\')">✓</div><div class="tick n" onclick="togglePick(this,\'need\')">✕</div></div><img data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+w.replace(/[^a-z]/g,'')+'/240/180" loading="lazy"><div style="flex:1"><b style="direction:ltr;display:block">'+w+'</b><span class="ex">'+m+'</span><br><button class="ghost" onclick="sp(\''+w+'\')">🔊</button></div><span style="display:none" data-w="'+w+'" data-m="'+m+'"></span></div>'});h+='<div class="row"><button onclick="applyPicks()">ثبت ✅❌ ها</button><button class="ghost" onclick="quizLesson()">تست همین درس</button></div></div>';var lv=document.getElementById('lessonView');lv.innerHTML=h;lv.scrollIntoView();lv.querySelectorAll('img').forEach(function(im){im.onerror=function(){nextImg(im)};setImg(im)});}
+function applyPicks(){var rows=document.querySelectorAll('#lessonView .wordpick');var nk=0,nn=0;rows.forEach(function(r){var w=r.querySelector('span[data-w]').getAttribute('data-w');var m=r.querySelector('span[data-w]').getAttribute('data-m');if(r.querySelector('.k').classList.contains('on-know')){if(!inDB(w)){DB.unshift({word:w,meaning:m,wrong:0,streak:0,next:Date.now()});nk++;}NEED=NEED.filter(function(x){return x.word!=w});}else if(r.querySelector('.n').classList.contains('on-need')){if(!inDB(w)&&!inNeed(w)){NEED.unshift({word:w,meaning:m});nn++;}}});save();dash();renderNeed();alert('✅ '+nk+' رفت بانک | 📕 '+nn+' رفت نیاز به آموزش');}
 function quizLesson(){if(!CUR)return;Q=CUR.words.map(function(x){return {word:x[0],meaning:x[1]}});QI=0;SC=0;QM='mixed';tab('review');nq();}
 function dash(){document.getElementById('d-t').textContent=DB.length;document.getElementById('d-n').textContent=NEED.length;var d=0;DB.forEach(function(x){if(x.next<=Date.now())d++});document.getElementById('d-d').textContent=d;document.getElementById('d-xp').textContent=META.xp;}
 function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
 var Q=[],QI=0,SC=0,QM='mixed';
 function start(m){if(DB.length<2){alert('کمه');return;}QM=m;Q=sh(DB.slice()).slice(0,10);QI=0;SC=0;nq();}
-function nq(){var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>تمام '+SC+'</h3>';META.xp+=SC*10;save();dash();return;}var w=Q[QI];var t=QM=='mixed'?['en-fa','fa-en','image','blank','listening'][Math.floor(Math.random()*5)]:QM;
+function nq(){var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>🎉 تمام '+SC+' از '+Q.length+' | +'+(SC*10)+' XP</h3>';META.xp+=SC*10;var t=new Date().toDateString();if(!META.hist[t])META.hist[t]={ok:0,no:0};META.hist[t].ok+=SC;META.hist[t].no+=(Q.length-SC);save();dash();return;}var w=Q[QI];var t=QM=='mixed'?['en-fa','fa-en','image','blank','listening'][Math.floor(Math.random()*5)]:QM;
 if(t=='image'){var o=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));var sr=JSON.stringify(imgSources(w.word)).replace(/"/g,'&quot;');b.innerHTML='<p>🖼️ این عکس چیه؟</p><img class="q" data-srcs="'+sr+'" data-i="0" onclick="nextImg(this)" src="https://picsum.photos/seed/'+w.word+'/600/350">'+o.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');var im=b.querySelector('img');im.onerror=function(){nextImg(im)};setImg(im);return;}
 if(t=='fa-en'){var o3=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));b.innerHTML='<h3>'+w.meaning+' به انگلیسی؟</h3>'+o3.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
 if(t=='listening'){b.innerHTML='<p>👂 گوش بده</p><div class="row"><button onclick="sp(\''+w.word+'\')">پخش</button></div><div class="row"><input id="li"><button onclick="cl(\''+w.word+'\')">ثبت</button></div>';sp(w.word);return;}
 if(t=='blank'){var mk=('I love '+w.word).replace(w.word,'_____');var o4=sh([w.word].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.word})).slice(0,3)));b.innerHTML='<div class="def">'+mk+'</div>'+o4.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
 var o2=sh([w.meaning].concat(sh(DB.filter(function(x){return x.word!=w.word}).map(function(x){return x.meaning})).slice(0,3)));b.innerHTML='<h3>'+w.word+' یعنی چی؟</h3>'+o2.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.meaning+'\')">'+x+'</button>'}).join('');}
-function cl(c){var v=document.getElementById('li').value.trim().toLowerCase();if(v==c)SC++;QI++;nq();}
-function ans(btn,v,cor){if(v==cor)SC++;btn.classList.add(v==cor?'ok':'no');setTimeout(function(){QI++;nq()},500);}
-function renderStats(){var wk=DB.filter(function(x){return x.wrong>=2}).slice(0,10);document.getElementById('weak').innerHTML=wk.map(function(x){return '<div class="def">'+x.word+'='+x.meaning+'</div>'}).join('')||'نداری';document.getElementById('sum').textContent='XP:'+META.xp;}
-function exportBK(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({bank:DB,need:NEED})]));a.download='vocab-vx-backup.json';a.click();}
-function importBK(i){var f=i.files[0],r=new FileReader();r.onload=function(){var j=JSON.parse(r.result);var a=j.bank||j;var s={};DB.forEach(function(x){s[x.word]=1});a.forEach(function(x){if(!s[x.word])DB.push(x)});save()};r.readAsText(f);}
+function cl(c){var v=document.getElementById('li').value.trim().toLowerCase();upd(c,v==c);if(v==c)SC++;QI++;nq();}
+function ans(btn,v,cor){var ok=v==cor;document.querySelectorAll('#qb .opt').forEach(function(x){if(x.textContent==cor)x.classList.add('ok')});if(ok)SC++;else btn.classList.add('no');upd(Q[QI].word,ok);setTimeout(function(){QI++;nq()},500);}
+function upd(wd,ok){DB.forEach(function(x){if(x.word==wd){if(ok){x.streak++;if(x.wrong>0)x.wrong--;}else{x.streak=0;x.wrong++;}x.next=Date.now()+86400000;}});save();}
+function renderStats(){try{var c=document.getElementById('ch'),ctx=c.getContext('2d'),W=c.offsetWidth||300,H=150;c.width=W*2;c.height=300;ctx.scale(2,2);ctx.clearRect(0,0,W,H);var days=[];for(var d=6;d>=0;d--){var dt=new Date();dt.setDate(dt.getDate()-d);days.push(dt.toDateString());}var mx=5;days.forEach(function(k){var hh=META.hist[k];if(hh&&hh.ok+hh.no>mx)mx=hh.ok+hh.no;});var bw=W/7;days.forEach(function(k,j){var h0=META.hist[k]||{ok:0,no:0};var bh=(h0.ok+h0.no)/mx*110||4;ctx.fillStyle='#334155';ctx.fillRect(j*bw+6,H-bh,bw-12,bh);ctx.fillStyle='#22c55e';ctx.fillRect(j*bw+6,H-(h0.ok/mx*110||0),bw-12,h0.ok/mx*110||0);});}catch(e){}var wk=DB.filter(function(x){return x.wrong>=2}).slice(0,10);document.getElementById('weak').innerHTML=wk.map(function(x){return '<div class="def">'+x.word+'='+x.meaning+'</div>'}).join('')||'نداری';document.getElementById('sum').textContent='XP:'+META.xp+' | ذخیره دائمی فعال ✅';}
+function exportBK(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({bank:DB,need:NEED,meta:META})]));a.download='vocab-vx-backup.json';a.click();}
+function importBK(i){var f=i.files[0],r=new FileReader();r.onload=function(){try{var j=JSON.parse(r.result);var arr=j.bank||j;var s={};DB.forEach(function(x){s[x.word]=1});arr.forEach(function(x){if(!s[x.word])DB.push(x)});if(j.need)j.need.forEach(function(x){if(!inNeed(x.word))NEED.push(x)});if(j.meta){for(var k in j.meta.hist)META.hist[k]=j.meta.hist[k];META.xp=j.meta.xp||META.xp;}save();dash();renderNeed();list(1);}catch(e){}};r.readAsText(f);}
 function list(p){var q=document.getElementById('s').value.trim().toLowerCase(),f=DB.filter(function(x){return !q||x.word.includes(q)});document.getElementById('wl').innerHTML=f.slice(0,40).map(function(x){return '<div class="def">'+x.word+'='+x.meaning+'</div>'}).join('');}
 renderLessons();dash();renderNeed();
 </script>
