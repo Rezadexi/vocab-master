@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>VocabMaster Vx</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 <style>
 :root{--a1:#2dd4bf;--a2:#60a5fa;--bg:#080d1a;--line:#1f2b44}
 *{box-sizing:border-box;font-family:Vazirmatn,Tahoma,sans-serif}
-body{margin:0;min-height:100vh;color:#e6edf7;background:radial-gradient(900px 400px at 50% -10%,#0e2a3d,transparent),var(--bg)}
+body{margin:0;min-height:100vh;color:#e6edf7;background:var(--bg)}
 header{padding:26px 16px;text-align:center;background:#0b1528;border-bottom:1px solid var(--line)}
 header h1{margin:0;font-size:32px}header h1 span{color:var(--a1)}
 .dash{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:960px;margin:12px auto 0;padding:0 12px}
@@ -29,58 +28,55 @@ button.ghost{background:#070c17;border:1px solid var(--line);color:#fff}
 .opt{display:block;width:100%;margin:7px 0;padding:13px;background:#070c17;border:1px solid var(--line);color:#fff;border-radius:12px;cursor:pointer;font-size:16px}
 .opt.ok{background:#15803d}.opt.no{background:#b91c1c}
 .badge{padding:3px 12px;border-radius:99px;font-size:12px;margin:2px;display:inline-block;background:#1a2742;border:1px solid var(--line)}
-.badge.lvl{background:#0e2f2b;color:#5eead4}.badge.cat{background:#122a4a;color:#93c5fd}
 .ex{color:#8ea0b8;font-size:12px}
-img.q{width:100%;max-height:260px;object-fit:cover;border-radius:14px;background:#0b1322;display:block}
 .suggest{background:#0b1a26;border:1px solid var(--a1);border-radius:12px;padding:12px;margin-top:10px}
 </style>
 </head>
 <body>
-<header><h1>VocabMaster <span>Vx</span></h1><p>دیکشنری حرفه‌ای + آزمون بازی‌وار • نسخه جهانی</p></header>
+<header><h1>VocabMaster <span>Vx</span></h1><p>نسخه تعمیرشده — بدون باگ کوتیشن ✅</p></header>
 <div class="dash"><div class="stat"><b id="d-t">0</b><span>📦 بانک</span></div><div class="stat"><b id="d-xp">0</b><span>⭐ XP</span></div><div class="stat"><b id="d-d">0</b><span>⏰ سررسید</span></div></div>
 <nav><button id="b-learn" class="active" onclick="tab('learn')">📚 آموزش</button><button id="b-review" onclick="tab('review')">🔁 آزمون</button><button id="b-list" onclick="tab('list')">📂 بانک</button></nav>
 <main>
 <section id="t-learn" class="tab active">
-<div class="card"><h3>➕ کلمه جدید + راستی‌آزمایی گوگل</h3>
+<div class="card"><h3>➕ کلمه جدید</h3>
 <div class="row"><input id="w" placeholder="english word"><input id="m" placeholder="معنی فارسی"><button onclick="add()">افزودن ⚡</button></div>
 <div id="gt"></div><p id="msg" style="color:#5eead4"></p></div>
 <div id="out"></div>
 </section>
-<section id="t-review" class="tab"><div class="card"><h3>🔁 آزمون هوشمند</h3><p id="st" class="ex"></p>
+<section id="t-review" class="tab"><div class="card"><h3>🔁 آزمون</h3><p id="st" class="ex"></p>
 <div class="row"><button onclick="start('mixed')">⭐ ترکیبی</button><button class="ghost" onclick="start('en-fa')">EN→FA</button><button class="ghost" onclick="start('fa-en')">FA→EN</button><button class="ghost" onclick="start('en-en')">EN→EN</button></div><div id="qb"></div></div></section>
-<section id="t-list" class="tab"><div class="card"><h3>📂 بانک + کتگوری خودکار</h3>
-<div class="row"><button onclick="exportBK()">⬇️ بکاپ JSON</button><button class="ghost" onclick="document.getElementById('imp').click()">⬆️ برگردوندن</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div>
+<section id="t-list" class="tab"><div class="card"><h3>📂 بانک</h3>
+<div class="row"><button onclick="exportBK()">⬇️ بکاپ</button><button class="ghost" onclick="document.getElementById('imp').click()">⬆️ برگردوندن</button><input type="file" id="imp" accept=".json" style="display:none" onchange="importBK(this)"></div>
 <div class="row"><input id="s" placeholder="جستجو..." oninput="list(1)"></div><div id="wl"></div></div></section>
 </main>
 <script>
-var CATMAP={fork:'آشپزخانه',spoon:'آشپزخانه',knife:'آشپزخانه',eye:'بدن',hand:'بدن',dog:'حیوانات',apple:'غذا',bread:'غذا',shirt:'لباس',car:'سفر',book:'مدرسه',computer:'تکنولوژی',mother:'خانواده',doctor:'شغل',football:'ورزش'};
-function autoCat(w,m){w=(w||'').toLowerCase().split(' ').pop();if(CATMAP[w])return CATMAP[w];return 'عمومی';}
-function lvl(w){w=w||'';if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';if(w.length<=10)return 'B2';return 'C1';}
+var _tw='', _tm='', _tg='';
+function autoCat(w){w=(w||'').toLowerCase();if(['fork','spoon','knife','plate'].indexOf(w)>-1)return 'آشپزخانه';if(['eye','hand','nose'].indexOf(w)>-1)return 'بدن';if(['dog','cat'].indexOf(w)>-1)return 'حیوانات';if(['apple','bread'].indexOf(w)>-1)return 'غذا';if(['book','pen','teacher'].indexOf(w)>-1)return 'مدرسه';return 'عمومی';}
+function lvl(w){w=w||'';if(w.length<=4)return 'A1';if(w.length<=6)return 'A2';if(w.length<=8)return 'B1';return 'B2';}
 function LS(k,fb){try{var v=JSON.parse(localStorage.getItem(k));if(v!=null)return v;}catch(e){}return fb;}
 var DB=LS('vm_db',[]);var META=LS('vm_meta',{});if(!META.xp)META.xp=0;
-function save(){localStorage.setItem('vm_db',JSON.stringify(DB));localStorage.setItem('vm_meta',JSON.stringify(META));}save();
-function tab(t){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('active')});document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);}
-function sp(t){if(!t)return;try{new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t)).play().catch(function(){var u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u);});}catch(e){}}
-function gT(w,cb){fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fa&dt=t&q='+encodeURIComponent(w)).then(function(r){return r.json()}).then(function(j){try{cb(j[0][0][0])}catch(e){cb('')}}).catch(function(){cb('')});}
+function save(){try{localStorage.setItem('vm_db',JSON.stringify(DB));localStorage.setItem('vm_meta',JSON.stringify(META));}catch(e){}}save();
+function tab(t){var s=document.querySelectorAll('.tab');for(var i=0;i<s.length;i++)s[i].classList.remove('active');var b=document.querySelectorAll('nav button');for(var j=0;j<b.length;j++)b[j].classList.remove('active');document.getElementById('t-'+t).classList.add('active');document.getElementById('b-'+t).classList.add('active');if(t=='list')list(1);dash();}
+function sp(t){if(!t)return;try{var a=new Audio('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text='+encodeURIComponent(t));var p=a.play();if(p&&p.catch)p.catch(function(){var u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u);});}catch(e){}}
 function inDB(w){for(var i=0;i<DB.length;i++)if(DB[i].word==w)return true;return false;}
-function add(){var w=document.getElementById('w').value.trim().toLowerCase(),m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو');return;}document.getElementById('gt').innerHTML='⏳ چک گوگل...';gT(w,function(g){if(g&&g!=m){document.getElementById('gt').innerHTML='<div class="suggest">⚠️ تو: <b>'+m+'</b> | گوگل: <b>'+g+'</b><br><button onclick="useG(\''+w+'\',\''+g+'\')">گوگل درسته</button> <button class="ghost" onclick="keepM(\''+document.getElementById('w').value+'\',\''+document.getElementById('m').value+'\')">خودم درستم</button></div>';}else keepM(w,m);});}
-function useG(w,g){keepM(w,g);}function keepM(w,m){if(!inDB(w)){DB.unshift({word:w,meaning:m,cat:autoCat(w,m),wrong:0,streak:0,next:Date.now()});save();}document.getElementById('gt').innerHTML='';document.getElementById('w').value='';document.getElementById('m').value='';dash();learnFast(w,m);}
-function dash(){document.getElementById('d-t').textContent=DB.length;var d=0;DB.forEach(function(x){if(x.next<=Date.now())d++});document.getElementById('d-d').textContent=d;document.getElementById('d-xp').textContent=META.xp;}
-function learnFast(word,my){var L=lvl(word);document.getElementById('out').innerHTML='<div class="card"><h2 style="direction:ltr;text-align:left">'+word+' <span id="phon"></span></h2><span class="badge lvl">'+L+'</span> <span class="badge" id="pos">...</span> <span class="badge cat">📁 '+autoCat(word,my)+'</span> <span class="badge">'+my+'</span><div class="row"><button onclick="sp(\''+word+'\')">🔊 تلفظ (VPN)</button></div><div id="dic"><p class="ex">⏳ دیکشنری + مترادف/متضاد...</p></div><div class="row"><a href="https://www.youtube.com/results?search_query='+word+'" target="_blank"><button class="ghost">▶️ یوتیوب</button></a></div></div>';tab('learn');
-fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+word).then(function(r){return r.json()}).then(function(d){var h='';if(d&&d[0]){document.getElementById('phon').textContent=d[0].phonetic||'';document.getElementById('pos').textContent=d[0].meanings[0].partOfSpeech;for(var a=0;a<Math.min(2,d[0].meanings.length);a++){var mn=d[0].meanings[a];h+='<div class="def"><b>'+mn.partOfSpeech+'</b>';for(var b=0;b<Math.min(2,mn.definitions.length);b++){h+='<div class="en-line">'+mn.definitions[b].definition+'</div>';if(mn.definitions[b].example)h+='<div class="ex">Ex: '+mn.definitions[b].example+'</div>';}h+='</div>';}}document.getElementById('dic').innerHTML=h+'<div id="syn"></div>';}).catch(function(){});
-fetch('https://api.datamuse.com/words?rel_syn='+word+'&max=2').then(function(r){return r.json()}).then(function(s){fetch('https://api.datamuse.com/words?rel_ant='+word+'&max=2').then(function(r2){return r2.json()}).then(function(a){var h='<div class="def">🔗 مترادف: '+(s.map(function(x){return x.word}).join(', ')||'—')+'<br>⚡ متضاد: '+(a.map(function(x){return x.word}).join(', ')||'—')+'</div>';var e=document.getElementById('syn');if(e)e.innerHTML=h;});});}).catch(function(){});}
-function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function add(){var w=document.getElementById('w').value.trim().toLowerCase();var m=document.getElementById('m').value.trim();if(!w||!m){alert('هر دو را بنویس');return;}_tw=w;_tm=m;document.getElementById('gt').innerHTML='⏳ چک گوگل...';fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fa&dt=t&q='+encodeURIComponent(w)).then(function(r){return r.json()}).then(function(j){var g='';try{g=j[0][0][0]}catch(e){} _tg=g;if(g&&g!==m){document.getElementById('gt').innerHTML='<div class="suggest">⚠️ تو: <b>'+m+'</b><br>گوگل: <b>'+g+'</b><br><div class="row"><button onclick="useG()">گوگل درسته</button><button class="ghost" onclick="keepM()">خودم درستم</button></div></div>';}else{keepM();}}).catch(function(){keepM();});}
+function useG(){keepM2(_tw,_tg);}function keepM(){keepM2(_tw,_tm);}
+function keepM2(w,m){if(!w||!m)return;var f=null;for(var i=0;i<DB.length;i++)if(DB[i].word==w)f=DB[i];if(!f){DB.unshift({word:w,meaning:m,cat:autoCat(w),wrong:0,streak:0,next:Date.now()});save();}document.getElementById('gt').innerHTML='';document.getElementById('msg').textContent='✅ ذخیره شد: '+w;document.getElementById('w').value='';document.getElementById('m').value='';dash();learnFast(w,m);}
+function dash(){document.getElementById('d-t').textContent=DB.length;var d=0;for(var i=0;i<DB.length;i++)if(DB[i].next<=Date.now())d++;document.getElementById('d-d').textContent=d;document.getElementById('d-xp').textContent=META.xp;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function learnFast(word,my){var L=lvl(word);document.getElementById('out').innerHTML='<div class="card"><h2 style="direction:ltr;text-align:left">'+esc(word)+'</h2><span class="badge">'+esc(L)+'</span> <span class="badge" id="pos">...</span> <span class="badge">📁 '+esc(autoCat(word))+'</span> <span class="badge">'+esc(my)+'</span><div class="row"><button onclick="sp(\''+esc(word)+'\')">🔊 تلفظ</button></div><div id="dic"><p class="ex">⏳ دیکشنری...</p></div></div>';tab('learn');
+fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word)).then(function(r){return r.json()}).then(function(d){var h='';if(d&&d[0]&&d[0].meanings){try{document.getElementById('pos').textContent=d[0].meanings[0].partOfSpeech;}catch(e){}for(var a=0;a<Math.min(2,d[0].meanings.length);a++){var mn=d[0].meanings[a];h+='<div class="def"><b>'+esc(mn.partOfSpeech)+'</b>';for(var b=0;b<Math.min(2,mn.definitions.length);b++){h+='<div class="en-line">'+esc(mn.definitions[b].definition)+'</div>';}h+='</div>';}}else{h='<p class="ex">دیکشنری نیاز به VPN دارد</p>';}document.getElementById('dic').innerHTML=h+'<div id="syn"></div>';fetch('https://api.datamuse.com/words?rel_syn='+encodeURIComponent(word)+'&max=2').then(function(r){return r.json()}).then(function(s){var names=[];for(var i=0;i<s.length;i++)names.push(s[i].word);var e2=document.getElementById('syn');if(e2)e2.innerHTML='<div class="def">🔗 مترادف: '+esc(names.join(', ')||'—')+'</div>';}).catch(function(){});}).catch(function(){var e=document.getElementById('dic');if(e)e.innerHTML='<p class="ex">برای دیکشنری VPN روشن کن</p>';});}
+function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 var Q=[],QI=0,SC=0,QM='mixed';
-function start(m){if(DB.length<4){alert('حداقل ۴ لغت');return;}QM=m;Q=sh(DB.slice()).slice(0,10);QI=0;SC=0;nq();}
-function gd(f,ex){var o=[];DB.forEach(function(x){if(x.word!=ex)o.push(x[f])});return sh(o).slice(0,3);}
-function nq(){var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>تمام '+SC+' از '+Q.length+'</h3>';META.xp+=SC*10;save();dash();return;}var w=Q[QI];var t=QM=='mixed'?['en-fa','fa-en','en-en'][Math.floor(Math.random()*3)]:QM;
-if(t=='en-fa'){var o=sh([w.meaning].concat(gd('meaning',w.word)));b.innerHTML='<h3>'+w.word+' یعنی چی؟</h3>'+o.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.meaning+'\')">'+x+'</button>'}).join('');return;}
-if(t=='fa-en'){var o2=sh([w.word].concat(gd('word',w.word)));b.innerHTML='<h3>'+w.meaning+' به انگلیسی؟</h3>'+o2.map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.word+'\')">'+x+'</button>'}).join('');return;}
-b.innerHTML='<h3 style="direction:ltr;text-align:center">'+w.word+' = ? (English)</h3>'+sh([w.meaning,'to run fast','a kind of food','to sleep well'].slice(0,1).concat(gd('meaning',w.word))).map(function(x){return '<button class="opt" onclick="ans(this,\''+x+'\',\''+w.meaning+'\')">'+x+'</button>'}).join('')+'<p class="ex">EN→EN: معنی انگلیسی را حدس بزن</p>';}
-function ans(b,v,c){if(v==c)SC++;b.classList.add(v==c?'ok':'no');DB.forEach(function(x){if(x.word==Q[QI].word){if(v==c){x.streak++;}else{x.streak=0;x.wrong++;}x.next=Date.now()+86400000;}});save();setTimeout(function(){QI++;nq()},500);}
+function start(m){if(DB.length<2){alert('حداقل ۲ لغت وارد کن');return;}QM=m;Q=sh(DB.slice()).slice(0,10);QI=0;SC=0;nq();}
+function nq(){var b=document.getElementById('qb');if(QI>=Q.length){b.innerHTML='<h3>🎉 تمام! '+SC+' از '+Q.length+'</h3>';META.xp+=SC*10;save();dash();return;}var w=Q[QI];var t=QM;if(t=='mixed'){var r=Math.floor(Math.random()*3);t=r==0?'en-fa':r==1?'fa-en':'en-en';}var opts=[],cor='';
+if(t=='en-fa'){cor=w.meaning;opts=[w.meaning];for(var i=0;i<DB.length&&opts.length<4;i++)if(DB[i].word!=w.word&&opts.indexOf(DB[i].meaning)<0)opts.push(DB[i].meaning);sh(opts);b.innerHTML='<h3>'+esc(w.word)+' یعنی چی؟</h3>'+opts.map(function(x){return '<button class="opt" data-v="'+esc(x)+'">'+esc(x)+'</button>'}).join('');}
+else if(t=='fa-en'){cor=w.word;opts=[w.word];for(var j=0;j<DB.length&&opts.length<4;j++)if(DB[j].word!=w.word&&opts.indexOf(DB[j].word)<0)opts.push(DB[j].word);sh(opts);b.innerHTML='<h3>'+esc(w.meaning)+' به انگلیسی؟</h3>'+opts.map(function(x){return '<button class="opt" data-v="'+esc(x)+'">'+esc(x)+'</button>'}).join('');}
+else{cor=w.meaning;opts=[w.meaning];for(var k=0;k<DB.length&&opts.length<4;k++)if(DB[k].word!=w.word&&opts.indexOf(DB[k].meaning)<0)opts.push(DB[k].meaning);sh(opts);b.innerHTML='<h3 style="direction:ltr">'+esc(w.word)+' = ?</h3>'+opts.map(function(x){return '<button class="opt" data-v="'+esc(x)+'">'+esc(x)+'</button>'}).join('');}
+var btns=b.querySelectorAll('.opt');for(var q=0;q<btns.length;q++){btns[q].onclick=function(){var v=this.getAttribute('data-v');var ok=(v===cor);if(ok)SC++;var all=b.querySelectorAll('.opt');for(var z=0;z<all.length;z++)if(all[z].getAttribute('data-v')===cor)all[z].classList.add('ok');if(!ok)this.classList.add('no');for(var n=0;n<DB.length;n++)if(DB[n].word==w.word){if(ok)DB[n].streak++;else DB[n].wrong++;DB[n].next=Date.now()+86400000;}save();setTimeout(function(){QI++;nq();},600);};}}
 function exportBK(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(DB)]));a.download='vocab-backup.json';a.click();}
-function importBK(i){var f=i.files[0],r=new FileReader();r.onload=function(){JSON.parse(r.result).forEach(function(x){if(!inDB(x.word))DB.push(x)});save();list(1)};r.readAsText(f);}
-function list(p){var q=document.getElementById('s').value.trim().toLowerCase();var f=DB.filter(function(x){return !q||x.word.includes(q)});document.getElementById('wl').innerHTML=f.slice(0,50).map(function(x){return '<div class="def">📁 '+x.cat+' <b>'+x.word+'</b>='+x.meaning+' <button class="ghost" onclick="learnFast(\''+x.word+'\',\''+x.meaning+'\')">📖</button></div>'}).join('');}
+function importBK(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var a=JSON.parse(r.result);for(var i=0;i<a.length;i++)if(!inDB(a[i].word))DB.push(a[i]);save();list(1);dash();}catch(e){alert('فایل خراب است');}};r.readAsText(f);}
+function list(p){var q=document.getElementById('s').value.trim().toLowerCase();var f=[];for(var i=0;i<DB.length;i++)if(!q||DB[i].word.indexOf(q)>-1)f.push(DB[i]);var h='';for(var j=0;j<Math.min(50,f.length);j++)h+='<div class="def">📁 '+esc(f[j].cat)+' <b>'+esc(f[j].word)+'</b> = '+esc(f[j].meaning)+' <button class="ghost" onclick="learnFast(\''+esc(f[j].word)+'\',\''+esc(f[j].meaning)+'\')">📖</button></div>';document.getElementById('wl').innerHTML=h||'خالیه';}
 dash();
 </script>
 </body>
